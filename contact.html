@@ -1,34 +1,144 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Contact Us - Language School</title>
+    <title>Contact YoLingo | Start Your Language Journey</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
-        <a href="index.html">Home</a>
-        <a href="parlons.html">Parlons (French)</a>
-        <a href="hablemos.html">Hablemos (Spanish)</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="contact.html" class="active">Contact</a>
+        <div class="logo">
+            <span class="logo-text">Yo</span><span class="logo-highlight">Lingo</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="parlons.html">Parlons (French)</a>
+            <a href="hablemos.html">Hablemos (Spanish)</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="contact.html" class="active">Contact</a>
+        </div>
     </nav>
     
-    <h1>📞 Contact Us</h1>
+    <header class="page-header contact-header">
+        <h1>Contact YoLingo</h1>
+        <p class="subtitle">Have questions? Ready to start your language journey? Get in touch with us!</p>
+    </header>
     
-    <form>
-        <input type="text" placeholder="Your Name" required><br><br>
-        <input type="email" placeholder="Your Email" required><br><br>
-        <select>
-            <option>Select Language</option>
-            <option>French Lessons</option>
-            <option>Spanish Lessons</option>
-        </select><br><br>
-        <textarea placeholder="Your Message" rows="5"></textarea><br><br>
-        <button type="submit" class="btn">Send Message</button>
-    </form>
+    <section class="contact-container">
+        <div class="contact-info">
+            <h2>📞 Get in Touch</h2>
+            
+            <div class="contact-method">
+                <h3>📧 Email Us</h3>
+                <p><strong>General Inquiries:</strong> hello@yolingo.com</p>
+                <p><strong>French Lessons:</strong> french@yolingo.com</p>
+                <p><strong>Spanish Lessons:</strong> spanish@yolingo.com</p>
+            </div>
+            
+            <div class="contact-method">
+                <h3>📱 Call or Text</h3>
+                <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                <p><strong>WhatsApp:</strong> +1 (555) 123-4567</p>
+                <p><strong>Hours:</strong> Mon-Fri 9am-8pm EST</p>
+            </div>
+            
+            <div class="contact-method">
+                <h3>📍 Visit Us</h3>
+                <p><strong>Address:</strong> 123 Language Street</p>
+                <p>Education City, EC 10001</p>
+                <p><strong>Office Hours:</strong> By appointment only</p>
+            </div>
+            
+            <div class="contact-method">
+                <h3>💬 Social Media</h3>
+                <p>Follow us for tips and updates:</p>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">YouTube</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Your Name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+                </div>
+                
+                <div class="form-group">
+                    <label for="language">Language Interest *</label>
+                    <select id="language" name="language" required>
+                        <option value="">Select a language</option>
+                        <option value="french">French Lessons (Parlons)</option>
+                        <option value="spanish">Spanish Lessons (Hablemos)</option>
+                        <option value="both">Both French & Spanish</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="level">Current Level</label>
+                    <select id="level" name="level">
+                        <option value="">Select your level</option>
+                        <option value="beginner">Complete Beginner (A1)</option>
+                        <option value="elementary">Elementary (A2)</option>
+                        <option value="intermediate">Intermediate (B1)</option>
+                        <option value="advanced">Advanced (B2+)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your Message *</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Tell us about your language goals or ask any questions..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
     
-    <h3>Contact Info:</h3>
-    <p>📧 info@languageschool.com</p>
-    <p>📞 (555) 123-4567</p>
+    <section class="faq">
+        <h2>❓ Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <h3>How soon can I start lessons?</h3>
+            <p>You can start within 48 hours of registration! We'll match you with a teacher and schedule your first lesson.</p>
+        </div>
+        
+        <div class="faq-item">
+            <h3>Do you offer trial lessons?</h3>
+            <p>Yes! Book a free 30-minute trial lesson to experience YoLingo teaching style before committing.</p>
+        </div>
+        
+        <div class="faq-item">
+            <h3>What materials do I need?</h3>
+            <p>Just a computer with internet connection. We provide all learning materials digitally.</p>
+        </div>
+        
+        <div class="faq-item">
+            <h3>Can I switch teachers?</h3>
+            <p>Absolutely! If the teaching style doesn't match, we'll find you a better match within 24 hours.</p>
+        </div>
+    </section>
+    
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for contacting YoLingo! We\'ll respond within 24 hours.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
