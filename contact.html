@@ -15,6 +15,7 @@
         nav {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 20px 0;
             margin-bottom: 40px;
         }
@@ -26,25 +27,17 @@
             color: #4361ee;
         }
         .nav-links a {
-            margin-left: 15px;
+            margin-left: 20px;
             text-decoration: none;
             color: #333;
+            font-weight: 500;
         }
         .nav-links a:hover {
             color: #4361ee;
         }
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-        .subtitle {
-            color: #666;
-            margin-bottom: 40px;
-            font-size: 18px;
-        }
         .contact-container {
             display: flex;
-            gap: 50px;
+            gap: 40px;
             margin-top: 30px;
         }
         .contact-form {
@@ -56,37 +49,44 @@
             padding: 30px;
             border-radius: 10px;
         }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+        }
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: 500;
-            color: #333;
         }
         input, textarea, select {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-family: Arial, sans-serif;
             font-size: 16px;
-            box-sizing: border-box;
         }
         input:focus, textarea:focus, select:focus {
             outline: none;
             border-color: #4361ee;
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
         }
         textarea {
-            height: 180px;
+            height: 150px;
             resize: vertical;
         }
         .btn {
             background: #4361ee;
             color: white;
             border: none;
-            padding: 16px 32px;
+            padding: 15px 30px;
             border-radius: 5px;
             font-size: 16px;
             font-weight: bold;
@@ -98,34 +98,23 @@
             background: #3a56d4;
         }
         .contact-item {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .contact-item h3 {
             color: #4361ee;
-            margin-bottom: 10px;
-            font-size: 18px;
+            margin-bottom: 5px;
         }
         .contact-item p {
             color: #666;
-            margin: 5px 0;
-        }
-        .language-options {
-            display: flex;
-            gap: 20px;
-            margin: 15px 0;
+            margin: 0;
         }
         .language-option {
-            display: flex;
-            align-items: center;
-        }
-        .language-option input {
-            width: auto;
-            margin-right: 8px;
+            margin-bottom: 15px;
         }
         .checkbox-label {
             display: flex;
             align-items: center;
-            margin-top: 20px;
+            margin-bottom: 20px;
         }
         .checkbox-label input {
             width: auto;
@@ -136,7 +125,7 @@
                 flex-direction: column;
             }
             .nav-links a {
-                margin-left: 10px;
+                margin-left: 15px;
                 font-size: 14px;
             }
         }
@@ -154,60 +143,58 @@
     </nav>
 
     <h1>Contact YoLingo</h1>
-    <p class="subtitle">Get in touch with our language experts. We're here to help you start your language journey!</p>
+    <p class="subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond within 24 hours.</p>
 
     <div class="contact-container">
         <div class="contact-form">
             <form action="thank-you.html" method="GET">
                 <div class="form-group">
-                    <label for="name">Full Name *</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">Email Address *</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="subject">What are you interested in? *</label>
+                    <label for="subject">Subject</label>
                     <select id="subject" name="subject" required>
-                        <option value="">Select an option</option>
+                        <option value="">Select a subject</option>
+                        <option value="general">General Inquiry</option>
                         <option value="french">French Lessons</option>
                         <option value="spanish">Spanish Lessons</option>
                         <option value="pricing">Pricing & Packages</option>
                         <option value="business">Business/Group Lessons</option>
-                        <option value="trial">Free Trial Lesson</option>
-                        <option value="other">Other Inquiry</option>
+                        <option value="other">Other</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label>Language Preference *</label>
-                    <div class="language-options">
-                        <div class="language-option">
-                            <input type="radio" id="french-radio" name="language" value="french" required>
-                            <label for="french-radio">French 🇫🇷</label>
+                    <label>Interested in learning:</label>
+                    <div class="language-option">
+                        <div class="checkbox-label">
+                            <input type="checkbox" id="french" name="language[]" value="french">
+                            <label for="french">French</label>
                         </div>
-                        <div class="language-option">
-                            <input type="radio" id="spanish-radio" name="language" value="spanish" required>
-                            <label for="spanish-radio">Spanish 🇪🇸</label>
-                        </div>
-                        <div class="language-option">
-                            <input type="radio" id="both-radio" name="language" value="both" required>
-                            <label for="both-radio">Both</label>
+                        <div class="checkbox-label">
+                            <input type="checkbox" id="spanish" name="language[]" value="spanish">
+                            <label for="spanish">Spanish</label>
                         </div>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="message">Your Message *</label>
-                    <textarea id="message" name="message" placeholder="Tell us about your language goals, schedule preferences, or any questions you have..." required></textarea>
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" required></textarea>
                 </div>
                 
-                <div class="checkbox-label">
-                    <input type="checkbox" id="newsletter" name="newsletter">
-                    <label for="newsletter">Subscribe to our newsletter for language learning tips and updates</label>
+                <div class="form-group">
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">Subscribe to our newsletter for language tips and updates</label>
+                    </div>
                 </div>
                 
                 <button type="submit" class="btn">Send Message</button>
@@ -216,28 +203,25 @@
         
         <div class="contact-info">
             <div class="contact-item">
-                <h3>📧 Quick Response</h3>
-                <p>Email: <strong>hello@yolingo.com</strong></p>
+                <h3>📧 Email</h3>
+                <p>hello@yolingo.com</p>
                 <p>We respond within 24 hours</p>
             </div>
             
             <div class="contact-item">
-                <h3>🕒 Business Hours</h3>
-                <p><strong>Mon-Fri:</strong> 9 AM - 8 PM</p>
-                <p><strong>Sat-Sun:</strong> 10 AM - 4 PM</p>
-                <p>All times in your local timezone</p>
+                <h3>🕒 Response Time</h3>
+                <p>Monday - Friday: Within 24 hours</p>
+                <p>Weekends: Within 48 hours</p>
             </div>
             
             <div class="contact-item">
-                <h3>🌍 Multilingual Support</h3>
-                <p>We speak English, French, and Spanish!</p>
-                <p>Feel free to write in any of these languages.</p>
+                <h3>🌐 Language Support</h3>
+                <p>Questions in English, French, or Spanish welcome!</p>
             </div>
             
             <div class="contact-item">
-                <h3>💡 Free Consultation</h3>
-                <p>Not sure where to start?</p>
-                <p>Mention "Free Consultation" in your message for a personalized learning plan.</p>
+                <h3>📞 Phone (Coming Soon)</h3>
+                <p>Phone support will be available starting January 2024</p>
             </div>
         </div>
     </div>
