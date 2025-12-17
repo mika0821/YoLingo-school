@@ -1,113 +1,210 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact YoLingo | Start Your Language Journey</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Additional styles for contact page */
+        /* Modern Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Contact Header - Enhanced */
         .contact-header {
-            background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%);
+            background: linear-gradient(135deg, #4361ee 0%, #3a56d4 30%, #7209b7 100%);
             color: white;
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
-            border-radius: 0 0 20px 20px;
             margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" opacity="0.1"><path d="M0,0 L100,0 L100,100 Z" fill="white"/></svg>');
+            background-size: cover;
         }
         
         .contact-header h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease-out;
         }
         
         .contact-header .subtitle {
-            font-size: 20px;
+            font-size: 1.3rem;
             opacity: 0.9;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            position: relative;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            line-height: 1.6;
         }
         
+        /* Contact Container - Enhanced */
         .contact-container {
             display: flex;
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto 60px;
-            padding: 0 20px;
+            gap: 50px;
+            max-width: 1300px;
+            margin: 0 auto 80px;
+            padding: 0 30px;
+            animation: fadeInUp 1s ease-out 0.4s both;
         }
         
+        /* Contact Info - Enhanced */
         .contact-info {
             flex: 1;
-            background: #f8f9fa;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(67, 97, 238, 0.15);
+            border: 1px solid rgba(67, 97, 238, 0.1);
+            position: relative;
+            overflow: hidden;
         }
         
-        .contact-form {
-            flex: 1;
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, #4361ee, #7209b7);
+        }
+        
+        .contact-info h2 {
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
         .contact-method {
-            margin-bottom: 35px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        .contact-method:last-child {
-            border-bottom: none;
+        .contact-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.15);
+            border-color: rgba(67, 97, 238, 0.2);
         }
         
         .contact-method h3 {
             color: #4361ee;
-            margin-bottom: 10px;
-            font-size: 20px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-method p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+        
+        .contact-method strong {
+            color: #333;
+            font-weight: 600;
         }
         
         .social-links {
             display: flex;
-            gap: 15px;
-            margin-top: 10px;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
         }
         
         .social-links a {
-            padding: 8px 16px;
-            background: #4361ee;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #4361ee, #3a56d4);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 14px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
         }
         
         .social-links a:hover {
-            background: #3a56d4;
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+            background: linear-gradient(135deg, #3a56d4, #2a46c4);
+        }
+        
+        /* Contact Form - Enhanced */
+        .contact-form {
+            flex: 1;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(67, 97, 238, 0.15);
+            border: 1px solid rgba(67, 97, 238, 0.1);
+        }
+        
+        .contact-form h2 {
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            position: relative;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             font-weight: 600;
             color: #333;
+            font-size: 1.05rem;
         }
         
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 14px;
+            padding: 18px 20px;
             border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
             font-family: inherit;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
+            background: white;
+            color: #333;
         }
         
         .form-group input:focus,
@@ -115,59 +212,129 @@
         .form-group textarea:focus {
             outline: none;
             border-color: #4361ee;
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #999;
         }
         
         .btn-primary {
-            background: #4361ee;
+            background: linear-gradient(135deg, #4361ee, #3a56d4);
             color: white;
             border: none;
-            padding: 16px 40px;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 600;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.3);
+            letter-spacing: 0.5px;
         }
         
         .btn-primary:hover {
-            background: #3a56d4;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+            background: linear-gradient(135deg, #3a56d4, #2a46c4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(67, 97, 238, 0.4);
         }
         
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+        
+        /* FAQ Section - Enhanced */
         .faq {
-            max-width: 800px;
-            margin: 0 auto 80px;
-            padding: 0 20px;
+            max-width: 1000px;
+            margin: 0 auto 100px;
+            padding: 0 30px;
+            animation: fadeInUp 1s ease-out 0.6s both;
         }
         
         .faq h2 {
             text-align: center;
-            font-size: 36px;
-            margin-bottom: 40px;
+            font-size: 2.8rem;
+            margin-bottom: 50px;
             color: #333;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .faq h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #4361ee, #7209b7);
+            border-radius: 2px;
         }
         
         .faq-item {
-            background: white;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            border-left: 5px solid #4361ee;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 6px solid #4361ee;
+        }
+        
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(67, 97, 238, 0.15);
+            border-left-color: #7209b7;
         }
         
         .faq-item h3 {
             color: #4361ee;
-            margin-bottom: 10px;
-            font-size: 20px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
         .faq-item p {
-            color: #666;
-            line-height: 1.6;
+            color: #555;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .contact-container {
+                gap: 30px;
+                padding: 0 20px;
+            }
+            
+            .contact-info,
+            .contact-form {
+                padding: 40px 30px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -175,16 +342,105 @@
                 flex-direction: column;
             }
             
+            .contact-header {
+                padding: 60px 20px;
+            }
+            
             .contact-header h1 {
-                font-size: 36px;
+                font-size: 2.5rem;
             }
             
             .contact-header .subtitle {
-                font-size: 18px;
+                font-size: 1.1rem;
+            }
+            
+            .contact-info h2,
+            .contact-form h2 {
+                font-size: 1.8rem;
+            }
+            
+            .faq h2 {
+                font-size: 2.2rem;
             }
             
             .social-links {
-                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .social-links a {
+                flex: 1;
+                min-width: 140px;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-header {
+                padding: 50px 15px;
+            }
+            
+            .contact-header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info,
+            .contact-form {
+                padding: 30px 20px;
+            }
+            
+            .contact-method,
+            .faq-item {
+                padding: 20px;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 16px;
+            }
+            
+            .btn-primary {
+                padding: 18px;
+            }
+        }
+        
+        /* Floating Animation for Icons */
+        .contact-method h3 i,
+        .contact-info h2 i,
+        .contact-form h2 i,
+        .faq-item h3 i {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        /* Success Animation for Form */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
@@ -203,68 +459,68 @@
         </div>
     </nav>
     
-    <header class="page-header contact-header">
-        <h1>Contact YoLingo</h1>
-        <p class="subtitle">Have questions? Ready to start your language journey? Get in touch with us!</p>
+    <header class="contact-header">
+        <h1><i class="fas fa-comments"></i> Contact YoLingo</h1>
+        <p class="subtitle">Have questions? Ready to start your language journey? Our team is here to guide you every step of the way!</p>
     </header>
     
     <section class="contact-container">
         <div class="contact-info">
-            <h2>📞 Get in Touch</h2>
+            <h2><i class="fas fa-headset"></i> Get in Touch</h2>
             
             <div class="contact-method">
-                <h3>📧 Email Us</h3>
+                <h3><i class="fas fa-envelope"></i> Email Us</h3>
                 <p><strong>General Inquiries:</strong> hello@yolingo.com</p>
                 <p><strong>French Lessons:</strong> french@yolingo.com</p>
                 <p><strong>Spanish Lessons:</strong> spanish@yolingo.com</p>
             </div>
             
             <div class="contact-method">
-                <h3>📱 Call or Text</h3>
+                <h3><i class="fas fa-phone-alt"></i> Call or Text</h3>
                 <p><strong>Phone:</strong> +1 (555) 123-4567</p>
                 <p><strong>WhatsApp:</strong> +1 (555) 123-4567</p>
                 <p><strong>Hours:</strong> Mon-Fri 9am-8pm EST</p>
             </div>
             
             <div class="contact-method">
-                <h3>📍 Visit Us</h3>
+                <h3><i class="fas fa-map-marker-alt"></i> Visit Us</h3>
                 <p><strong>Address:</strong> 123 Language Street</p>
                 <p>Education City, EC 10001</p>
                 <p><strong>Office Hours:</strong> By appointment only</p>
             </div>
             
             <div class="contact-method">
-                <h3>💬 Social Media</h3>
+                <h3><i class="fas fa-hashtag"></i> Social Media</h3>
                 <p>Follow us for tips and updates:</p>
                 <div class="social-links">
-                    <a href="#">Facebook</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">YouTube</a>
+                    <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
                 </div>
             </div>
         </div>
         
         <div class="contact-form">
-            <h2>Send Us a Message</h2>
-            <form action="thank-you.html" method="GET">
+            <h2><i class="fas fa-paper-plane"></i> Send Us a Message</h2>
+            <form action="thank-you.html" method="GET" id="contactForm">
                 <div class="form-group">
-                    <label for="name">Full Name *</label>
-                    <input type="text" id="name" name="name" required placeholder="Your Name">
+                    <label for="name"><i class="fas fa-user"></i> Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Your full name">
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">Email Address *</label>
+                    <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
                     <input type="email" id="email" name="email" required placeholder="your@email.com">
                 </div>
                 
                 <div class="form-group">
-                    <label for="phone">Phone Number</label>
+                    <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
                     <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
                 </div>
                 
                 <div class="form-group">
-                    <label for="language">Language Interest *</label>
+                    <label for="language"><i class="fas fa-language"></i> Language Interest *</label>
                     <select id="language" name="language" required>
                         <option value="">Select a language</option>
                         <option value="french">French Lessons (Parlons)</option>
@@ -274,7 +530,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="level">Current Level</label>
+                    <label for="level"><i class="fas fa-chart-line"></i> Current Level</label>
                     <select id="level" name="level">
                         <option value="">Select your level</option>
                         <option value="beginner">Complete Beginner (A1)</option>
@@ -285,37 +541,94 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="message">Your Message *</label>
-                    <textarea id="message" name="message" rows="5" required placeholder="Tell us about your language goals or ask any questions..."></textarea>
+                    <label for="message"><i class="fas fa-comment-dots"></i> Your Message *</label>
+                    <textarea id="message" name="message" rows="6" required placeholder="Tell us about your language goals or ask any questions..."></textarea>
                 </div>
                 
-                <button type="submit" class="btn-primary">Send Message</button>
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
             </form>
         </div>
     </section>
     
     <section class="faq">
-        <h2>❓ Frequently Asked Questions</h2>
+        <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
         
-        <div class="faq-item">
-            <h3>How soon can I start lessons?</h3>
-            <p>You can start within 48 hours of registration! We'll match you with a teacher and schedule your first lesson.</p>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <h3><i class="fas fa-rocket"></i> How soon can I start lessons?</h3>
+            <p>You can start within 48 hours of registration! We'll match you with a perfect teacher and schedule your first lesson. Most students have their first lesson within 24 hours.</p>
         </div>
         
-        <div class="faq-item">
-            <h3>Do you offer trial lessons?</h3>
-            <p>Yes! Book a free 30-minute trial lesson to experience YoLingo teaching style before committing.</p>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <h3><i class="fas fa-star"></i> Do you offer trial lessons?</h3>
+            <p>Yes! Book a free 30-minute trial lesson to experience YoLingo's unique teaching style before committing. No credit card required for the trial.</p>
         </div>
         
-        <div class="faq-item">
-            <h3>What materials do I need?</h3>
-            <p>Just a computer with internet connection. We provide all learning materials digitally.</p>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <h3><i class="fas fa-laptop"></i> What materials do I need?</h3>
+            <p>Just a computer with internet connection. We provide all learning materials digitally, including interactive exercises, videos, and personalized lesson plans.</p>
         </div>
         
-        <div class="faq-item">
-            <h3>Can I switch teachers?</h3>
-            <p>Absolutely! If the teaching style doesn't match, we'll find you a better match within 24 hours.</p>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <h3><i class="fas fa-exchange-alt"></i> Can I switch teachers?</h3>
+            <p>Absolutely! If the teaching style doesn't match your learning preferences, we'll find you a better match within 24 hours at no extra cost.</p>
         </div>
     </section>
+
+    <script>
+        // FAQ toggle functionality
+        function toggleFAQ(element) {
+            const allFAQ = document.querySelectorAll('.faq-item');
+            allFAQ.forEach(faq => {
+                if (faq !== element) {
+                    faq.style.transform = 'translateY(0)';
+                    faq.style.boxShadow = '0 10px 25px rgba(0,0,0,0.08)';
+                }
+            });
+            
+            if (element.style.transform === 'translateY(-5px)') {
+                element.style.transform = 'translateY(0)';
+                element.style.boxShadow = '0 10px 25px rgba(0,0,0,0.08)';
+            } else {
+                element.style.transform = 'translateY(-5px)';
+                element.style.boxShadow = '0 20px 35px rgba(67, 97, 238, 0.15)';
+            }
+        }
+
+        // Form validation feedback
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = '#ff4757';
+                    field.style.boxShadow = '0 0 0 4px rgba(255, 71, 87, 0.1)';
+                } else {
+                    field.style.borderColor = '#e0e0e0';
+                    field.style.boxShadow = 'none';
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert('Please fill in all required fields marked with *');
+            }
+        });
+
+        // Input focus effects
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
 </body>
 </html>
