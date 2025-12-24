@@ -3,309 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YoLingo | Learn French & Spanish with Native Teachers</title>
-
-    <!-- ===== FAVICON ===== -->
-    <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
-    <link rel="apple-touch-icon" href="/favicon.png">
-    <meta name="theme-color" content="#7b61ff">
-    <!-- =================== -->
-    
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Yolingo - Learn Languages</title>
     <style>
-        /* Minimal inline styles for quick visual enhancement */
-        .hero {
-            position: relative;
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header styles */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            padding-right: 12px; /* Fix for cut-off G */
+            overflow: visible;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(90deg, #4299e1, #48bb78);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.85;
+        }
+        
+        /* Language sections */
+        .languages-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .language-card {
+            background: white;
+            border-radius: 16px;
             overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        /* Subtle floating animation for visual interest */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .language-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
-        .language-card:hover .start-link {
-            animation: float 1s infinite;
+        /* Language headers with improved visibility */
+        .language-header {
+            padding: 40px 30px;
+            color: white;
+            text-align: center;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .french-header {
+            background: linear-gradient(rgba(41, 128, 185, 0.85), rgba(52, 152, 219, 0.85)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .spanish-header {
+            background: linear-gradient(rgba(231, 76, 60, 0.85), rgba(192, 57, 43, 0.85)), url('https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Text overlay for better readability */
+        .text-overlay {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+            max-width: 90%;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .language-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .language-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+        
+        /* Language content */
+        .language-content {
+            padding: 30px;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .features-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .feature-check {
+            background-color: #48bb78;
+            color: white;
+        }
+        
+        .feature-uncheck {
+            background-color: #cbd5e0;
+            color: #718096;
+        }
+        
+        /* Buttons */
+        .start-button {
+            display: inline-block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(90deg, #2d3748, #4a5568);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+        }
+        
+        .start-button:hover {
+            background: linear-gradient(90deg, #4a5568, #2d3748);
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .french-button {
+            background: linear-gradient(90deg, #2980b9, #3498db);
+        }
+        
+        .french-button:hover {
+            background: linear-gradient(90deg, #3498db, #2980b9);
+        }
+        
+        .spanish-button {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+        }
+        
+        .spanish-button:hover {
+            background: linear-gradient(90deg, #c0392b, #e74c3c);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            color: #718096;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .logo {
+                font-size: 2.8rem;
+            }
+            
+            .tagline {
+                font-size: 1.3rem;
+            }
+            
+            .languages-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .language-title {
+                font-size: 2rem;
+            }
+            
+            .language-header {
+                min-height: 180px;
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .language-title {
+                font-size: 1.8rem;
+            }
+            
+            .language-content {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">
-            <img src="logo.jpg" alt="YoLingo" class="logo-image">
-            <div class="logo-text-container">
-                <span class="logo-text">Yo</span><span class="logo-highlight">Lingo</span>
-            </div>
-        </div>
-        <button class="menu-toggle" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="nav-links" id="navLinks">
-            <a href="index.html" class="active">Home</a>
-            <a href="parlons.html">Parlons (French)</a>
-            <a href="hablemos.html">Hablemos (Spanish)</a>
-            <a href="pricing.html">Pricing</a>
-            <a href="contact.html">Contact</a>
-        </div>
-    </nav>
-    
-    <!-- Hero Section with Minimalist Background -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Learn Languages with <span class="highlight">YoLingo</span></h1>
-            <p class="subtitle">Where culture meets conversation. Master French or Spanish with native speakers in interactive, personalized lessons.</p>
-            
-            <div class="language-chooser">
-                <a href="parlons.html" class="language-card french-card">
-                    <div class="card-content">
-                        <h2>🇫🇷 Parlons Français</h2>
-                        <p>Discover the language of love, art, and culture</p>
-                        <ul>
-                            <li>🗼 Learn with teachers from France</li>
-                            <li>🎭 Cultural immersion activities</li>
-                            <li>🎯 DELF/DALF & Baccalaureate preparation</li>
-                        </ul>
-                        <span class="start-link">Start Learning French →</span>
-                    </div>
-                </a>
-                
-                <a href="hablemos.html" class="language-card spanish-card">
-                    <div class="card-content">
-                        <h2>🇪🇸 ¡Hablemos Español!</h2>
-                        <p>Explore vibrant Spanish culture and language</p>
-                        <ul>
-                            <li>💃 Learn with teachers from Spain</li>
-                            <li>🌍 Cultural immersion activities</li>
-                            <li>🎯 DELE certification preparation</li>
-                        </ul>
-                        <span class="start-link">Start Learning Spanish →</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Why YoLingo Section -->
-    <section class="why-yolingo">
-        <h2>Why Choose <span class="highlight">YoLingo</span>?</h2>
+    <div class="container">
+        <header>
+            <div class="logo">Yolingo</div>
+            <div class="tagline">Learn Languages with Yolingo</div>
+            <p class="description">Where culture meets conversation. Master French or Spanish with native speakers in interactive, personalized lessons.</p>
+        </header>
         
-        <div class="features-grid">
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-bullseye"></i></div>
-                <h3>Personalized Learning</h3>
-                <p>Custom lesson plans based on your goals, level, and learning style.</p>
-            </div>
-            
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-                <h3>Native Teachers</h3>
-                <p>Certified native speakers from France and Spain with teaching experience.</p>
-            </div>
-            
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
-                <h3>Flexible Schedule</h3>
-                <p>Morning, evening & weekend classes to fit your busy lifestyle.</p>
-            </div>
-            
-            <div class="feature">
-                <div class="feature-icon"><i class="fas fa-globe-americas"></i></div>
-                <h3>Cultural Immersion</h3>
-                <p>Learn language through culture, history, music, and real conversations.</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="stat">
-            <h3>500+</h3>
-            <p>Happy Students</p>
-        </div>
-        <div class="stat">
-            <h3>98%</h3>
-            <p>Satisfaction Rate</p>
-        </div>
-        <div class="stat">
-            <h3>15</h3>
-            <p>Native Teachers</p>
-        </div>
-        <div class="stat">
-            <h3>24/7</h3>
-            <p>Support Available</p>
-        </div>
-    </section>
-    
-    <!-- CTA Section -->
-    <section class="cta">
-        <h2>Ready to Start Your Language Journey?</h2>
-        <p>Join YoLingo today and get your first lesson free!</p>
-        <div class="cta-buttons">
-            <a href="contact.html" class="btn btn-primary">Book Free Trial Lesson</a>
-            <a href="pricing.html" class="btn btn-secondary">View All Plans</a>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <div class="footer-logo">
-                    <span class="logo-text">Yo</span><span class="logo-highlight">Lingo</span>
+        <div class="languages-container">
+            <!-- French Card -->
+            <div class="language-card">
+                <div class="language-header french-header">
+                    <div class="text-overlay">
+                        <h2 class="language-title">Français</h2>
+                        <p class="language-subtitle">Discover the language of love, art, and culture</p>
+                    </div>
                 </div>
-                <p>Making language learning accessible, fun, and effective since 2020.</p>
+                
+                <div class="language-content">
+                    <ul class="features-list">
+                        <li>
+                            <span class="feature-icon feature-check">✓</span>
+                            Learn with teachers from France
+                        </li>
+                        <li>
+                            <span class="feature-icon feature-check">✓</span>
+                            Cultural immersion activities
+                        </li>
+                        <li>
+                            <span class="feature-icon feature-uncheck">○</span>
+                            DELF/DALF & Baccalauréat preparation
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="start-button french-button">Start Learning French →</a>
+                </div>
             </div>
             
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="index.html">Home</a>
-                <a href="parlons.html">French Lessons</a>
-                <a href="hablemos.html">Spanish Lessons</a>
-                <a href="pricing.html">Pricing</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Contact Info</h4>
-                <p><i class="fas fa-envelope"></i> contact@yolingo.info</p>
-                <p><i class="fas fa-phone"></i> +1 818 262 1520 (WhatsApp)</p>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Follow YoLingo</h4>
-                <div class="social">
-                    <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
-                    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+            <!-- Spanish Card -->
+            <div class="language-card">
+                <div class="language-header spanish-header">
+                    <div class="text-overlay">
+                        <h2 class="language-title">¡Español!</h2>
+                        <p class="language-subtitle">Explore vibrant Spanish culture and language</p>
+                    </div>
+                </div>
+                
+                <div class="language-content">
+                    <ul class="features-list">
+                        <li>
+                            <span class="feature-icon feature-check">✓</span>
+                            Learn with teachers from Spain
+                        </li>
+                        <li>
+                            <span class="feature-icon feature-check">✓</span>
+                            Cultural immersion activities
+                        </li>
+                        <li>
+                            <span class="feature-icon feature-uncheck">○</span>
+                            DELE certification preparation
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="start-button spanish-button">Start Learning Spanish →</a>
                 </div>
             </div>
         </div>
         
-        <div class="footer-bottom">
-            <p>&copy; 2026 YoLingo Language School. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navLinks = document.getElementById('navLinks');
-            const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
-                navLinks.classList.remove('active');
-            }
-        });
-        
-        // Enhanced hover effects for language cards
-        document.querySelectorAll('.language-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.boxShadow = '0 20px 40px rgba(123, 97, 255, 0.2)';
-                this.style.transform = 'translateY(-15px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.boxShadow = 'var(--shadow)';
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-        
-        // Add click animation to buttons
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                // Create ripple effect
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    border-radius: 50%;
-                    background: rgba(255, 255, 255, 0.7);
-                    transform: scale(0);
-                    animation: ripple-animation 0.6s linear;
-                    width: ${size}px;
-                    height: ${size}px;
-                    top: ${y}px;
-                    left: ${x}px;
-                `;
-                
-                this.appendChild(ripple);
-                
-                // Remove ripple after animation
-                setTimeout(() => ripple.remove(), 600);
-            });
-        });
-        
-        // Add CSS for ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple-animation {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-            .btn {
-                position: relative;
-                overflow: hidden;
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // Stats counter animation
-        function animateCounter(element, target, duration = 2000) {
-            let start = 0;
-            const increment = target / (duration / 16); // 60fps
-            const timer = setInterval(() => {
-                start += increment;
-                if (start >= target) {
-                    element.textContent = target + (element.textContent.includes('%') ? '%' : '');
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(start) + (element.textContent.includes('%') ? '%' : '');
-                }
-            }, 16);
-        }
-        
-        // Animate stats when they come into view
-        const observerOptions = {
-            threshold: 0.5
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const stats = entry.target.querySelectorAll('.stat h3');
-                    stats.forEach(stat => {
-                        const value = parseInt(stat.textContent);
-                        if (!isNaN(value)) {
-                            animateCounter(stat, value);
-                        }
-                    });
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-        
-        // Observe stats section
-        const statsSection = document.querySelector('.stats');
-        if (statsSection) {
-            observer.observe(statsSection);
-        }
-    </script>
+        <footer>
+            <p>© 2023 Yolingo Language Learning. All rights reserved.</p>
+        </footer>
+    </div>
 </body>
 </html>
