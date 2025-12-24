@@ -8,7 +8,7 @@
     <!-- ===== FAVICON ===== -->
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
     <link rel="apple-touch-icon" href="/favicon.png">
-    <meta name="theme-color" content="#4361ee">
+    <meta name="theme-color" content="#7b61ff">
     <!-- =================== -->
     
     <link rel="stylesheet" href="style.css">
@@ -150,22 +150,22 @@
     <section class="faq">
         <h2>Frequently Asked Questions</h2>
         
-        <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-item">
             <h3>Can I switch between plans?</h3>
             <p>Yes! You can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle.</p>
         </div>
         
-        <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-item">
             <h3>How do payments work?</h3>
             <p>All plans are billed every 4 weeks. You can pay via credit card, PayPal, or bank transfer. We send reminders 3 days before renewal.</p>
         </div>
         
-        <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-item">
             <h3>Do you offer discounts?</h3>
             <p>Yes! We offer 10% discount for students and 15% for 3-month commitments. Contact us for family or group discounts.</p>
         </div>
         
-        <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-item">
             <h3>What if I miss a class?</h3>
             <p>For private lessons, we offer makeup sessions with 24-hour notice. Group classes have recorded sessions available.</p>
         </div>
@@ -173,12 +173,13 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-section">
-    <div class="footer-logo">
-        <span class="logo-text">Yo</span><span class="logo-highlight">Lingo</span>
-    </div>
-    <p>Making language learning accessible, fun, and effective since 2020.</p>
-</div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <span class="logo-text">Yo</span><span class="logo-highlight">Lingo</span>
+                </div>
+                <p>Making language learning accessible, fun, and effective since 2020.</p>
+            </div>
             
             <div class="footer-section">
                 <h4>Quick Links</h4>
@@ -216,25 +217,6 @@
             navLinks.classList.toggle('active');
         }
 
-        // FAQ toggle functionality
-        function toggleFAQ(element) {
-            const allFAQ = document.querySelectorAll('.faq-item');
-            allFAQ.forEach(faq => {
-                if (faq !== element) {
-                    faq.style.transform = 'translateY(0)';
-                    faq.style.boxShadow = '0 5px 15px rgba(0,0,0,0.08)';
-                }
-            });
-            
-            if (element.style.transform === 'translateY(-5px)') {
-                element.style.transform = 'translateY(0)';
-                element.style.boxShadow = '0 5px 15px rgba(0,0,0,0.08)';
-            } else {
-                element.style.transform = 'translateY(-5px)';
-                element.style.boxShadow = '0 10px 25px rgba(67, 97, 238, 0.15)';
-            }
-        }
-
         // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             const navLinks = document.getElementById('navLinks');
@@ -242,6 +224,89 @@
             
             if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
                 navLinks.classList.remove('active');
+            }
+        });
+        
+        // FAQ toggle functionality
+        function toggleFAQ(element) {
+            const allFAQ = document.querySelectorAll('.faq-item');
+            allFAQ.forEach(faq => {
+                if (faq !== element) {
+                    faq.classList.remove('active');
+                }
+            });
+            
+            element.classList.toggle('active');
+        }
+        
+        // Add click listeners to all FAQ items
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', function() {
+                toggleFAQ(this);
+            });
+        });
+        
+        // Plan selection animation
+        document.querySelectorAll('.plan .btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const plan = this.closest('.plan');
+                
+                // Add selection animation
+                plan.style.animation = 'pulse 0.5s';
+                
+                // Remove animation after it completes
+                setTimeout(() => {
+                    plan.style.animation = '';
+                }, 500);
+                
+                // Add to localStorage for tracking
+                const planName = plan.querySelector('h3').textContent;
+                localStorage.setItem('yolingo_selected_plan', planName);
+                localStorage.setItem('yolingo_plan_selection_time', new Date().toISOString());
+            });
+        });
+        
+        // Price calculator (if needed)
+        function calculateSavings(planPrice, months) {
+            let discount = 0;
+            if (months >= 3) discount = 0.15;
+            else if (months >= 6) discount = 0.25;
+            
+            const total = planPrice * months * (1 - discount);
+            const savings = planPrice * months * discount;
+            
+            return { total, savings, discount: discount * 100 };
+        }
+        
+        // Add CSS for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+            .faq-item p {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out;
+            }
+            .faq-item.active p {
+                max-height: 500px;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Highlight popular plan on load
+        window.addEventListener('load', function() {
+            const popularPlan = document.querySelector('.plan.popular');
+            if (popularPlan) {
+                setTimeout(() => {
+                    popularPlan.style.animation = 'pulse 1s';
+                    setTimeout(() => {
+                        popularPlan.style.animation = '';
+                    }, 1000);
+                }, 1000);
             }
         });
     </script>
