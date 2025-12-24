@@ -580,19 +580,19 @@ nav {
     z-index: 1000;
 }
 
-/* Logo with Image + Text */
+/* Logo with Image + Text - JUST IMAGE BIGGER */
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
     cursor: pointer;
-    height: 50px;
+    height: 70px; /* Even taller container */
 }
 
 .logo-image {
     height: 100%;
     width: auto;
-    max-height: 40px;
+    max-height: 60px; /* Much bigger image */
     object-fit: contain;
     transition: opacity 0.3s ease;
 }
@@ -605,7 +605,7 @@ nav {
     display: flex;
     font-family: 'Montserrat', sans-serif;
     font-weight: 900;
-    font-size: 2rem;
+    font-size: 2rem; /* Original text size */
     line-height: 1;
 }
 
