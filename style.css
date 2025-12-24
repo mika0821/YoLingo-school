@@ -1593,3 +1593,29 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--gray);
 }
+
+.logo, .brand-heading {
+  padding-right: 8px; /* Prevents cutting */
+  overflow: visible;
+  word-wrap: normal;
+}
+
+.poster-text {
+  color: #fff; /* Bright white */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Improves readability */
+  background: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay behind text */
+  padding: 12px;
+  border-radius: 6px;
+}
+
+body {
+  background-color: #f8f9fa; /* Much lighter gray */
+  /* Or use a light gradient: */
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+}
+
+/* If using dark sections, adjust their color separately */
+.section-dark {
+  background-color: #2d3748; /* Softer dark */
+  color: #f7fafc;
+}
