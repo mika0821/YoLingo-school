@@ -6,8 +6,8 @@
     <title>YoLingo | Learn French & Spanish with Native Teachers</title>
 
     <!-- ===== FAVICON ===== -->
-    <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
-    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
     <meta name="theme-color" content="#7b61ff">
     <!-- =================== -->
     
@@ -17,20 +17,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Lazy loading for images -->
-    <link rel="preload" href="logo.jpg" as="image">
-    
     <style>
-        /* Minimal inline styles for quick visual enhancement */
-        .hero {
-            position: relative;
-            overflow: hidden;
+        /* Additional fixes for index.html specific issues */
+        .language-card {
+            height: 480px; /* Increased height to accommodate content */
         }
         
-        /* Subtle floating animation for visual interest */
+        .card-content {
+            padding: 1.5rem; /* Reduced padding for better fit */
+        }
+        
+        /* Ensure text fits in the box */
+        .start-link {
+            font-size: 0.95rem;
+            padding: 0.6rem 1.2rem;
+        }
+        
+        /* Animation for cards */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); }
         }
         
         .language-card:hover .start-link {
@@ -52,6 +58,33 @@
                 transform: scale(1);
             }
         }
+        
+        /* Fix for logo text */
+        .logo-image:before {
+            content: "YL";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .logo-image.loaded:before {
+            display: none;
+        }
+        
+        .logo-image img {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .logo-image.loaded img {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -61,7 +94,9 @@
     <!-- Navigation -->
     <nav>
         <div class="logo" onclick="window.location.href='index.html'">
-            <img src="logo.jpg" alt="YoLingo" class="logo-image" loading="lazy">
+            <div class="logo-image" id="logoImage">
+                <!-- Logo image will be loaded via JavaScript -->
+            </div>
             <div class="logo-text-container">
                 <span class="logo-text">Yo</span><span class="logo-highlight">Lingo</span>
             </div>
@@ -268,6 +303,31 @@
     </footer>
 
     <script>
+        // ===== FIX LOGO ISSUE =====
+        function loadLogo() {
+            const logoImage = document.getElementById('logoImage');
+            const img = new Image();
+            
+            img.onload = function() {
+                // If logo.jpg exists, use it
+                logoImage.innerHTML = `<img src="logo.jpg" alt="YoLingo" loading="lazy">`;
+                logoImage.classList.add('loaded');
+            };
+            
+            img.onerror = function() {
+                // If logo.jpg doesn't exist, create a fallback
+                logoImage.innerHTML = `
+                    <div style="background: var(--gradient-primary); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px; box-shadow: var(--shadow);">
+                        YL
+                    </div>
+                `;
+                logoImage.classList.add('loaded');
+            };
+            
+            // Try to load the logo
+            img.src = 'logo.jpg';
+        }
+        
         // ===== THEME MANAGEMENT =====
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
@@ -313,89 +373,77 @@
             }
         });
         
-        // ===== LANGUAGE MANAGEMENT =====
-        let currentLanguage = 'en';
-        const languageStrings = {
-            en: {
-                heroTitle: "Learn Languages with YoLingo",
-                heroSubtitle: "Where culture meets conversation. Master French or Spanish with native speakers in interactive, personalized lessons.",
-                frenchCardTitle: "🇫🇷 Parlons Français",
-                frenchCardDesc: "Discover the language of love, art, and culture with native French teachers",
-                spanishCardTitle: "🇪🇸 ¡Hablemos Español!",
-                spanishCardDesc: "Explore vibrant Spanish culture and language with authentic immersion"
-            },
-            fr: {
-                heroTitle: "Apprenez les langues avec YoLingo",
-                heroSubtitle: "Là où la culture rencontre la conversation. Maîtrisez le français ou l'espagnol avec des locuteurs natifs dans des leçons interactives et personnalisées.",
-                frenchCardTitle: "🇫🇷 Parlons Français",
-                frenchCardDesc: "Découvrez la langue de l'amour, de l'art et de la culture avec des professeurs français natifs",
-                spanishCardTitle: "🇪🇸 ¡Hablemos Español!",
-                spanishCardDesc: "Explorez la culture et la langue espagnoles vibrantes avec une immersion authentique"
-            },
-            ru: {
-                heroTitle: "Изучайте языки с YoLingo",
-                heroSubtitle: "Место, где культура встречается с общением. Освойте французский или испанский с носителями языка на интерактивных индивидуальных уроках.",
-                frenchCardTitle: "🇫🇷 Говорим по-французски",
-                frenchCardDesc: "Откройте для себя язык любви, искусства и культуры с носителями французского языка",
-                spanishCardTitle: "🇪🇸 ¡Hablemos Español!",
-                spanishCardDesc: "Исследуйте яркую испанскую культуру и язык с помощью аутентичного погружения"
-            }
-        };
-        
+        // ===== FIX LANGUAGE SWITCHER =====
         function toggleLanguageDropdown() {
             const dropdown = document.getElementById('languageDropdown');
+            const isShowing = dropdown.classList.contains('show');
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.lang-dropdown.show').forEach(d => {
+                if (d !== dropdown) d.classList.remove('show');
+            });
+            
+            // Toggle current dropdown
             dropdown.classList.toggle('show');
+            
+            // Update chevron icon
+            const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+            if (chevron) {
+                chevron.style.transform = isShowing ? 'rotate(0deg)' : 'rotate(180deg)';
+            }
         }
-        
-        function setLanguage(lang) {
-            currentLanguage = lang;
-            const strings = languageStrings[lang];
-            
-            // Update page content
-            document.querySelector('.hero-content h1').textContent = strings.heroTitle;
-            document.querySelector('.hero-content .subtitle').textContent = strings.heroSubtitle;
-            document.querySelector('.french-card h2').textContent = strings.frenchCardTitle;
-            document.querySelector('.french-card p').textContent = strings.frenchCardDesc;
-            document.querySelector('.spanish-card h2').textContent = strings.spanishCardTitle;
-            document.querySelector('.spanish-card p').textContent = strings.spanishCardDesc;
-            
-            // Update active language button
-            document.querySelectorAll('.lang-option').forEach(option => {
-                option.classList.toggle('active', option.dataset.lang === lang);
-            });
-            
-            // Close dropdown
-            document.getElementById('languageDropdown').classList.remove('show');
-            
-            // Save preference
-            localStorage.setItem('yolingo_language', lang);
-        }
-        
-        // Initialize language
-        const savedLang = localStorage.getItem('yolingo_language') || 'en';
-        setLanguage(savedLang);
-        
-        // Language dropdown event listeners
-        document.querySelectorAll('.lang-option').forEach(option => {
-            option.addEventListener('click', (e) => {
-                e.preventDefault();
-                setLanguage(option.dataset.lang);
-            });
-        });
         
         // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.language-switcher')) {
                 document.getElementById('languageDropdown').classList.remove('show');
+                const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+                if (chevron) {
+                    chevron.style.transform = 'rotate(0deg)';
+                }
             }
+        });
+        
+        // Language selection
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = option.dataset.lang;
+                
+                // Update active state
+                document.querySelectorAll('.lang-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                option.classList.add('active');
+                
+                // Update button text
+                const langSpan = document.querySelector('.lang-toggle span');
+                if (langSpan) {
+                    langSpan.textContent = lang.toUpperCase();
+                }
+                
+                // Close dropdown
+                document.getElementById('languageDropdown').classList.remove('show');
+                const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+                if (chevron) {
+                    chevron.style.transform = 'rotate(0deg)';
+                }
+                
+                // Show notification
+                showNotification(`Language changed to ${lang.toUpperCase()}`, 'success');
+                
+                // Store preference
+                localStorage.setItem('yolingo_language', lang);
+            });
         });
         
         // ===== NAVIGATION =====
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
-            document.querySelector('.menu-toggle i').classList.toggle('fa-bars');
-            document.querySelector('.menu-toggle i').classList.toggle('fa-times');
+            const icon = document.querySelector('.menu-toggle i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         }
         
         // Close menu when clicking outside
@@ -405,8 +453,9 @@
             
             if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
                 navLinks.classList.remove('active');
-                document.querySelector('.menu-toggle i').classList.remove('fa-times');
-                document.querySelector('.menu-toggle i').classList.add('fa-bars');
+                const icon = document.querySelector('.menu-toggle i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             }
         });
         
@@ -414,23 +463,33 @@
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('navLinks').classList.remove('active');
-                document.querySelector('.menu-toggle i').classList.remove('fa-times');
-                document.querySelector('.menu-toggle i').classList.add('fa-bars');
+                const icon = document.querySelector('.menu-toggle i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             });
         });
         
-        // ===== ENHANCED HOVER EFFECTS =====
-        document.querySelectorAll('.language-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.boxShadow = 'var(--shadow-glow)';
-                this.style.transform = 'translateY(-20px) scale(1.02)';
-            });
+        // ===== NOTIFICATION SYSTEM =====
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type}`;
+            notification.style.position = 'fixed';
+            notification.style.top = '80px';
+            notification.style.right = '20px';
+            notification.style.zIndex = '10000';
+            notification.style.minWidth = '300px';
+            notification.style.padding = '1rem 1.5rem';
+            notification.style.borderRadius = 'var(--radius-sm)';
+            notification.style.boxShadow = 'var(--shadow-hover)';
+            notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
+            document.body.appendChild(notification);
             
-            card.addEventListener('mouseleave', function() {
-                this.style.boxShadow = 'var(--shadow)';
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
         
         // ===== ANIMATED COUNTERS =====
         function animateCounter(element, target, duration = 2000) {
@@ -468,11 +527,18 @@
             });
         }, observerOptions);
         
-        // Observe stats section
-        const statsSection = document.querySelector('.stats');
-        if (statsSection) {
-            observer.observe(statsSection);
-        }
+        // ===== ENHANCED HOVER EFFECTS =====
+        document.querySelectorAll('.language-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = 'var(--shadow-glow)';
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'var(--shadow)';
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
         
         // ===== SMOOTH SCROLLING =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -538,30 +604,49 @@
         `;
         document.head.appendChild(style);
         
-        // ===== LAZY LOADING =====
-        document.addEventListener('DOMContentLoaded', function() {
-            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        // ===== INITIALIZE ON LOAD =====
+        window.addEventListener('load', function() {
+            // Load logo
+            loadLogo();
             
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.classList.add('loaded');
-                        observer.unobserve(img);
-                    }
-                });
+            // Observe stats section
+            const statsSection = document.querySelector('.stats');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+            
+            // Load saved language preference
+            const savedLang = localStorage.getItem('yolingo_language') || 'en';
+            const savedOption = document.querySelector(`.lang-option[data-lang="${savedLang}"]`);
+            if (savedOption) {
+                savedOption.click();
+            }
+            
+            // Add loaded class
+            document.body.classList.add('loaded');
+            
+            // Ensure start-link text fits
+            document.querySelectorAll('.start-link').forEach(link => {
+                link.style.fontSize = '0.95rem';
+                link.style.padding = '0.6rem 1.2rem';
             });
-            
-            lazyImages.forEach(img => imageObserver.observe(img));
         });
         
-        // ===== ACCESSIBILITY: KEYBOARD NAVIGATION =====
+        // ===== KEYBOARD NAVIGATION =====
         document.addEventListener('keydown', function(e) {
             // Escape key closes dropdowns and menus
             if (e.key === 'Escape') {
                 document.getElementById('languageDropdown').classList.remove('show');
                 document.getElementById('navLinks').classList.remove('active');
+                const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+                if (chevron) {
+                    chevron.style.transform = 'rotate(0deg)';
+                }
+                const icon = document.querySelector('.menu-toggle i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
             }
             
             // Tab key management for dropdowns
@@ -573,48 +658,11 @@
                     !dropdown.contains(activeElement) && 
                     !document.querySelector('.lang-toggle').contains(activeElement)) {
                     dropdown.classList.remove('show');
+                    const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+                    if (chevron) {
+                        chevron.style.transform = 'rotate(0deg)';
+                    }
                 }
-            }
-        });
-        
-        // ===== PERFORMANCE: IDLE CALLBACKS =====
-        if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(() => {
-                // Preload next page if user hovers over link
-                document.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('mouseenter', function() {
-                        const href = this.href;
-                        if (href && !href.includes('#')) {
-                            const prefetchLink = document.createElement('link');
-                            prefetchLink.rel = 'prefetch';
-                            prefetchLink.href = href;
-                            document.head.appendChild(prefetchLink);
-                        }
-                    });
-                });
-            });
-        }
-        
-        // ===== INITIALIZE ON LOAD =====
-        window.addEventListener('load', function() {
-            // Add loaded class for fade-in effects
-            document.body.classList.add('loaded');
-            
-            // Initialize AOS if needed
-            if (typeof AOS !== 'undefined') {
-                AOS.init({
-                    duration: 800,
-                    once: true,
-                    offset: 100
-                });
-            }
-            
-            // Log analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'page_view', {
-                    page_title: document.title,
-                    page_location: window.location.href
-                });
             }
         });
     </script>
