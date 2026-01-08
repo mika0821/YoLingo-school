@@ -877,6 +877,124 @@
         
         // Uncomment to add social sharing
         // document.querySelector('.thank-you-container').appendChild(shareSection);
+
+        // ===== FIXED LANGUAGE SWITCHER =====
+function toggleLanguageDropdown() {
+    const dropdown = document.getElementById('languageDropdown');
+    const isShowing = dropdown.classList.contains('show');
+    
+    // Close all other dropdowns
+    document.querySelectorAll('.lang-dropdown.show').forEach(d => {
+        if (d !== dropdown) d.classList.remove('show');
+    });
+    
+    // Toggle current dropdown
+    dropdown.classList.toggle('show');
+    
+    // Update chevron icon
+    const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+    if (chevron) {
+        chevron.style.transform = isShowing ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.language-switcher')) {
+        document.getElementById('languageDropdown').classList.remove('show');
+        const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+        if (chevron) {
+            chevron.style.transform = 'rotate(0deg)';
+        }
+    }
+});
+
+// Language selection
+document.querySelectorAll('.lang-option').forEach(option => {
+    option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const lang = option.dataset.lang;
+        
+        // Update active state
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.classList.remove('active');
+        });
+        option.classList.add('active');
+        
+        // Update button text
+        const langSpan = document.querySelector('.lang-toggle span');
+        if (langSpan) {
+            langSpan.textContent = lang.toUpperCase();
+        }
+        
+        // Close dropdown
+        document.getElementById('languageDropdown').classList.remove('show');
+        const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+        if (chevron) {
+            chevron.style.transform = 'rotate(0deg)';
+        }
+        
+        // Show notification
+        const notification = document.createElement('div');
+        notification.className = 'alert alert-success';
+        notification.style.position = 'fixed';
+        notification.style.top = '80px';
+        notification.style.right = '20px';
+        notification.style.zIndex = '10000';
+        notification.style.padding = '1rem 1.5rem';
+        notification.style.borderRadius = 'var(--radius-sm)';
+        notification.style.boxShadow = 'var(--shadow-hover)';
+        notification.innerHTML = `<i class="fas fa-language"></i> Language changed to ${lang.toUpperCase()}`;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+        
+        // Store preference
+        localStorage.setItem('yolingo_language', lang);
+    });
+});
+
+// Load saved language preference on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('yolingo_language') || 'en';
+    const savedOption = document.querySelector(`.lang-option[data-lang="${savedLang}"]`);
+    if (savedOption) {
+        savedOption.click();
+    }
+});
+
+// ===== FIX LOGO ON OTHER PAGES =====
+function loadLogoForPage() {
+    const logoImage = document.querySelector('.logo-image');
+    if (logoImage && !logoImage.innerHTML.includes('img')) {
+        const img = new Image();
+        
+        img.onload = function() {
+            logoImage.innerHTML = `<img src="logo.jpg" alt="YoLingo" loading="lazy">`;
+            logoImage.classList.add('loaded');
+        };
+        
+        img.onerror = function() {
+            if (!logoImage.innerHTML.includes('div')) {
+                logoImage.innerHTML = `
+                    <div style="background: var(--gradient-primary); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px; box-shadow: var(--shadow);">
+                        YL
+                    </div>
+                `;
+                logoImage.classList.add('loaded');
+            }
+        };
+        
+        img.src = 'logo.jpg';
+    }
+}
+
+// Load logo on page load
+document.addEventListener('DOMContentLoaded', loadLogoForPage);
     </script>
 </body>
 </html>
