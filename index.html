@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +14,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Lazy loading for images -->
+    <link rel="preload" href="logo.jpg" as="image">
+    
     <style>
         /* Minimal inline styles for quick visual enhancement */
         .hero {
@@ -26,26 +30,75 @@
         /* Subtle floating animation for visual interest */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
         }
         
         .language-card:hover .start-link {
-            animation: float 1s infinite;
+            animation: float 1.5s infinite ease-in-out;
+        }
+        
+        /* Loading animation for cards */
+        .language-card, .feature {
+            animation: fadeInScale 0.6s ease-out;
+        }
+        
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
     <!-- Navigation -->
     <nav>
-        <div class="logo">
-            <img src="logo.jpg" alt="YoLingo" class="logo-image">
+        <div class="logo" onclick="window.location.href='index.html'">
+            <img src="logo.jpg" alt="YoLingo" class="logo-image" loading="lazy">
             <div class="logo-text-container">
                 <span class="logo-text">Yo</span><span class="logo-highlight">Lingo</span>
             </div>
         </div>
-        <button class="menu-toggle" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </button>
+        
+        <div class="nav-controls">
+            <!-- Language Switcher -->
+            <div class="language-switcher">
+                <button class="lang-toggle" onclick="toggleLanguageDropdown()">
+                    <i class="fas fa-globe"></i>
+                    <span>EN</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="lang-dropdown" id="languageDropdown">
+                    <a href="#" class="lang-option active" data-lang="en">
+                        <i class="fas fa-language"></i> English
+                    </a>
+                    <a href="#" class="lang-option" data-lang="fr">
+                        <i class="fas fa-language"></i> Français
+                    </a>
+                    <a href="#" class="lang-option" data-lang="ru">
+                        <i class="fas fa-language"></i> Русский
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Dark Mode Toggle -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            
+            <!-- Mobile menu button -->
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
         <div class="nav-links" id="navLinks">
             <a href="index.html" class="active">Home</a>
             <a href="parlons.html">Parlons (French)</a>
@@ -55,36 +108,44 @@
         </div>
     </nav>
     
-    <!-- Hero Section with Minimalist Background -->
-    <section class="hero">
+    <!-- Hero Section -->
+    <section class="hero" id="main-content">
         <div class="hero-content">
             <h1>Learn Languages with <span class="highlight">YoLingo</span></h1>
             <p class="subtitle">Where culture meets conversation. Master French or Spanish with native speakers in interactive, personalized lessons.</p>
             
             <div class="language-chooser">
-                <a href="parlons.html" class="language-card french-card">
+                <a href="parlons.html" class="language-card french-card" aria-label="Learn French with YoLingo">
                     <div class="card-content">
                         <h2>🇫🇷 Parlons Français</h2>
-                        <p>Discover the language of love, art, and culture</p>
+                        <p>Discover the language of love, art, and culture with native French teachers</p>
                         <ul>
                             <li>🗼 Learn with teachers from France</li>
                             <li>🎭 Cultural immersion activities</li>
                             <li>🎯 DELF/DALF & Baccalaureate preparation</li>
+                            <li>💬 Conversation-focused lessons</li>
                         </ul>
-                        <span class="start-link">Start Learning French →</span>
+                        <span class="start-link">
+                            Start Learning French 
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
                     </div>
                 </a>
                 
-                <a href="hablemos.html" class="language-card spanish-card">
+                <a href="hablemos.html" class="language-card spanish-card" aria-label="Learn Spanish with YoLingo">
                     <div class="card-content">
                         <h2>🇪🇸 ¡Hablemos Español!</h2>
-                        <p>Explore vibrant Spanish culture and language</p>
+                        <p>Explore vibrant Spanish culture and language with authentic immersion</p>
                         <ul>
                             <li>💃 Learn with teachers from Spain</li>
                             <li>🌍 Cultural immersion activities</li>
                             <li>🎯 DELE certification preparation</li>
+                            <li>🗣️ Real conversation practice</li>
                         </ul>
-                        <span class="start-link">Start Learning Spanish →</span>
+                        <span class="start-link">
+                            Start Learning Spanish 
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
                     </div>
                 </a>
             </div>
@@ -96,28 +157,28 @@
         <h2>Why Choose <span class="highlight">YoLingo</span>?</h2>
         
         <div class="features-grid">
-            <div class="feature">
+            <div class="feature hover-lift">
                 <div class="feature-icon"><i class="fas fa-bullseye"></i></div>
                 <h3>Personalized Learning</h3>
-                <p>Custom lesson plans based on your goals, level, and learning style.</p>
+                <p>Custom lesson plans based on your goals, level, and learning style. Track progress with detailed analytics.</p>
             </div>
             
-            <div class="feature">
+            <div class="feature hover-lift">
                 <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
                 <h3>Native Teachers</h3>
-                <p>Certified native speakers from France and Spain with teaching experience.</p>
+                <p>Certified native speakers from France and Spain with 5+ years teaching experience and cultural expertise.</p>
             </div>
             
-            <div class="feature">
+            <div class="feature hover-lift">
                 <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
                 <h3>Flexible Schedule</h3>
-                <p>Morning, evening & weekend classes to fit your busy lifestyle.</p>
+                <p>Morning, evening & weekend classes to fit your busy lifestyle. Reschedule easily with 24-hour notice.</p>
             </div>
             
-            <div class="feature">
+            <div class="feature hover-lift">
                 <div class="feature-icon"><i class="fas fa-globe-americas"></i></div>
                 <h3>Cultural Immersion</h3>
-                <p>Learn language through culture, history, music, and real conversations.</p>
+                <p>Learn language through culture, history, music, and real conversations with immersive activities.</p>
             </div>
         </div>
     </section>
@@ -125,15 +186,15 @@
     <!-- Stats Section -->
     <section class="stats">
         <div class="stat">
-            <h3>500+</h3>
+            <h3 data-count="500">0</h3>
             <p>Happy Students</p>
         </div>
         <div class="stat">
-            <h3>98%</h3>
+            <h3 data-count="98">0</h3>
             <p>Satisfaction Rate</p>
         </div>
         <div class="stat">
-            <h3>15</h3>
+            <h3 data-count="15">0</h3>
             <p>Native Teachers</p>
         </div>
         <div class="stat">
@@ -145,10 +206,16 @@
     <!-- CTA Section -->
     <section class="cta">
         <h2>Ready to Start Your Language Journey?</h2>
-        <p>Join YoLingo today and get your first lesson free!</p>
+        <p>Join YoLingo today and get your first lesson free! Experience our unique teaching method risk-free.</p>
         <div class="cta-buttons">
-            <a href="contact.html" class="btn btn-primary">Book Free Trial Lesson</a>
-            <a href="pricing.html" class="btn btn-secondary">View All Plans</a>
+            <a href="contact.html" class="btn btn-primary">
+                <i class="fas fa-calendar-check"></i>
+                Book Free Trial Lesson
+            </a>
+            <a href="pricing.html" class="btn btn-secondary">
+                <i class="fas fa-tag"></i>
+                View All Plans
+            </a>
         </div>
     </section>
     
@@ -159,7 +226,15 @@
                 <div class="footer-logo">
                     <span class="logo-text">Yo</span><span class="logo-highlight">Lingo</span>
                 </div>
-                <p>Making language learning accessible, fun, and effective since 2020.</p>
+                <p>Making language learning accessible, fun, and effective since 2020. Join our community of passionate learners.</p>
+                <div class="social" style="margin-top: 1.5rem;">
+                    <a href="#" aria-label="Follow us on Facebook">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </a>
+                    <a href="#" aria-label="Follow us on Instagram">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                </div>
             </div>
             
             <div class="footer-section">
@@ -175,29 +250,154 @@
                 <h4>Contact Info</h4>
                 <p><i class="fas fa-envelope"></i> contact@yolingo.info</p>
                 <p><i class="fas fa-phone"></i> +1 818 262 1520 (WhatsApp)</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 9am-8pm EST</p>
             </div>
             
             <div class="footer-section">
-                <h4>Follow YoLingo</h4>
-                <div class="social">
-                    <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
-                    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                </div>
+                <h4>Languages</h4>
+                <a href="parlons.html">French (Parlons)</a>
+                <a href="hablemos.html">Spanish (Hablemos)</a>
+                <a href="#coming-soon">Russian (Coming Soon)</a>
+                <a href="#coming-soon">German (Coming Soon)</a>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2026 YoLingo Language School. All rights reserved.</p>
+            <p>&copy; 2026 YoLingo Language School. All rights reserved. | <a href="#" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> | <a href="#" style="color: rgba(255,255,255,0.6);">Terms of Service</a></p>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
+        // ===== THEME MANAGEMENT =====
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme or prefer-color-scheme
+        function getPreferredTheme() {
+            const savedTheme = localStorage.getItem('yolingo_theme');
+            if (savedTheme) return savedTheme;
+            
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        
+        // Apply theme
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('yolingo_theme', theme);
+            
+            // Update icon
+            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        
+        // Toggle theme
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+            
+            // Add animation
+            themeToggle.style.transform = 'rotate(180deg)';
+            setTimeout(() => {
+                themeToggle.style.transform = 'rotate(0)';
+            }, 300);
+        }
+        
+        // Initialize theme
+        applyTheme(getPreferredTheme());
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('yolingo_theme')) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+        
+        // ===== LANGUAGE MANAGEMENT =====
+        let currentLanguage = 'en';
+        const languageStrings = {
+            en: {
+                heroTitle: "Learn Languages with YoLingo",
+                heroSubtitle: "Where culture meets conversation. Master French or Spanish with native speakers in interactive, personalized lessons.",
+                frenchCardTitle: "🇫🇷 Parlons Français",
+                frenchCardDesc: "Discover the language of love, art, and culture with native French teachers",
+                spanishCardTitle: "🇪🇸 ¡Hablemos Español!",
+                spanishCardDesc: "Explore vibrant Spanish culture and language with authentic immersion"
+            },
+            fr: {
+                heroTitle: "Apprenez les langues avec YoLingo",
+                heroSubtitle: "Là où la culture rencontre la conversation. Maîtrisez le français ou l'espagnol avec des locuteurs natifs dans des leçons interactives et personnalisées.",
+                frenchCardTitle: "🇫🇷 Parlons Français",
+                frenchCardDesc: "Découvrez la langue de l'amour, de l'art et de la culture avec des professeurs français natifs",
+                spanishCardTitle: "🇪🇸 ¡Hablemos Español!",
+                spanishCardDesc: "Explorez la culture et la langue espagnoles vibrantes avec une immersion authentique"
+            },
+            ru: {
+                heroTitle: "Изучайте языки с YoLingo",
+                heroSubtitle: "Место, где культура встречается с общением. Освойте французский или испанский с носителями языка на интерактивных индивидуальных уроках.",
+                frenchCardTitle: "🇫🇷 Говорим по-французски",
+                frenchCardDesc: "Откройте для себя язык любви, искусства и культуры с носителями французского языка",
+                spanishCardTitle: "🇪🇸 ¡Hablemos Español!",
+                spanishCardDesc: "Исследуйте яркую испанскую культуру и язык с помощью аутентичного погружения"
+            }
+        };
+        
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.toggle('show');
+        }
+        
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            const strings = languageStrings[lang];
+            
+            // Update page content
+            document.querySelector('.hero-content h1').textContent = strings.heroTitle;
+            document.querySelector('.hero-content .subtitle').textContent = strings.heroSubtitle;
+            document.querySelector('.french-card h2').textContent = strings.frenchCardTitle;
+            document.querySelector('.french-card p').textContent = strings.frenchCardDesc;
+            document.querySelector('.spanish-card h2').textContent = strings.spanishCardTitle;
+            document.querySelector('.spanish-card p').textContent = strings.spanishCardDesc;
+            
+            // Update active language button
+            document.querySelectorAll('.lang-option').forEach(option => {
+                option.classList.toggle('active', option.dataset.lang === lang);
+            });
+            
+            // Close dropdown
+            document.getElementById('languageDropdown').classList.remove('show');
+            
+            // Save preference
+            localStorage.setItem('yolingo_language', lang);
+        }
+        
+        // Initialize language
+        const savedLang = localStorage.getItem('yolingo_language') || 'en';
+        setLanguage(savedLang);
+        
+        // Language dropdown event listeners
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                setLanguage(option.dataset.lang);
+            });
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-switcher')) {
+                document.getElementById('languageDropdown').classList.remove('show');
+            }
+        });
+        
+        // ===== NAVIGATION =====
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
+            document.querySelector('.menu-toggle i').classList.toggle('fa-bars');
+            document.querySelector('.menu-toggle i').classList.toggle('fa-times');
         }
-
+        
         // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             const navLinks = document.getElementById('navLinks');
@@ -205,14 +405,25 @@
             
             if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
                 navLinks.classList.remove('active');
+                document.querySelector('.menu-toggle i').classList.remove('fa-times');
+                document.querySelector('.menu-toggle i').classList.add('fa-bars');
             }
         });
         
-        // Enhanced hover effects for language cards
+        // Close menu on link click (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+                document.querySelector('.menu-toggle i').classList.remove('fa-times');
+                document.querySelector('.menu-toggle i').classList.add('fa-bars');
+            });
+        });
+        
+        // ===== ENHANCED HOVER EFFECTS =====
         document.querySelectorAll('.language-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.boxShadow = '0 20px 40px rgba(123, 97, 255, 0.2)';
-                this.style.transform = 'translateY(-15px) scale(1.02)';
+                this.style.boxShadow = 'var(--shadow-glow)';
+                this.style.transform = 'translateY(-20px) scale(1.02)';
             });
             
             card.addEventListener('mouseleave', function() {
@@ -221,69 +432,25 @@
             });
         });
         
-        // Add click animation to buttons
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                // Create ripple effect
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    border-radius: 50%;
-                    background: rgba(255, 255, 255, 0.7);
-                    transform: scale(0);
-                    animation: ripple-animation 0.6s linear;
-                    width: ${size}px;
-                    height: ${size}px;
-                    top: ${y}px;
-                    left: ${x}px;
-                `;
-                
-                this.appendChild(ripple);
-                
-                // Remove ripple after animation
-                setTimeout(() => ripple.remove(), 600);
-            });
-        });
-        
-        // Add CSS for ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple-animation {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-            .btn {
-                position: relative;
-                overflow: hidden;
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // Stats counter animation
+        // ===== ANIMATED COUNTERS =====
         function animateCounter(element, target, duration = 2000) {
             let start = 0;
-            const increment = target / (duration / 16); // 60fps
+            const increment = target / (duration / 16);
             const timer = setInterval(() => {
                 start += increment;
                 if (start >= target) {
-                    element.textContent = target + (element.textContent.includes('%') ? '%' : '');
+                    element.textContent = target + (element.textContent.includes('%') ? '%' : '+');
                     clearInterval(timer);
                 } else {
-                    element.textContent = Math.floor(start) + (element.textContent.includes('%') ? '%' : '');
+                    element.textContent = Math.floor(start) + (element.textContent.includes('%') ? '%' : '+');
                 }
             }, 16);
         }
         
         // Animate stats when they come into view
         const observerOptions = {
-            threshold: 0.5
+            threshold: 0.5,
+            rootMargin: '0px 0px -50px 0px'
         };
         
         const observer = new IntersectionObserver((entries) => {
@@ -291,9 +458,9 @@
                 if (entry.isIntersecting) {
                     const stats = entry.target.querySelectorAll('.stat h3');
                     stats.forEach(stat => {
-                        const value = parseInt(stat.textContent);
+                        const value = parseInt(stat.dataset.count);
                         if (!isNaN(value)) {
-                            animateCounter(stat, value);
+                            animateCounter(stat, value, 1500);
                         }
                     });
                     observer.unobserve(entry.target);
@@ -306,6 +473,150 @@
         if (statsSection) {
             observer.observe(statsSection);
         }
+        
+        // ===== SMOOTH SCROLLING =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // ===== RIPPLE BUTTON EFFECT =====
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                
+                // Remove ripple after animation
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+        
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            .btn {
+                position: relative;
+                overflow: hidden;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // ===== LAZY LOADING =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            lazyImages.forEach(img => imageObserver.observe(img));
+        });
+        
+        // ===== ACCESSIBILITY: KEYBOARD NAVIGATION =====
+        document.addEventListener('keydown', function(e) {
+            // Escape key closes dropdowns and menus
+            if (e.key === 'Escape') {
+                document.getElementById('languageDropdown').classList.remove('show');
+                document.getElementById('navLinks').classList.remove('active');
+            }
+            
+            // Tab key management for dropdowns
+            if (e.key === 'Tab') {
+                const activeElement = document.activeElement;
+                const dropdown = document.getElementById('languageDropdown');
+                
+                if (dropdown.classList.contains('show') && 
+                    !dropdown.contains(activeElement) && 
+                    !document.querySelector('.lang-toggle').contains(activeElement)) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        });
+        
+        // ===== PERFORMANCE: IDLE CALLBACKS =====
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(() => {
+                // Preload next page if user hovers over link
+                document.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('mouseenter', function() {
+                        const href = this.href;
+                        if (href && !href.includes('#')) {
+                            const prefetchLink = document.createElement('link');
+                            prefetchLink.rel = 'prefetch';
+                            prefetchLink.href = href;
+                            document.head.appendChild(prefetchLink);
+                        }
+                    });
+                });
+            });
+        }
+        
+        // ===== INITIALIZE ON LOAD =====
+        window.addEventListener('load', function() {
+            // Add loaded class for fade-in effects
+            document.body.classList.add('loaded');
+            
+            // Initialize AOS if needed
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    once: true,
+                    offset: 100
+                });
+            }
+            
+            // Log analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    page_title: document.title,
+                    page_location: window.location.href
+                });
+            }
+        });
     </script>
 </body>
 </html>
