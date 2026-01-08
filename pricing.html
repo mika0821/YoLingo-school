@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,21 +14,54 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
     <!-- Navigation -->
     <nav>
-        <div class="logo">
-            <img src="logo.jpg" alt="YoLingo" class="logo-image">
+        <div class="logo" onclick="window.location.href='index.html'">
+            <img src="logo.jpg" alt="YoLingo" class="logo-image" loading="lazy">
             <div class="logo-text-container">
                 <span class="logo-text">Yo</span><span class="logo-highlight">Lingo</span>
             </div>
         </div>
-        <button class="menu-toggle" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </button>
+        
+        <div class="nav-controls">
+            <!-- Language Switcher -->
+            <div class="language-switcher">
+                <button class="lang-toggle" onclick="toggleLanguageDropdown()">
+                    <i class="fas fa-globe"></i>
+                    <span>EN</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="lang-dropdown" id="languageDropdown">
+                    <a href="#" class="lang-option active" data-lang="en">
+                        <i class="fas fa-language"></i> English
+                    </a>
+                    <a href="#" class="lang-option" data-lang="fr">
+                        <i class="fas fa-language"></i> Français
+                    </a>
+                    <a href="#" class="lang-option" data-lang="ru">
+                        <i class="fas fa-language"></i> Русский
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Dark Mode Toggle -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            
+            <!-- Mobile menu button -->
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
         <div class="nav-links" id="navLinks">
             <a href="index.html">Home</a>
             <a href="parlons.html">Parlons (French)</a>
@@ -39,77 +72,99 @@
     </nav>
     
     <!-- Header -->
-    <header class="page-header pricing-header">
+    <header class="page-header pricing-header" id="main-content">
         <h1>YoLingo Pricing Plans</h1>
-        <p class="subtitle">Choose the perfect plan for your language learning journey. All prices are per 4 weeks and include access to YoLingo learning materials.</p>
+        <p class="subtitle">Choose the perfect plan for your language learning journey. All prices are per 4 weeks and include full access to YoLingo learning materials and resources.</p>
     </header>
     
     <!-- Pricing Plans -->
     <section class="pricing-plans">
-        <div class="plan">
+        <div class="plan hover-lift">
             <div class="plan-header">
                 <h3>Group Classes</h3>
-                <p class="plan-description">Perfect for social learners</p>
+                <p class="plan-description">Perfect for social learners who enjoy group dynamics</p>
             </div>
             <div class="plan-price">
                 <span class="price">$149</span>
                 <span class="period">per 4 weeks</span>
+                <p style="color: var(--success); font-size: 0.9rem; margin-top: 0.5rem;">
+                    <i class="fas fa-bolt"></i> Save 20% with 3-month commitment
+                </p>
             </div>
             <ul class="plan-features">
-                <li>✓ 4 students max per class</li>
-                <li>✓ 8 sessions (2 per week)</li>
-                <li>✓ All course materials included</li>
-                <li>✓ Weekly practice exercises</li>
-                <li>✓ Progress reports</li>
-                <li>✓ Access to learning app</li>
+                <li>✓ 4 students max per class for personalized attention</li>
+                <li>✓ 8 sessions (2 per week, 60 minutes each)</li>
+                <li>✓ All digital course materials included</li>
+                <li>✓ Weekly practice exercises with feedback</li>
+                <li>✓ Detailed progress reports every 2 weeks</li>
+                <li>✓ Full access to YoLingo learning app</li>
                 <li>✓ YoLingo certificate upon completion</li>
+                <li>✓ Access to student community forum</li>
             </ul>
-            <a href="contact.html" class="btn btn-outline">Choose Group Plan</a>
+            <a href="contact.html?plan=group" class="btn btn-outline">
+                <i class="fas fa-users"></i>
+                Choose Group Plan
+            </a>
         </div>
         
-        <div class="plan popular">
+        <div class="plan popular hover-lift">
             <div class="popular-badge">MOST POPULAR</div>
             <div class="plan-header">
                 <h3>Private Lessons</h3>
-                <p class="plan-description">Fully personalized attention</p>
+                <p class="plan-description">Fully personalized attention and flexible scheduling</p>
             </div>
             <div class="plan-price">
                 <span class="price">$249</span>
                 <span class="period">per 4 weeks</span>
+                <p style="color: var(--success); font-size: 0.9rem; margin-top: 0.5rem;">
+                    <i class="fas fa-bolt"></i> Save 25% with 3-month commitment
+                </p>
             </div>
             <ul class="plan-features">
                 <li>✓ One-on-one with native teacher</li>
-                <li>✓ 8 personalized sessions</li>
-                <li>✓ Flexible scheduling</li>
-                <li>✓ Custom learning plan</li>
-                <li>✓ Priority support</li>
-                <li>✓ All Group features included</li>
-                <li>✓ Detailed progress tracking</li>
-                <li>✓ Homework corrections</li>
+                <li>✓ 8 personalized sessions (flexible scheduling)</li>
+                <li>✓ Custom learning plan tailored to your goals</li>
+                <li>✓ Priority 24/7 support via WhatsApp</li>
+                <li>✓ All Group features included plus:</li>
+                <li>✓ Detailed weekly progress tracking</li>
+                <li>✓ Homework corrections with detailed feedback</li>
+                <li>✓ Personalized resource recommendations</li>
+                <li>✓ Exam strategy sessions (if applicable)</li>
             </ul>
-            <a href="contact.html" class="btn btn-primary">Choose Private Plan</a>
+            <a href="contact.html?plan=private" class="btn btn-primary">
+                <i class="fas fa-user-graduate"></i>
+                Choose Private Plan
+            </a>
         </div>
         
-        <div class="plan">
+        <div class="plan hover-lift">
             <div class="plan-header">
                 <h3>Intensive Course</h3>
-                <p class="plan-description">Fast-track your learning</p>
+                <p class="plan-description">Fast-track your learning with daily immersion</p>
             </div>
             <div class="plan-price">
                 <span class="price">$649</span>
                 <span class="period">per 4 weeks</span>
+                <p style="color: var(--success); font-size: 0.9rem; margin-top: 0.5rem;">
+                    <i class="fas fa-bolt"></i> Save 30% with 3-month commitment
+                </p>
             </div>
             <ul class="plan-features">
-                <li>✓ Daily classes (5x per week)</li>
-                <li>✓ 20 intensive sessions</li>
-                <li>✓ Small group (3 max)</li>
-                <li>✓ Extra materials & resources</li>
-                <li>✓ Priority support</li>
-                <li>✓ Exam preparation materials</li>
-                <li>✓ All Private features</li>
+                <li>✓ Daily classes (5x per week, 90 minutes each)</li>
+                <li>✓ 20 intensive sessions per month</li>
+                <li>✓ Ultra-small group (3 students max)</li>
+                <li>✓ Extra materials & premium resources</li>
+                <li>✓ Priority support with dedicated advisor</li>
+                <li>✓ Exam preparation materials & mock tests</li>
+                <li>✓ All Private features included plus:</li>
                 <li>✓ Accelerated learning path</li>
+                <li>✓ Cultural immersion workshops</li>
+                <li>✓ Conversation partner matching</li>
             </ul>
-            <a href="contact.html" class="btn btn-outline">Choose Intensive Plan</a>
+            <a href="contact.html?plan=intensive" class="btn btn-outline">
+                <i class="fas fa-rocket"></i>
+                Choose Intensive Plan
+            </a>
         </div>
     </section>
     
@@ -117,25 +172,37 @@
     <section class="additional-services">
         <h2>Additional YoLingo Services</h2>
         <div class="services-grid">
-            <div class="service">
+            <div class="service hover-lift">
                 <h3>Conversation Club</h3>
                 <p class="service-price">$50/month</p>
-                <p>Weekly conversation practice with native speakers and other students</p>
+                <p>Weekly conversation practice with native speakers and other students. Perfect for maintaining fluency.</p>
+                <a href="contact.html?service=conversation" class="btn btn-outline" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;">
+                    Join Club
+                </a>
             </div>
-            <div class="service">
+            <div class="service hover-lift">
                 <h3>Exam Preparation</h3>
                 <p class="service-price">$199/course</p>
-                <p>DELF/DALF or DELE exam preparation with mock tests and strategy sessions</p>
+                <p>DELF/DALF or DELE exam preparation with mock tests, strategy sessions, and personalized feedback.</p>
+                <a href="contact.html?service=exam" class="btn btn-outline" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;">
+                    Prepare Now
+                </a>
             </div>
-            <div class="service">
+            <div class="service hover-lift">
                 <h3>Business Language</h3>
                 <p class="service-price">$399/course</p>
-                <p>Professional vocabulary and business communication skills for the workplace</p>
+                <p>Professional vocabulary and business communication skills for the workplace, meetings, and presentations.</p>
+                <a href="contact.html?service=business" class="btn btn-outline" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;">
+                    Learn More
+                </a>
             </div>
-            <div class="service">
+            <div class="service hover-lift">
                 <h3>Corporate Packages</h3>
                 <p class="service-price">Custom Quote</p>
-                <p>Group training for companies and organizations with flexible scheduling</p>
+                <p>Group training for companies and organizations with flexible scheduling, progress reporting, and volume discounts.</p>
+                <a href="contact.html?service=corporate" class="btn btn-outline" style="margin-top: 1rem; padding: 0.5rem 1rem; font-size: 0.9rem;">
+                    Get Quote
+                </a>
             </div>
         </div>
     </section>
@@ -143,7 +210,19 @@
     <!-- Guarantee Section -->
     <section class="money-back">
         <h2><i class="fas fa-shield-alt"></i> 100% Satisfaction Guarantee</h2>
-        <p>Try your first lesson risk-free. If you're not completely satisfied, we offer a full refund within 7 days of your first session.</p>
+        <p style="max-width: 700px; margin: 0 auto; font-size: 1.1rem;">
+            Try your first lesson completely risk-free. If you're not completely satisfied with our teaching method, 
+            we offer a full refund within 7 days of your first session. No questions asked.
+        </p>
+        <div style="margin-top: 2rem;">
+            <div style="display: inline-flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.1); padding: 1rem 2rem; border-radius: var(--radius-sm);">
+                <i class="fas fa-lock" style="font-size: 2rem;"></i>
+                <div style="text-align: left;">
+                    <h4 style="margin: 0; font-size: 1.1rem;">Secure Payment</h4>
+                    <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">All payments are 100% secure and encrypted</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- FAQ -->
@@ -151,23 +230,88 @@
         <h2>Frequently Asked Questions</h2>
         
         <div class="faq-item">
-            <h3>Can I switch between plans?</h3>
-            <p>Yes! You can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle.</p>
+            <h3><i class="fas fa-exchange-alt"></i> Can I switch between plans?</h3>
+            <p>Yes! You can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle. We prorate any differences in pricing to ensure you only pay for what you use.</p>
         </div>
         
         <div class="faq-item">
-            <h3>How do payments work?</h3>
-            <p>All plans are billed every 4 weeks. You can pay via credit card, PayPal, or bank transfer. We send reminders 3 days before renewal.</p>
+            <h3><i class="fas fa-credit-card"></i> How do payments work?</h3>
+            <p>All plans are billed every 4 weeks. You can pay via credit card, PayPal, or bank transfer. We send payment reminders 3 days before renewal. All major credit cards and digital payment methods are accepted.</p>
         </div>
         
         <div class="faq-item">
-            <h3>Do you offer discounts?</h3>
-            <p>Yes! We offer 10% discount for students and 15% for 3-month commitments. Contact us for family or group discounts.</p>
+            <h3><i class="fas fa-percentage"></i> Do you offer discounts?</h3>
+            <p>Yes! We offer 10% discount for students (with valid ID) and 15% discount for 3-month commitments. Contact us directly for family discounts (multiple family members) or group discounts (3+ people signing up together).</p>
         </div>
         
         <div class="faq-item">
-            <h3>What if I miss a class?</h3>
-            <p>For private lessons, we offer makeup sessions with 24-hour notice. Group classes have recorded sessions available.</p>
+            <h3><i class="fas fa-calendar-times"></i> What if I miss a class?</h3>
+            <p>For private lessons, we offer makeup sessions with 24-hour notice. Group classes have recorded sessions available within 24 hours, and you can attend a similar level class later in the week if space is available.</p>
+        </div>
+        
+        <div class="faq-item">
+            <h3><i class="fas fa-user-clock"></i> Can I pause my subscription?</h3>
+            <p>Yes, you can pause your subscription for up to 4 weeks per year for vacations or personal reasons. Just notify us at least 7 days before your next billing date.</p>
+        </div>
+        
+        <div class="faq-item">
+            <h3><i class="fas fa-graduation-cap"></i> Are materials included?</h3>
+            <p>Yes! All digital learning materials are included in your subscription. This includes textbooks, workbooks, audio materials, and access to our exclusive learning platform with interactive exercises.</p>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="why-yolingo">
+        <h2>Plan Comparison</h2>
+        <div style="overflow-x: auto; margin-top: 2rem;">
+            <table style="width: 100%; border-collapse: collapse; background: white; border-radius: var(--radius); box-shadow: var(--shadow);">
+                <thead>
+                    <tr style="background: var(--gradient-primary); color: white;">
+                        <th style="padding: 1.5rem; text-align: left;">Feature</th>
+                        <th style="padding: 1.5rem; text-align: center;">Group</th>
+                        <th style="padding: 1.5rem; text-align: center;">Private</th>
+                        <th style="padding: 1.5rem; text-align: center;">Intensive</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--gray-light);">
+                        <td style="padding: 1rem 1.5rem;">Weekly Sessions</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;">2</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;">2</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;">5</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--gray-light);">
+                        <td style="padding: 1rem 1.5rem;">Session Length</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;">60 min</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;">60 min</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;">90 min</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--gray-light);">
+                        <td style="padding: 1rem 1.5rem;">Class Size</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;">4 max</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;">1:1</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;">3 max</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--gray-light);">
+                        <td style="padding: 1rem 1.5rem;">Personalized Plan</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;"><i class="fas fa-check" style="color: var(--success);"></i></td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;"><i class="fas fa-check" style="color: var(--success);"></i></td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;"><i class="fas fa-check" style="color: var(--success);"></i></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--gray-light);">
+                        <td style="padding: 1rem 1.5rem;">Priority Support</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;"><i class="fas fa-times" style="color: var(--gray);"></i></td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;"><i class="fas fa-check" style="color: var(--success);"></i></td>
+                        <td style="padding: 1rem 1.5rem; text-align: center;"><i class="fas fa-check" style="color: var(--success);"></i></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1rem 1.5rem;">Monthly Price</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center; font-weight: bold; color: var(--primary);">$149</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center; font-weight: bold; color: var(--primary);">$249</td>
+                        <td style="padding: 1rem 1.5rem; text-align: center; font-weight: bold; color: var(--primary);">$649</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 
@@ -178,7 +322,15 @@
                 <div class="footer-logo">
                     <span class="logo-text">Yo</span><span class="logo-highlight">Lingo</span>
                 </div>
-                <p>Making language learning accessible, fun, and effective since 2020.</p>
+                <p>Making language learning accessible, fun, and effective since 2020. Join our community of passionate learners.</p>
+                <div class="social" style="margin-top: 1.5rem;">
+                    <a href="#" aria-label="Follow us on Facebook">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </a>
+                    <a href="#" aria-label="Follow us on Instagram">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                </div>
             </div>
             
             <div class="footer-section">
@@ -194,44 +346,121 @@
                 <h4>Contact Info</h4>
                 <p><i class="fas fa-envelope"></i> contact@yolingo.info</p>
                 <p><i class="fas fa-phone"></i> +1 818 262 1520 (WhatsApp)</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 9am-8pm EST</p>
             </div>
             
             <div class="footer-section">
-                <h4>Follow YoLingo</h4>
-                <div class="social">
-                    <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
-                    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                </div>
+                <h4>Payment Methods</h4>
+                <p><i class="fab fa-cc-visa"></i> Visa</p>
+                <p><i class="fab fa-cc-mastercard"></i> Mastercard</p>
+                <p><i class="fab fa-cc-paypal"></i> PayPal</p>
+                <p><i class="fas fa-university"></i> Bank Transfer</p>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2026 YoLingo Language School. All rights reserved.</p>
+            <p>&copy; 2026 YoLingo Language School. All rights reserved. | <a href="#" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> | <a href="#" style="color: rgba(255,255,255,0.6);">Terms of Service</a></p>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
+        // ===== THEME MANAGEMENT =====
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        function getPreferredTheme() {
+            const savedTheme = localStorage.getItem('yolingo_theme');
+            if (savedTheme) return savedTheme;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('yolingo_theme', theme);
+            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+            themeToggle.style.transform = 'rotate(180deg)';
+            setTimeout(() => {
+                themeToggle.style.transform = 'rotate(0)';
+            }, 300);
+        }
+        
+        applyTheme(getPreferredTheme());
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('yolingo_theme')) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+        
+        // ===== LANGUAGE MANAGEMENT =====
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.toggle('show');
+        }
+        
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-switcher')) {
+                document.getElementById('languageDropdown').classList.remove('show');
+            }
+        });
+        
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = option.dataset.lang;
+                document.querySelectorAll('.lang-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                option.classList.add('active');
+                document.getElementById('languageDropdown').classList.remove('show');
+                
+                // Show notification
+                const notification = document.createElement('div');
+                notification.className = 'alert alert-success';
+                notification.style.position = 'fixed';
+                notification.style.top = '80px';
+                notification.style.right = '20px';
+                notification.style.zIndex = '10000';
+                notification.innerHTML = `<i class="fas fa-language"></i> Language changed to ${lang.toUpperCase()}`;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            });
+        });
+        
+        // ===== NAVIGATION =====
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
+            document.querySelector('.menu-toggle i').classList.toggle('fa-bars');
+            document.querySelector('.menu-toggle i').classList.toggle('fa-times');
         }
-
-        // Close menu when clicking outside
+        
         document.addEventListener('click', function(event) {
             const navLinks = document.getElementById('navLinks');
             const menuToggle = document.querySelector('.menu-toggle');
             
             if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
                 navLinks.classList.remove('active');
+                document.querySelector('.menu-toggle i').classList.remove('fa-times');
+                document.querySelector('.menu-toggle i').classList.add('fa-bars');
             }
         });
         
-        // FAQ toggle functionality
+        // ===== FAQ TOGGLE =====
         function toggleFAQ(element) {
             const allFAQ = document.querySelectorAll('.faq-item');
             allFAQ.forEach(faq => {
-                if (faq !== element) {
+                if (faq !== element && faq.classList.contains('active')) {
                     faq.classList.remove('active');
                 }
             });
@@ -239,14 +468,13 @@
             element.classList.toggle('active');
         }
         
-        // Add click listeners to all FAQ items
         document.querySelectorAll('.faq-item').forEach(item => {
             item.addEventListener('click', function() {
                 toggleFAQ(this);
             });
         });
         
-        // Plan selection animation
+        // ===== PLAN SELECTION =====
         document.querySelectorAll('.plan .btn').forEach(button => {
             button.addEventListener('click', function(e) {
                 const plan = this.closest('.plan');
@@ -254,19 +482,20 @@
                 // Add selection animation
                 plan.style.animation = 'pulse 0.5s';
                 
-                // Remove animation after it completes
-                setTimeout(() => {
-                    plan.style.animation = '';
-                }, 500);
-                
-                // Add to localStorage for tracking
+                // Store selection
                 const planName = plan.querySelector('h3').textContent;
                 localStorage.setItem('yolingo_selected_plan', planName);
                 localStorage.setItem('yolingo_plan_selection_time', new Date().toISOString());
+                
+                // Add to URL for tracking
+                const url = new URL(this.href);
+                const currentParams = new URLSearchParams(url.search);
+                currentParams.set('selected_plan', planName.toLowerCase().replace(' ', '_'));
+                this.href = `${url.pathname}?${currentParams.toString()}`;
             });
         });
         
-        // Price calculator (if needed)
+        // ===== PRICE CALCULATOR =====
         function calculateSavings(planPrice, months) {
             let discount = 0;
             if (months >= 3) discount = 0.15;
@@ -277,6 +506,70 @@
             
             return { total, savings, discount: discount * 100 };
         }
+        
+        // ===== HIGHLIGHT POPULAR PLAN =====
+        window.addEventListener('load', function() {
+            const popularPlan = document.querySelector('.plan.popular');
+            if (popularPlan) {
+                setTimeout(() => {
+                    popularPlan.style.animation = 'pulse 1s';
+                    setTimeout(() => {
+                        popularPlan.style.animation = '';
+                    }, 1000);
+                }, 1000);
+            }
+            
+            // Check for URL parameters to pre-select plan
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedPlan = urlParams.get('selected_plan');
+            if (selectedPlan) {
+                const planElements = document.querySelectorAll('.plan');
+                planElements.forEach(plan => {
+                    const planTitle = plan.querySelector('h3').textContent.toLowerCase().replace(' ', '_');
+                    if (planTitle.includes(selectedPlan)) {
+                        plan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        plan.style.boxShadow = '0 0 0 3px var(--primary), var(--shadow-glow)';
+                        setTimeout(() => {
+                            plan.style.boxShadow = '';
+                        }, 3000);
+                    }
+                });
+            }
+        });
+        
+        // ===== ANIMATIONS =====
+        function animatePlansOnScroll() {
+            const plans = document.querySelectorAll('.plan, .service');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            plans.forEach(plan => {
+                plan.style.opacity = '0';
+                plan.style.transform = 'translateY(20px)';
+                plan.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(plan);
+            });
+        }
+        
+        // Initialize animations
+        window.addEventListener('load', animatePlansOnScroll);
+        
+        // ===== KEYBOARD NAVIGATION =====
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('languageDropdown').classList.remove('show');
+                document.getElementById('navLinks').classList.remove('active');
+                document.querySelector('.menu-toggle i').classList.remove('fa-times');
+                document.querySelector('.menu-toggle i').classList.add('fa-bars');
+            }
+        });
         
         // Add CSS for animations
         const style = document.createElement('style');
@@ -296,19 +589,6 @@
             }
         `;
         document.head.appendChild(style);
-        
-        // Highlight popular plan on load
-        window.addEventListener('load', function() {
-            const popularPlan = document.querySelector('.plan.popular');
-            if (popularPlan) {
-                setTimeout(() => {
-                    popularPlan.style.animation = 'pulse 1s';
-                    setTimeout(() => {
-                        popularPlan.style.animation = '';
-                    }, 1000);
-                }, 1000);
-            }
-        });
     </script>
 </body>
 </html>
