@@ -179,40 +179,6 @@
         </div>
     </section>
 
-    <!-- Teacher Spotlight -->
-    <section class="why-yolingo">
-        <h2>Meet Our Spanish Teachers</h2>
-        <div class="features-grid">
-            <div class="feature hover-lift">
-                <div class="feature-icon" style="background: var(--gradient-spanish);">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-                <h3>Carlos Rodríguez</h3>
-                <p><strong>From:</strong> Madrid, Spain</p>
-                <p><strong>Specialty:</strong> DELE Preparation & Business Spanish</p>
-                <p>12+ years teaching experience, University of Madrid graduate.</p>
-            </div>
-            <div class="feature hover-lift">
-                <div class="feature-icon" style="background: var(--gradient-spanish);">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-                <h3>Isabel García</h3>
-                <p><strong>From:</strong> Barcelona, Spain</p>
-                <p><strong>Specialty:</strong> Conversational Spanish & Pronunciation</p>
-                <p>Former Cervantes Institute teacher, linguistics specialist.</p>
-            </div>
-            <div class="feature hover-lift">
-                <div class="feature-icon" style="background: var(--gradient-spanish);">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-                <h3>Miguel Torres</h3>
-                <p><strong>From:</strong> Sevilla, Spain</p>
-                <p><strong>Specialty:</strong> Cultural Immersion & Andalusian Spanish</p>
-                <p>MA in Hispanic Studies, 9+ years teaching experience.</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -276,21 +242,34 @@
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('yolingo_theme', theme);
             themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            
+            // Update meta theme-color for mobile browsers
+            const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+            if (metaThemeColor) {
+                metaThemeColor.setAttribute('content', theme === 'dark' ? '#0f172a' : '#7b61ff');
+            }
         }
         
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             applyTheme(newTheme);
-            themeToggle.style.transform = 'rotate(180deg)';
+            
+            // Add animation
+            themeToggle.style.transform = 'rotate(180deg) scale(1.1)';
             setTimeout(() => {
-                themeToggle.style.transform = 'rotate(0)';
+                themeToggle.style.transform = 'rotate(0) scale(1)';
             }, 300);
+            
+            // Show notification
+            showNotification(`${newTheme === 'dark' ? 'Dark' : 'Light'} mode activated`, 'info');
         }
         
+        // Initialize theme
         applyTheme(getPreferredTheme());
         themeToggle.addEventListener('click', toggleTheme);
         
+        // Listen for system theme changes
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
             if (!localStorage.getItem('yolingo_theme')) {
                 applyTheme(e.matches ? 'dark' : 'light');
@@ -300,40 +279,152 @@
         // ===== LANGUAGE MANAGEMENT =====
         function toggleLanguageDropdown() {
             const dropdown = document.getElementById('languageDropdown');
+            const isShowing = dropdown.classList.contains('show');
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.lang-dropdown.show').forEach(d => {
+                if (d !== dropdown) d.classList.remove('show');
+            });
+            
+            // Toggle current dropdown
             dropdown.classList.toggle('show');
+            
+            // Update chevron icon
+            const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+            if (chevron) {
+                chevron.style.transform = isShowing ? 'rotate(0deg)' : 'rotate(180deg)';
+            }
         }
         
+        // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.language-switcher')) {
                 document.getElementById('languageDropdown').classList.remove('show');
+                const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+                if (chevron) {
+                    chevron.style.transform = 'rotate(0deg)';
+                }
             }
         });
         
+        // Language translations dictionary
+        const translations = {
+            en: {
+                nav: {
+                    home: "Home",
+                    parlons: "Parlons (French)",
+                    hablemos: "Hablemos (Spanish)",
+                    pricing: "Pricing",
+                    contact: "Contact"
+                },
+                header: {
+                    title: "🇪🇸 ¡Hablemos Español con YoLingo!",
+                    subtitle: "Discover the vibrant world of Spanish language, music, culture, and conversation with native teachers from Spain."
+                },
+                // Add more translations as needed
+            },
+            fr: {
+                nav: {
+                    home: "Accueil",
+                    parlons: "Parlons (Français)",
+                    hablemos: "Hablemos (Espagnol)",
+                    pricing: "Tarifs",
+                    contact: "Contact"
+                },
+                header: {
+                    title: "🇪🇸 ¡Hablemos Español avec YoLingo!",
+                    subtitle: "Découvrez le monde vibrant de la langue, de la musique, de la culture et de la conversation espagnoles avec des enseignants natifs d'Espagne."
+                }
+            },
+            ru: {
+                nav: {
+                    home: "Главная",
+                    parlons: "Parlons (Французский)",
+                    hablemos: "Hablemos (Испанский)",
+                    pricing: "Цены",
+                    contact: "Контакты"
+                },
+                header: {
+                    title: "🇪🇸 ¡Hablemos Español с YoLingo!",
+                    subtitle: "Откройте для себя яркий мир испанского языка, музыки, культуры и общения с преподавателями-носителями из Испании."
+                }
+            }
+        };
+        
+        // Language selection
         document.querySelectorAll('.lang-option').forEach(option => {
             option.addEventListener('click', (e) => {
                 e.preventDefault();
                 const lang = option.dataset.lang;
+                
+                // Update active state
                 document.querySelectorAll('.lang-option').forEach(opt => {
                     opt.classList.remove('active');
                 });
                 option.classList.add('active');
+                
+                // Update button text
+                const langSpan = document.querySelector('.lang-toggle span');
+                if (langSpan) {
+                    langSpan.textContent = lang.toUpperCase();
+                }
+                
+                // Close dropdown
                 document.getElementById('languageDropdown').classList.remove('show');
+                const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+                if (chevron) {
+                    chevron.style.transform = 'rotate(0deg)';
+                }
+                
+                // Apply translations
+                applyTranslations(lang);
                 
                 // Show notification
-                const notification = document.createElement('div');
-                notification.className = 'alert alert-success';
-                notification.style.position = 'fixed';
-                notification.style.top = '80px';
-                notification.style.right = '20px';
-                notification.style.zIndex = '10000';
-                notification.innerHTML = `<i class="fas fa-language"></i> Language changed to ${lang.toUpperCase()}`;
-                document.body.appendChild(notification);
+                showNotification(`Language changed to ${getLanguageName(lang)}`, 'success');
                 
-                setTimeout(() => {
-                    notification.remove();
-                }, 3000);
+                // Store preference
+                localStorage.setItem('yolingo_language', lang);
             });
         });
+        
+        function getLanguageName(code) {
+            const names = {
+                'en': 'English',
+                'fr': 'Français',
+                'ru': 'Русский'
+            };
+            return names[code] || code.toUpperCase();
+        }
+        
+        function applyTranslations(lang) {
+            const translation = translations[lang] || translations.en;
+            
+            // Update navigation
+            const navLinks = document.querySelectorAll('.nav-links a');
+            if (navLinks[0]) navLinks[0].textContent = translation.nav.home;
+            if (navLinks[1]) navLinks[1].textContent = translation.nav.parlons;
+            if (navLinks[2]) navLinks[2].textContent = translation.nav.hablemos;
+            if (navLinks[3]) navLinks[3].textContent = translation.nav.pricing;
+            if (navLinks[4]) navLinks[4].textContent = translation.nav.contact;
+            
+            // Update header
+            const header = document.querySelector('.page-header');
+            if (header) {
+                const h1 = header.querySelector('h1');
+                const subtitle = header.querySelector('.subtitle');
+                if (h1) h1.textContent = translation.header.title;
+                if (subtitle) subtitle.textContent = translation.header.subtitle;
+            }
+            
+            // Update page title
+            document.title = `¡Hablemos Español! | ${getLanguageName(lang)} Lessons - YoLingo`;
+            
+            // Update language in contact form if exists
+            const languageInput = document.querySelector('input[name="_language"]');
+            if (languageInput) {
+                languageInput.value = lang;
+            }
+        }
         
         // ===== NAVIGATION =====
         function toggleMenu() {
@@ -353,6 +444,53 @@
                 document.querySelector('.menu-toggle i').classList.add('fa-bars');
             }
         });
+        
+        // ===== NOTIFICATION SYSTEM =====
+        function showNotification(message, type) {
+            // Remove any existing notifications
+            document.querySelectorAll('.custom-notification').forEach(n => n.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = `custom-notification alert-${type}`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 90px;
+                right: 20px;
+                z-index: 10000;
+                padding: 1rem 1.5rem;
+                border-radius: var(--radius-sm);
+                box-shadow: var(--shadow-hover);
+                background: ${type === 'success' ? 'var(--success)' : 
+                            type === 'error' ? 'var(--error)' : 
+                            type === 'warning' ? 'var(--warning)' : 'var(--info)'};
+                color: white;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                animation: slideIn 0.3s ease-out;
+                max-width: 350px;
+                border-left: 4px solid ${type === 'success' ? 'rgba(16, 185, 129, 0.7)' : 
+                                    type === 'error' ? 'rgba(239, 68, 68, 0.7)' : 
+                                    type === 'warning' ? 'rgba(245, 158, 11, 0.7)' : 'rgba(59, 130, 246, 0.7)'};
+            `;
+            
+            const icon = type === 'success' ? 'fa-check-circle' :
+                        type === 'error' ? 'fa-exclamation-circle' :
+                        type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle';
+            
+            notification.innerHTML = `
+                <i class="fas ${icon}" style="font-size: 1.2rem;"></i>
+                <span style="flex: 1;">${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
         
         // ===== LEVEL SCROLL HIGHLIGHTING =====
         function highlightCurrentLevel() {
@@ -438,6 +576,32 @@
                 }
             }
             
+            // Load saved language preference
+            const savedLang = localStorage.getItem('yolingo_language') || 'en';
+            const savedOption = document.querySelector(`.lang-option[data-lang="${savedLang}"]`);
+            if (savedOption) {
+                savedOption.click();
+            }
+            
+            // Load logo
+            const logoImage = document.querySelector('.logo-image');
+            if (logoImage) {
+                const img = new Image();
+                img.onload = function() {
+                    logoImage.innerHTML = `<img src="logo.jpg" alt="YoLingo" loading="lazy">`;
+                    logoImage.classList.add('loaded');
+                };
+                img.onerror = function() {
+                    logoImage.innerHTML = `
+                        <div style="background: var(--gradient-primary); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px; box-shadow: var(--shadow);">
+                            YL
+                        </div>
+                    `;
+                    logoImage.classList.add('loaded');
+                };
+                img.src = 'logo.jpg';
+            }
+            
             document.body.classList.add('loaded');
         });
         
@@ -450,124 +614,26 @@
                 document.querySelector('.menu-toggle i').classList.add('fa-bars');
             }
         });
-
-        // ===== FIXED LANGUAGE SWITCHER =====
-function toggleLanguageDropdown() {
-    const dropdown = document.getElementById('languageDropdown');
-    const isShowing = dropdown.classList.contains('show');
-    
-    // Close all other dropdowns
-    document.querySelectorAll('.lang-dropdown.show').forEach(d => {
-        if (d !== dropdown) d.classList.remove('show');
-    });
-    
-    // Toggle current dropdown
-    dropdown.classList.toggle('show');
-    
-    // Update chevron icon
-    const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
-    if (chevron) {
-        chevron.style.transform = isShowing ? 'rotate(0deg)' : 'rotate(180deg)';
-    }
-}
-
-// Close dropdown when clicking outside
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.language-switcher')) {
-        document.getElementById('languageDropdown').classList.remove('show');
-        const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
-        if (chevron) {
-            chevron.style.transform = 'rotate(0deg)';
-        }
-    }
-});
-
-// Language selection
-document.querySelectorAll('.lang-option').forEach(option => {
-    option.addEventListener('click', (e) => {
-        e.preventDefault();
-        const lang = option.dataset.lang;
         
-        // Update active state
-        document.querySelectorAll('.lang-option').forEach(opt => {
-            opt.classList.remove('active');
-        });
-        option.classList.add('active');
-        
-        // Update button text
-        const langSpan = document.querySelector('.lang-toggle span');
-        if (langSpan) {
-            langSpan.textContent = lang.toUpperCase();
-        }
-        
-        // Close dropdown
-        document.getElementById('languageDropdown').classList.remove('show');
-        const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
-        if (chevron) {
-            chevron.style.transform = 'rotate(0deg)';
-        }
-        
-        // Show notification
-        const notification = document.createElement('div');
-        notification.className = 'alert alert-success';
-        notification.style.position = 'fixed';
-        notification.style.top = '80px';
-        notification.style.right = '20px';
-        notification.style.zIndex = '10000';
-        notification.style.padding = '1rem 1.5rem';
-        notification.style.borderRadius = 'var(--radius-sm)';
-        notification.style.boxShadow = 'var(--shadow-hover)';
-        notification.innerHTML = `<i class="fas fa-language"></i> Language changed to ${lang.toUpperCase()}`;
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
-        
-        // Store preference
-        localStorage.setItem('yolingo_language', lang);
-    });
-});
-
-// Load saved language preference on page load
-document.addEventListener('DOMContentLoaded', function() {
-    const savedLang = localStorage.getItem('yolingo_language') || 'en';
-    const savedOption = document.querySelector(`.lang-option[data-lang="${savedLang}"]`);
-    if (savedOption) {
-        savedOption.click();
-    }
-});
-
-// ===== FIX LOGO ON OTHER PAGES =====
-function loadLogoForPage() {
-    const logoImage = document.querySelector('.logo-image');
-    if (logoImage && !logoImage.innerHTML.includes('img')) {
-        const img = new Image();
-        
-        img.onload = function() {
-            logoImage.innerHTML = `<img src="logo.jpg" alt="YoLingo" loading="lazy">`;
-            logoImage.classList.add('loaded');
-        };
-        
-        img.onerror = function() {
-            if (!logoImage.innerHTML.includes('div')) {
-                logoImage.innerHTML = `
-                    <div style="background: var(--gradient-primary); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px; box-shadow: var(--shadow);">
-                        YL
-                    </div>
-                `;
-                logoImage.classList.add('loaded');
+        // Add CSS for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
             }
-        };
-        
-        img.src = 'logo.jpg';
-    }
-}
-
-// Load logo on page load
-document.addEventListener('DOMContentLoaded', loadLogoForPage);
+            
+            .custom-notification {
+                transition: all 0.3s ease;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
