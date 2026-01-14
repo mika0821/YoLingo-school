@@ -394,36 +394,80 @@
         </div>
     </footer>
 
-    <script>
+      <script>
+        // ===== FIX LOGO ISSUE =====
+        function loadLogo() {
+            const logoImage = document.getElementById('logoImage');
+            const img = new Image();
+            
+            img.onload = function() {
+                // If logo.jpg exists, use it
+                logoImage.innerHTML = `<img src="logo.jpg" alt="YoLingo" loading="lazy">`;
+                logoImage.classList.add('loaded');
+            };
+            
+            img.onerror = function() {
+                // If logo.jpg doesn't exist, create a fallback
+                logoImage.innerHTML = `
+                    <div style="background: var(--gradient-primary); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px; box-shadow: var(--shadow);">
+                        YL
+                    </div>
+                `;
+                logoImage.classList.add('loaded');
+            };
+            
+            // Try to load the logo
+            img.src = 'logo.jpg';
+        }
+        
         // ===== THEME MANAGEMENT =====
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
         
+        // Check for saved theme or prefer-color-scheme
         function getPreferredTheme() {
             const savedTheme = localStorage.getItem('yolingo_theme');
             if (savedTheme) return savedTheme;
+            
             return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
         
+        // Apply theme
         function applyTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('yolingo_theme', theme);
+            
+            // Update icon
             themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            
+            // Update meta theme-color for mobile browsers
+            const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+            if (metaThemeColor) {
+                metaThemeColor.setAttribute('content', theme === 'dark' ? '#0f172a' : '#7b61ff');
+            }
         }
         
+        // Toggle theme
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             applyTheme(newTheme);
-            themeToggle.style.transform = 'rotate(180deg)';
+            
+            // Add animation
+            themeToggle.style.transform = 'rotate(180deg) scale(1.1)';
             setTimeout(() => {
-                themeToggle.style.transform = 'rotate(0)';
+                themeToggle.style.transform = 'rotate(0) scale(1)';
             }, 300);
+            
+            // Show notification
+            showNotification(`${newTheme === 'dark' ? 'Dark' : 'Light'} mode activated`, 'info');
         }
         
+        // Initialize theme
         applyTheme(getPreferredTheme());
         themeToggle.addEventListener('click', toggleTheme);
         
+        // Listen for system theme changes
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
             if (!localStorage.getItem('yolingo_theme')) {
                 applyTheme(e.matches ? 'dark' : 'light');
@@ -433,73 +477,235 @@
         // ===== LANGUAGE MANAGEMENT =====
         function toggleLanguageDropdown() {
             const dropdown = document.getElementById('languageDropdown');
+            const isShowing = dropdown.classList.contains('show');
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.lang-dropdown.show').forEach(d => {
+                if (d !== dropdown) d.classList.remove('show');
+            });
+            
+            // Toggle current dropdown
             dropdown.classList.toggle('show');
+            
+            // Update chevron icon
+            const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+            if (chevron) {
+                chevron.style.transform = isShowing ? 'rotate(0deg)' : 'rotate(180deg)';
+            }
         }
         
+        // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.language-switcher')) {
                 document.getElementById('languageDropdown').classList.remove('show');
+                const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+                if (chevron) {
+                    chevron.style.transform = 'rotate(0deg)';
+                }
             }
         });
         
+        // Language translations dictionary
+        const translations = {
+            en: {
+                nav: {
+                    home: "Home",
+                    parlons: "Parlons (French)",
+                    hablemos: "Hablemos (Spanish)",
+                    pricing: "Pricing",
+                    contact: "Contact"
+                },
+                hero: {
+                    title: "Learn Languages with <span class='highlight'>YoLingo</span>",
+                    subtitle: "Where culture meets conversation. Master French or Spanish with native speakers in interactive, personalized lessons."
+                },
+                why: "Why Choose <span class='highlight'>YoLingo</span>?",
+                stats: "Ready to Start Your Language Journey?",
+                // Add more translations as needed
+            },
+            fr: {
+                nav: {
+                    home: "Accueil",
+                    parlons: "Parlons (Français)",
+                    hablemos: "Hablemos (Espagnol)",
+                    pricing: "Tarifs",
+                    contact: "Contact"
+                },
+                hero: {
+                    title: "Apprenez les langues avec <span class='highlight'>YoLingo</span>",
+                    subtitle: "Où la culture rencontre la conversation. Maîtrisez le français ou l'espagnol avec des locuteurs natifs dans des cours interactifs et personnalisés."
+                },
+                why: "Pourquoi choisir <span class='highlight'>YoLingo</span> ?",
+                stats: "Prêt à commencer votre apprentissage linguistique ?",
+            },
+            ru: {
+                nav: {
+                    home: "Главная",
+                    parlons: "Parlons (Французский)",
+                    hablemos: "Hablemos (Испанский)",
+                    pricing: "Цены",
+                    contact: "Контакты"
+                },
+                hero: {
+                    title: "Изучайте языки с <span class='highlight'>YoLingo</span>",
+                    subtitle: "Место, где культура встречается с общением. Освойте французский или испанский с носителями языка на интерактивных персонализированных уроках."
+                },
+                why: "Почему стоит выбрать <span class='highlight'>YoLingo</span>?",
+                stats: "Готовы начать своё языковое путешествие?",
+            }
+        };
+        
+        // Language selection
         document.querySelectorAll('.lang-option').forEach(option => {
             option.addEventListener('click', (e) => {
                 e.preventDefault();
                 const lang = option.dataset.lang;
+                
+                // Update active state
                 document.querySelectorAll('.lang-option').forEach(opt => {
                     opt.classList.remove('active');
                 });
                 option.classList.add('active');
-                document.getElementById('languageDropdown').classList.remove('show');
                 
-                // Update form language
-                document.querySelector('input[name="_language"]').value = lang;
+                // Update button text
+                const langSpan = document.querySelector('.lang-toggle span');
+                if (langSpan) {
+                    langSpan.textContent = lang.toUpperCase();
+                }
+                
+                // Close dropdown
+                document.getElementById('languageDropdown').classList.remove('show');
+                const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+                if (chevron) {
+                    chevron.style.transform = 'rotate(0deg)';
+                }
+                
+                // Apply translations
+                applyTranslations(lang);
                 
                 // Show notification
-                showNotification(`Language changed to ${lang.toUpperCase()}`, 'success');
+                showNotification(`Language changed to ${getLanguageName(lang)}`, 'success');
+                
+                // Store preference
+                localStorage.setItem('yolingo_language', lang);
             });
         });
+        
+        function getLanguageName(code) {
+            const names = {
+                'en': 'English',
+                'fr': 'Français',
+                'ru': 'Русский'
+            };
+            return names[code] || code.toUpperCase();
+        }
+        
+        function applyTranslations(lang) {
+            const translation = translations[lang] || translations.en;
+            
+            // Update navigation
+            const navLinks = document.querySelectorAll('.nav-links a');
+            if (navLinks[0]) navLinks[0].textContent = translation.nav.home;
+            if (navLinks[1]) navLinks[1].textContent = translation.nav.parlons;
+            if (navLinks[2]) navLinks[2].textContent = translation.nav.hablemos;
+            if (navLinks[3]) navLinks[3].textContent = translation.nav.pricing;
+            if (navLinks[4]) navLinks[4].textContent = translation.nav.contact;
+            
+            // Update hero section
+            const hero = document.querySelector('.hero-content');
+            if (hero) {
+                const h1 = hero.querySelector('h1');
+                const subtitle = hero.querySelector('.subtitle');
+                if (h1) h1.innerHTML = translation.hero.title;
+                if (subtitle) subtitle.textContent = translation.hero.subtitle;
+            }
+            
+            // Update why yolingo section
+            const whySection = document.querySelector('.why-yolingo h2');
+            if (whySection) {
+                whySection.innerHTML = translation.why;
+            }
+            
+            // Update CTA section
+            const ctaSection = document.querySelector('.cta h2');
+            if (ctaSection) {
+                ctaSection.textContent = translation.stats;
+            }
+            
+            // Update page title
+            document.title = `YoLingo | ${getLanguageName(lang)} Lessons with Native Teachers`;
+        }
         
         // ===== NAVIGATION =====
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
-            document.querySelector('.menu-toggle i').classList.toggle('fa-bars');
-            document.querySelector('.menu-toggle i').classList.toggle('fa-times');
+            const icon = document.querySelector('.menu-toggle i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         }
         
+        // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             const navLinks = document.getElementById('navLinks');
             const menuToggle = document.querySelector('.menu-toggle');
             
             if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
                 navLinks.classList.remove('active');
-                document.querySelector('.menu-toggle i').classList.remove('fa-times');
-                document.querySelector('.menu-toggle i').classList.add('fa-bars');
+                const icon = document.querySelector('.menu-toggle i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             }
         });
         
-        // ===== FORM VALIDATION =====
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
+        // Close menu on link click (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+                const icon = document.querySelector('.menu-toggle i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
         
-        function validatePhone(phone) {
-            if (!phone) return true; // Optional field
-            const re = /^[\+]?[1-9][\d]{0,15}$/;
-            return re.test(phone.replace(/[\s\-\(\)]/g, ''));
-        }
-        
+        // ===== NOTIFICATION SYSTEM =====
         function showNotification(message, type) {
+            // Remove any existing notifications
+            document.querySelectorAll('.custom-notification').forEach(n => n.remove());
+            
             const notification = document.createElement('div');
-            notification.className = `alert alert-${type}`;
-            notification.style.position = 'fixed';
-            notification.style.top = '80px';
-            notification.style.right = '20px';
-            notification.style.zIndex = '10000';
-            notification.style.minWidth = '300px';
-            notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
+            notification.className = `custom-notification alert-${type}`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 90px;
+                right: 20px;
+                z-index: 10000;
+                padding: 1rem 1.5rem;
+                border-radius: var(--radius-sm);
+                box-shadow: var(--shadow-hover);
+                background: ${type === 'success' ? 'var(--success)' : 
+                            type === 'error' ? 'var(--error)' : 
+                            type === 'warning' ? 'var(--warning)' : 'var(--info)'};
+                color: white;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                animation: slideIn 0.3s ease-out;
+                max-width: 350px;
+                border-left: 4px solid ${type === 'success' ? 'rgba(16, 185, 129, 0.7)' : 
+                                    type === 'error' ? 'rgba(239, 68, 68, 0.7)' : 
+                                    type === 'warning' ? 'rgba(245, 158, 11, 0.7)' : 'rgba(59, 130, 246, 0.7)'};
+            `;
+            
+            const icon = type === 'success' ? 'fa-check-circle' :
+                        type === 'error' ? 'fa-exclamation-circle' :
+                        type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle';
+            
+            notification.innerHTML = `
+                <i class="fas ${icon}" style="font-size: 1.2rem;"></i>
+                <span style="flex: 1;">${message}</span>
+            `;
+            
             document.body.appendChild(notification);
             
             setTimeout(() => {
@@ -509,437 +715,193 @@
             }, 3000);
         }
         
-        // ===== FORMSPREE SUBMISSION =====
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const successMessage = document.getElementById('successMessage');
-        const errorMessage = document.getElementById('errorMessage');
-        const loadingMessage = document.getElementById('loadingMessage');
-        
-        // Character counter for message
-        const messageTextarea = document.getElementById('message');
-        const charCount = document.getElementById('charCount');
-        
-        messageTextarea.addEventListener('input', function() {
-            const length = this.value.length;
-            charCount.textContent = length;
-            
-            if (length < 20) {
-                charCount.style.color = 'var(--error)';
-            } else if (length > 800) {
-                charCount.style.color = 'var(--warning)';
-            } else {
-                charCount.style.color = 'var(--success)';
-            }
-        });
-        
-        // Pre-fill form from URL parameters
-        function prefillFormFromURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            const fields = {
-                'language': 'language',
-                'plan': 'plan',
-                'schedule': 'schedule'
-            };
-            
-            for (const [param, fieldId] of Object.entries(fields)) {
-                const value = urlParams.get(param);
-                if (value && document.getElementById(fieldId)) {
-                    document.getElementById(fieldId).value = value;
+        // ===== ANIMATED COUNTERS =====
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target + (element.textContent.includes('%') ? '%' : '+');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start) + (element.textContent.includes('%') ? '%' : '+');
                 }
-            }
-            
-            // Check if this is a trial request
-            if (urlParams.get('trial') === 'true') {
-                document.getElementById('plan').value = 'trial';
-                showNotification('Free trial lesson selected!', 'success');
-            }
+            }, 16);
         }
         
-        // Form submission
-        contactForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            // Hide previous messages
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
-            loadingMessage.style.display = 'none';
-            
-            // Validate required fields
-            const requiredFields = this.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                const hint = field.parentElement.querySelector('.form-hint');
-                
-                if (!field.value.trim()) {
-                    field.style.borderColor = 'var(--error)';
-                    if (hint) {
-                        hint.style.display = 'block';
-                        hint.textContent = 'This field is required';
-                        hint.style.color = 'var(--error)';
-                    }
-                    isValid = false;
-                } else if (field.type === 'email' && !validateEmail(field.value)) {
-                    field.style.borderColor = 'var(--error)';
-                    if (hint) {
-                        hint.style.display = 'block';
-                        hint.textContent = 'Please enter a valid email address';
-                        hint.style.color = 'var(--error)';
-                    }
-                    isValid = false;
-                } else if (field.id === 'phone' && field.value && !validatePhone(field.value)) {
-                    field.style.borderColor = 'var(--error)';
-                    if (hint) {
-                        hint.style.display = 'block';
-                        hint.textContent = 'Please enter a valid phone number';
-                        hint.style.color = 'var(--error)';
-                    }
-                    isValid = false;
-                } else if (field.id === 'message' && field.value.length < 20) {
-                    field.style.borderColor = 'var(--error)';
-                    if (hint) {
-                        hint.style.display = 'block';
-                        hint.textContent = 'Message must be at least 20 characters';
-                        hint.style.color = 'var(--error)';
-                    }
-                    isValid = false;
-                } else {
-                    field.style.borderColor = '';
-                    if (hint) hint.style.display = 'none';
-                }
-            });
-            
-            if (!isValid) {
-                showNotification('Please fill in all required fields correctly.', 'error');
-                return;
-            }
-            
-            // Show loading state
-            loadingMessage.style.display = 'block';
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            submitBtn.disabled = true;
-            
-            try {
-                const formData = new FormData(this);
-                
-                // Add tracking data
-                formData.append('_timestamp', new Date().toISOString());
-                formData.append('_url', window.location.href);
-                formData.append('_user_agent', navigator.userAgent);
-                formData.append('_timezone', Intl.DateTimeFormat().resolvedOptions().timeZone);
-                
-                const response = await fetch(this.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    // Success
-                    successMessage.style.display = 'block';
-                    
-                    // Store submission data
-                    const submissionData = {
-                        name: document.getElementById('name').value,
-                        email: document.getElementById('email').value,
-                        language: document.getElementById('language').value,
-                        timestamp: new Date().toISOString()
-                    };
-                    
-                    localStorage.setItem('yolingo_contact_submission', JSON.stringify(submissionData));
-                    
-                    // Reset form
-                    this.reset();
-                    charCount.textContent = '0';
-                    
-                    // Clear form auto-save data
-                    const formFields = ['name', 'email', 'phone', 'language', 'current_level', 'wanted_level', 'schedule', 'plan', 'message'];
-                    formFields.forEach(field => {
-                        localStorage.removeItem(`yolingo_${field}`);
+        // Animate stats when they come into view
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const stats = entry.target.querySelectorAll('.stat h3');
+                    stats.forEach(stat => {
+                        const value = parseInt(stat.dataset.count);
+                        if (!isNaN(value)) {
+                            animateCounter(stat, value, 1500);
+                        }
                     });
-                    
-                    // Redirect to thank you page after 2 seconds
-                    setTimeout(() => {
-                        window.location.href = 'thank-you.html';
-                    }, 2000);
-                    
-                } else {
-                    throw new Error('Form submission failed');
+                    observer.unobserve(entry.target);
                 }
-            } catch (error) {
-                console.error('Form submission error:', error);
-                errorMessage.style.display = 'block';
-                showNotification('Failed to send message. Please try again.', 'error');
+            });
+        }, observerOptions);
+        
+        // ===== ENHANCED HOVER EFFECTS =====
+        document.querySelectorAll('.language-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = 'var(--shadow-glow)';
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'var(--shadow)';
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // ===== SMOOTH SCROLLING =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
                 
-                // Offer alternative contact method
-                setTimeout(() => {
-                    if (confirm('Unable to send email. Would you like to contact us via WhatsApp instead?')) {
-                        window.open('https://wa.me/18182621520?text=Hi%20YoLingo!%20I%20tried%20to%20contact%20you%20via%20your%20website.', '_blank');
-                    }
-                }, 1000);
-            } finally {
-                // Reset button
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                loadingMessage.style.display = 'none';
-            }
-        });
-        
-        // ===== REAL-TIME VALIDATION =====
-        const form = document.getElementById('contactForm');
-        const inputs = form.querySelectorAll('input, select, textarea');
-        
-        inputs.forEach(input => {
-            input.addEventListener('blur', function() {
-                validateField(this);
-            });
-            
-            input.addEventListener('input', function() {
-                const hint = this.parentElement.querySelector('.form-hint');
-                if (hint) hint.style.display = 'none';
-                this.style.borderColor = '';
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
                 
-                // Auto-save to localStorage
-                if (this.id && this.id !== 'privacy') {
-                    localStorage.setItem(`yolingo_${this.id}`, this.value);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
         
-        function validateField(field) {
-            const hint = field.parentElement.querySelector('.form-hint');
-            
-            if (field.hasAttribute('required') && !field.value.trim()) {
-                field.style.borderColor = 'var(--error)';
-                if (hint) {
-                    hint.style.display = 'block';
-                    hint.textContent = 'This field is required';
-                    hint.style.color = 'var(--error)';
-                }
-            } else if (field.type === 'email' && field.value && !validateEmail(field.value)) {
-                field.style.borderColor = 'var(--error)';
-                if (hint) {
-                    hint.style.display = 'block';
-                    hint.textContent = 'Please enter a valid email address';
-                    hint.style.color = 'var(--error)';
-                }
-            } else if (field.id === 'phone' && field.value && !validatePhone(field.value)) {
-                field.style.borderColor = 'var(--error)';
-                if (hint) {
-                    hint.style.display = 'block';
-                    hint.textContent = 'Please enter a valid phone number';
-                    hint.style.color = 'var(--error)';
-                }
-            } else if (field.id === 'message' && field.value && field.value.length < 20) {
-                field.style.borderColor = 'var(--error)';
-                if (hint) {
-                    hint.style.display = 'block';
-                    hint.textContent = 'Message must be at least 20 characters';
-                    hint.style.color = 'var(--error)';
-                }
-            } else {
-                field.style.borderColor = '';
-                if (hint) hint.style.display = 'none';
-            }
-        }
-        
-        // ===== FAQ TOGGLE =====
-        function toggleFAQ(element) {
-            const allFAQ = document.querySelectorAll('.faq-item');
-            allFAQ.forEach(faq => {
-                if (faq !== element && faq.classList.contains('active')) {
-                    faq.classList.remove('active');
-                }
-            });
-            
-            element.classList.toggle('active');
-        }
-        
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.addEventListener('click', function() {
-                toggleFAQ(this);
+        // ===== RIPPLE BUTTON EFFECT =====
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                
+                // Remove ripple after animation
+                setTimeout(() => ripple.remove(), 600);
             });
         });
-        
-        // ===== FORM AUTO-SAVE =====
-        function loadSavedFormData() {
-            const formFields = ['name', 'email', 'phone', 'language', 'current_level', 'wanted_level', 'schedule', 'plan', 'message'];
-            
-            formFields.forEach(field => {
-                const savedValue = localStorage.getItem(`yolingo_${field}`);
-                if (savedValue && document.getElementById(field)) {
-                    document.getElementById(field).value = savedValue;
-                    
-                    // Update character counter for message
-                    if (field === 'message') {
-                        charCount.textContent = savedValue.length;
-                    }
-                }
-            });
-        }
         
         // ===== INITIALIZE ON LOAD =====
         window.addEventListener('load', function() {
-            // Load saved form data
-            loadSavedFormData();
+            // Load logo
+            loadLogo();
             
-            // Pre-fill from URL parameters
-            prefillFormFromURL();
+            // Observe stats section
+            const statsSection = document.querySelector('.stats');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
             
-            // Initialize animations
-            const elements = document.querySelectorAll('.contact-method, .feature');
+            // Load saved language preference
+            const savedLang = localStorage.getItem('yolingo_language') || 'en';
+            const savedOption = document.querySelector(`.lang-option[data-lang="${savedLang}"]`);
+            if (savedOption) {
+                savedOption.click();
+            }
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            elements.forEach(element => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(20px)';
-                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                observer.observe(element);
-            });
-            
+            // Add loaded class
             document.body.classList.add('loaded');
+            
+            // Ensure start-link text fits
+            document.querySelectorAll('.start-link').forEach(link => {
+                link.style.fontSize = '0.95rem';
+                link.style.padding = '0.6rem 1.2rem';
+            });
         });
         
         // ===== KEYBOARD NAVIGATION =====
         document.addEventListener('keydown', function(e) {
+            // Escape key closes dropdowns and menus
             if (e.key === 'Escape') {
                 document.getElementById('languageDropdown').classList.remove('show');
                 document.getElementById('navLinks').classList.remove('active');
-                document.querySelector('.menu-toggle i').classList.remove('fa-times');
-                document.querySelector('.menu-toggle i').classList.add('fa-bars');
+                const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+                if (chevron) {
+                    chevron.style.transform = 'rotate(0deg)';
+                }
+                const icon = document.querySelector('.menu-toggle i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+            
+            // Tab key management for dropdowns
+            if (e.key === 'Tab') {
+                const activeElement = document.activeElement;
+                const dropdown = document.getElementById('languageDropdown');
+                
+                if (dropdown.classList.contains('show') && 
+                    !dropdown.contains(activeElement) && 
+                    !document.querySelector('.lang-toggle').contains(activeElement)) {
+                    dropdown.classList.remove('show');
+                    const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
+                    if (chevron) {
+                        chevron.style.transform = 'rotate(0deg)';
+                    }
+                }
             }
         });
-
-        // ===== FIXED LANGUAGE SWITCHER =====
-function toggleLanguageDropdown() {
-    const dropdown = document.getElementById('languageDropdown');
-    const isShowing = dropdown.classList.contains('show');
-    
-    // Close all other dropdowns
-    document.querySelectorAll('.lang-dropdown.show').forEach(d => {
-        if (d !== dropdown) d.classList.remove('show');
-    });
-    
-    // Toggle current dropdown
-    dropdown.classList.toggle('show');
-    
-    // Update chevron icon
-    const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
-    if (chevron) {
-        chevron.style.transform = isShowing ? 'rotate(0deg)' : 'rotate(180deg)';
-    }
-}
-
-// Close dropdown when clicking outside
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.language-switcher')) {
-        document.getElementById('languageDropdown').classList.remove('show');
-        const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
-        if (chevron) {
-            chevron.style.transform = 'rotate(0deg)';
-        }
-    }
-});
-
-// Language selection
-document.querySelectorAll('.lang-option').forEach(option => {
-    option.addEventListener('click', (e) => {
-        e.preventDefault();
-        const lang = option.dataset.lang;
         
-        // Update active state
-        document.querySelectorAll('.lang-option').forEach(opt => {
-            opt.classList.remove('active');
-        });
-        option.classList.add('active');
-        
-        // Update button text
-        const langSpan = document.querySelector('.lang-toggle span');
-        if (langSpan) {
-            langSpan.textContent = lang.toUpperCase();
-        }
-        
-        // Close dropdown
-        document.getElementById('languageDropdown').classList.remove('show');
-        const chevron = document.querySelector('.lang-toggle .fa-chevron-down');
-        if (chevron) {
-            chevron.style.transform = 'rotate(0deg)';
-        }
-        
-        // Show notification
-        const notification = document.createElement('div');
-        notification.className = 'alert alert-success';
-        notification.style.position = 'fixed';
-        notification.style.top = '80px';
-        notification.style.right = '20px';
-        notification.style.zIndex = '10000';
-        notification.style.padding = '1rem 1.5rem';
-        notification.style.borderRadius = 'var(--radius-sm)';
-        notification.style.boxShadow = 'var(--shadow-hover)';
-        notification.innerHTML = `<i class="fas fa-language"></i> Language changed to ${lang.toUpperCase()}`;
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
-        
-        // Store preference
-        localStorage.setItem('yolingo_language', lang);
-    });
-});
-
-// Load saved language preference on page load
-document.addEventListener('DOMContentLoaded', function() {
-    const savedLang = localStorage.getItem('yolingo_language') || 'en';
-    const savedOption = document.querySelector(`.lang-option[data-lang="${savedLang}"]`);
-    if (savedOption) {
-        savedOption.click();
-    }
-});
-
-// ===== FIX LOGO ON OTHER PAGES =====
-function loadLogoForPage() {
-    const logoImage = document.querySelector('.logo-image');
-    if (logoImage && !logoImage.innerHTML.includes('img')) {
-        const img = new Image();
-        
-        img.onload = function() {
-            logoImage.innerHTML = `<img src="logo.jpg" alt="YoLingo" loading="lazy">`;
-            logoImage.classList.add('loaded');
-        };
-        
-        img.onerror = function() {
-            if (!logoImage.innerHTML.includes('div')) {
-                logoImage.innerHTML = `
-                    <div style="background: var(--gradient-primary); width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px; box-shadow: var(--shadow);">
-                        YL
-                    </div>
-                `;
-                logoImage.classList.add('loaded');
+        // Add CSS for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
             }
-        };
-        
-        img.src = 'logo.jpg';
-    }
-}
-
-// Load logo on page load
-document.addEventListener('DOMContentLoaded', loadLogoForPage);
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            .btn {
+                position: relative;
+                overflow: hidden;
+            }
+            .custom-notification {
+                transition: all 0.3s ease;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
