@@ -378,8 +378,8 @@
             
             <div class="footer-bottom">
                 <p>&copy; 2026 YoLingo Language School. Designed for the digital generation. | 
-                    <a href="#" style="color: rgba(255,255,255,0.6);">Privacy</a> • 
-                    <a href="#" style="color: rgba(255,255,255,0.6);">Terms</a>
+                    <a href="#">Privacy</a> • 
+                    <a href="#">Terms</a>
                 </p>
             </div>
         </div>
@@ -412,65 +412,4 @@
         
         // Close menu when clicking a link
         navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuToggle.classList.remove('active');
-                menuToggle.querySelector('i').classList.remove('fa-times');
-                menuToggle.querySelector('i').classList.add('fa-bars');
-                document.body.style.overflow = '';
-            });
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
-                navLinks.classList.remove('active');
-                menuToggle.classList.remove('active');
-                menuToggle.querySelector('i').classList.remove('fa-times');
-                menuToggle.querySelector('i').classList.add('fa-bars');
-                document.body.style.overflow = '';
-            }
-        });
-        
-        // ===== NAVBAR SCROLL EFFECT =====
-        const navbar = document.getElementById('mainNav');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-        
-        // ===== SMOOTH SCROLL FOR LEVEL LINKS =====
-        document.querySelectorAll('a[href^="#level-"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // ===== INITIALIZATION =====
-        window.addEventListener('DOMContentLoaded', () => {
-            // Event listeners
-            menuToggle.addEventListener('click', toggleMobileMenu);
-            
-            // Close mobile menu on escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+            item.addEventListener('click', () =>
