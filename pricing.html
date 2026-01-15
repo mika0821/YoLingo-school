@@ -483,8 +483,8 @@
             
             <div class="footer-bottom">
                 <p>&copy; 2026 YoLingo Language School. Designed for the digital generation. | 
-                    <a href="#" style="color: rgba(255,255,255,0.6);">Privacy</a> • 
-                    <a href="#" style="color: rgba(255,255,255,0.6);">Terms</a>
+                    <a href="#">Privacy</a> • 
+                    <a href="#">Terms</a>
                 </p>
             </div>
         </div>
@@ -563,34 +563,6 @@
             });
         });
         
-        // ===== PLAN HOVER EFFECTS =====
-        document.querySelectorAll('.plan').forEach(plan => {
-            plan.addEventListener('mouseenter', () => {
-                plan.style.transform = 'translateY(-15px) scale(1.02)';
-            });
-            
-            plan.addEventListener('mouseleave', () => {
-                if (!plan.classList.contains('popular')) {
-                    plan.style.transform = 'translateY(0) scale(1)';
-                } else {
-                    plan.style.transform = 'scale(1.05) translateY(-15px)';
-                }
-            });
-            
-            // Touch feedback for mobile
-            plan.addEventListener('touchstart', () => {
-                plan.style.transform = 'scale(0.98)';
-            });
-            
-            plan.addEventListener('touchend', () => {
-                if (!plan.classList.contains('popular')) {
-                    plan.style.transform = 'scale(1)';
-                } else {
-                    plan.style.transform = 'scale(1.05)';
-                }
-            });
-        });
-        
         // ===== INITIALIZATION =====
         window.addEventListener('DOMContentLoaded', () => {
             // Event listeners
@@ -602,17 +574,6 @@
                     toggleMobileMenu();
                 }
             });
-            
-            // Highlight popular plan on load
-            const popularPlan = document.querySelector('.plan.popular');
-            if (popularPlan) {
-                setTimeout(() => {
-                    popularPlan.style.animation = 'pulse 1s';
-                    setTimeout(() => {
-                        popularPlan.style.animation = '';
-                    }, 1000);
-                }, 1000);
-            }
         });
     </script>
 </body>
