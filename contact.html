@@ -668,9 +668,9 @@
             
             <div class="footer-bottom">
                 <p>&copy; 2026 YoLingo Language School. Designed for the digital generation. | 
-                    <a href="#" style="color: rgba(255,255,255,0.6);">Privacy</a> • 
-                    <a href="#" style="color: rgba(255,255,255,0.6);">Terms</a> • 
-                    <a href="#" style="color: rgba(255,255,255,0.6);">Refund Policy</a>
+                    <a href="#">Privacy</a> • 
+                    <a href="#">Terms</a> • 
+                    <a href="#">Refund Policy</a>
                 </p>
             </div>
         </div>
@@ -846,13 +846,24 @@
             const urlParams = new URLSearchParams(window.location.search);
             const language = urlParams.get('language');
             const plan = urlParams.get('plan');
+            const service = urlParams.get('service');
             
             if (language && document.getElementById('language')) {
                 document.getElementById('language').value = language;
             }
             
-            if (plan && document.getElementById('plan')) {
-                document.getElementById('plan').value = plan;
+            if (plan && document.getElementById('language')) {
+                const message = document.getElementById('message');
+                if (message) {
+                    message.value = `I'm interested in the ${plan} plan.\n\n`;
+                }
+            }
+            
+            if (service && document.getElementById('language')) {
+                const message = document.getElementById('message');
+                if (message) {
+                    message.value = `I'm interested in the ${service} service.\n\n`;
+                }
             }
         });
     </script>
