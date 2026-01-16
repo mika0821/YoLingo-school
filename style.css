@@ -232,26 +232,31 @@ nav.scrolled {
 
 /* ===== UPDATED LOGO STYLES FOR IMAGE LOGO ===== */
 .logo-image {
-    width: 55px;
-    height: 55px;
+    width: 70px; /* Increased from 55px */
+    height: 70px; /* Increased from 55px */
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow);
     transition: var(--transition);
     position: relative;
     overflow: hidden;
     background: transparent; /* Remove gradient background */
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Logo image styling */
 .logo-image img {
-    height: 40px;
+    height: 55px; /* Increased from 40px */
     width: auto;
     display: block;
     transition: transform 0.3s ease;
-    border-radius: 4px;
+    
+    /* Remove white background - try this filter first */
+    filter: 
+        brightness(1.2) 
+        contrast(1.2)
+        drop-shadow(0 0 2px rgba(168, 85, 247, 0.3));
 }
 
 /* Remove the previous gradient shine effect from logo-image */
@@ -261,6 +266,7 @@ nav.scrolled {
 
 .logo:hover .logo-image {
     transform: rotate(-10deg) scale(1.1);
+    border-color: var(--primary);
     box-shadow: var(--shadow-glow);
 }
 
@@ -1161,32 +1167,12 @@ footer::before {
     }
     
     .logo-image {
-        width: 45px;
-        height: 45px;
+        width: 55px; /* Adjusted for mobile */
+        height: 55px;
     }
     
     .logo-image img {
-        height: 35px; /* Slightly smaller for mobile */
-    }
-    
-    /* Stack logo and text vertically if needed on very small screens */
-    @media screen and (max-width: 480px) {
-        .logo {
-            gap: 8px; /* Reduce gap on very small screens */
-        }
-        
-        .logo-image {
-            width: 42px;
-            height: 42px;
-        }
-        
-        .logo-image img {
-            height: 32px; /* Even smaller for very small screens */
-        }
-        
-        .logo-text-container {
-            font-size: 1.6rem; /* Smaller text */
-        }
+        height: 40px; /* Adjusted for mobile */
     }
     
     /* Hero */
@@ -1300,7 +1286,7 @@ footer::before {
 /* For tablets and medium screens */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
     .logo-image img {
-        height: 38px; /* Slightly smaller than desktop */
+        height: 48px; /* Adjusted for tablets */
     }
     
     .logo-text-container {
@@ -1331,6 +1317,26 @@ footer::before {
 @keyframes fadeIn {
     to {
         opacity: 1;
+    }
+}
+
+/* Stack logo and text vertically if needed on very small screens */
+@media screen and (max-width: 480px) {
+    .logo {
+        gap: 8px; /* Reduce gap on very small screens */
+    }
+    
+    .logo-image {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .logo-image img {
+        height: 38px; /* Even smaller for very small screens */
+    }
+    
+    .logo-text-container {
+        font-size: 1.6rem; /* Smaller text */
     }
 }
 
