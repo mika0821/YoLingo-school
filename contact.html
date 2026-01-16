@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0f0f23">
+    <meta name="theme-color" content="#0a0a1a">
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Contact YoLingo to start your language learning journey. Get free trial lessons, personalized plans, and expert guidance from native teachers.">
@@ -82,7 +82,7 @@
         
         .contact-info h2,
         .contact-form h2 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin-bottom: 2rem;
             color: var(--text-primary);
             display: flex;
@@ -93,7 +93,7 @@
         .contact-method {
             background: var(--bg-secondary);
             margin-bottom: 2rem;
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: var(--radius-lg);
             border: 2px solid rgba(255, 255, 255, 0.05);
             transition: var(--transition);
@@ -107,7 +107,7 @@
         }
         
         .contact-method h3 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 1.5rem;
             color: var(--primary);
             display: flex;
@@ -119,11 +119,12 @@
             color: var(--text-secondary);
             margin-bottom: 0.8rem;
             line-height: 1.6;
+            font-size: 0.95rem;
         }
         
         .contact-method em {
             color: var(--text-tertiary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: block;
             margin-top: 1rem;
         }
@@ -136,10 +137,10 @@
         }
         
         .social-links a {
-            padding: 0.8rem 1.5rem;
+            padding: 0.8rem 1.2rem;
             text-decoration: none;
             border-radius: var(--radius-sm);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: var(--transition);
             display: flex;
             align-items: center;
@@ -169,17 +170,18 @@
         
         .contact-form {
             background: var(--bg-secondary);
-            padding: 3.5rem;
+            padding: 2.5rem;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-card);
         }
         
         .alert {
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-radius: var(--radius-sm);
             margin-bottom: 2rem;
             display: none;
             animation: fadeIn 0.3s ease-out;
+            font-size: 0.95rem;
         }
         
         .alert-success {
@@ -196,11 +198,11 @@
         
         .alert i {
             margin-right: 0.75rem;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         
         .form-group {
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
         }
         
         .form-group label {
@@ -208,7 +210,7 @@
             margin-bottom: 0.8rem;
             font-weight: 600;
             color: var(--text-primary);
-            font-size: 1.05rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -218,11 +220,11 @@
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 1.2rem 1.5rem;
+            padding: 1rem 1.2rem;
             border: 2px solid var(--border);
             border-radius: var(--radius-sm);
             font-family: 'Inter', sans-serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: var(--transition);
             background: var(--bg-tertiary);
             color: var(--text-primary);
@@ -244,35 +246,41 @@
         .char-counter {
             text-align: right;
             color: var(--text-tertiary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-top: 0.5rem;
         }
         
         .faq {
             padding: 6rem 0;
-            background: var(--gradient-dark);
+            background: var(--gradient-galaxy);
+            position: relative;
+            overflow: hidden;
         }
         
         .faq h2 {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 4rem;
             color: var(--text-primary);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 1rem;
+            position: relative;
+            z-index: 2;
         }
         
         .faq-item {
             background: var(--bg-secondary);
             margin-bottom: 1.5rem;
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: var(--radius-lg);
             cursor: pointer;
             transition: var(--transition);
             border: 2px solid rgba(255, 255, 255, 0.05);
             box-shadow: var(--shadow-card);
+            position: relative;
+            z-index: 2;
         }
         
         .faq-item:hover {
@@ -284,7 +292,7 @@
         .faq-item h3 {
             color: var(--text-primary);
             margin-bottom: 0;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -293,12 +301,13 @@
         
         .faq-item p {
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.6;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out;
             opacity: 0;
             margin-top: 0;
+            font-size: 0.9rem;
         }
         
         .faq-item.active p {
@@ -313,11 +322,12 @@
         
         .virtual-school {
             padding: 6rem 0;
+            background: var(--bg-primary);
         }
         
         .virtual-school h2 {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 2rem;
             color: var(--text-primary);
             display: flex;
@@ -331,8 +341,8 @@
             max-width: 800px;
             margin: 0 auto 4rem;
             color: var(--text-secondary);
-            font-size: 1.2rem;
-            line-height: 1.7;
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
         
         @keyframes fadeIn {
@@ -345,9 +355,29 @@
                 transform: translateY(0);
             }
         }
+        
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--bg-primary));
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
+    <!-- Galaxy Background -->
+    <div class="galaxy-bg">
+        <div class="stars"></div>
+        <div class="nebula"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+    </div>
+
     <!-- Navigation -->
     <nav id="mainNav">
         <div class="logo" onclick="window.location.href='index.html'">
@@ -395,7 +425,7 @@
                         <p><strong>Student Support:</strong> support@yolingo.info</p>
                         <p><strong>Teachers:</strong> careers@yolingo.info</p>
                         <em>We respond within 24 hours</em>
-                        <a href="mailto:contact@yolingo.info" class="btn btn-outline" style="margin-top: 1.5rem; padding: 0.8rem 1.5rem;">
+                        <a href="mailto:contact@yolingo.info" class="btn btn-outline" style="margin-top: 1.5rem; padding: 0.8rem 1.5rem; font-size: 0.9rem;">
                             <i class="fas fa-paper-plane"></i> Send Email
                         </a>
                     </div>
@@ -406,7 +436,7 @@
                         <p><strong>Hours:</strong> Mon-Fri 9am-8pm EST</p>
                         <p><strong>Weekends:</strong> 10am-4pm EST</p>
                         <p><strong>Emergency:</strong> Available 24/7 for current students</p>
-                        <a href="https://wa.me/18182621520" target="_blank" class="btn btn-outline" style="margin-top: 1.5rem; padding: 0.8rem 1.5rem; background: #25D366; color: white; border-color: #25D366;">
+                        <a href="https://wa.me/18182621520" target="_blank" class="btn btn-outline" style="margin-top: 1.5rem; padding: 0.8rem 1.5rem; background: #25D366; color: white; border-color: #25D366; font-size: 0.9rem;">
                             <i class="fab fa-whatsapp"></i> WhatsApp Chat
                         </a>
                     </div>
@@ -418,7 +448,7 @@
                         <p><strong>Phone Calls:</strong> Immediate during business hours</p>
                         <p><strong>Weekend inquiries:</strong> Next business day</p>
                         <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(168, 85, 247, 0.1); border-radius: var(--radius-sm);">
-                            <p style="margin: 0; font-size: 0.95rem; color: var(--primary);">
+                            <p style="margin: 0; font-size: 0.9rem; color: var(--primary);">
                                 <i class="fas fa-bolt"></i> <strong>Fastest Response:</strong> WhatsApp during business hours
                             </p>
                         </div>
@@ -477,7 +507,7 @@
                         <div class="form-group">
                             <label for="phone"><i class="fas fa-phone"></i> Phone Number (Optional)</label>
                             <input type="tel" id="phone" name="phone" placeholder="+1 (818) 262-1520">
-                            <small style="color: var(--text-tertiary); display: block; margin-top: 0.5rem;">Include country code for WhatsApp</small>
+                            <small style="color: var(--text-tertiary); display: block; margin-top: 0.5rem; font-size: 0.85rem;">Include country code for WhatsApp</small>
                         </div>
                         
                         <div class="form-group">
@@ -519,15 +549,15 @@
                         
                         <div class="form-group">
                             <label for="message"><i class="fas fa-comment-dots"></i> Your Message *</label>
-                            <textarea id="message" name="message" rows="6" required placeholder="Tell us about your language goals, timeline, specific questions, or any special requirements... (Min. 20 characters)" minlength="20" maxlength="1000"></textarea>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell us about your language goals, timeline, specific questions, or any special requirements... (Min. 20 characters)" minlength="20" maxlength="1000"></textarea>
                             <div class="char-counter">
                                 <span id="charCount">0</span>/1000 characters
                             </div>
                         </div>
                         
                         <!-- Privacy Policy Consent -->
-                        <div class="form-group" style="margin-top: 2.5rem;">
-                            <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer; font-size: 0.95rem;">
+                        <div class="form-group" style="margin-top: 2rem;">
+                            <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer; font-size: 0.9rem;">
                                 <input type="checkbox" id="privacy" name="privacy" required style="margin-top: 0.25rem;">
                                 <span>
                                     I agree to the <a href="#" style="color: var(--primary);">Privacy Policy</a> and consent to YoLingo contacting me via email/phone about language learning services. I understand I can unsubscribe at any time.
@@ -538,11 +568,11 @@
                         <!-- Honeypot field for spam protection -->
                         <input type="text" name="_honey" style="display:none">
                         
-                        <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%; padding: 1.2rem; font-size: 1.1rem; margin-top: 1rem;">
+                        <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%; padding: 1rem; font-size: 1rem; margin-top: 1rem;">
                             <i class="fas fa-paper-plane"></i> Send Message & Start Your Journey
                         </button>
                         
-                        <p style="text-align: center; margin-top: 1.5rem; color: var(--text-tertiary); font-size: 0.9rem;">
+                        <p style="text-align: center; margin-top: 1.5rem; color: var(--text-tertiary); font-size: 0.85rem;">
                             <i class="fas fa-shield-alt"></i> Your information is secure and encrypted
                         </p>
                     </form>
