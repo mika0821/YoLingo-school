@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0f0f23">
+    <meta name="theme-color" content="#0a0a1a">
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Thank you for contacting YoLingo. Your message has been received and we'll contact you within 24 hours to start your language journey.">
@@ -84,7 +84,7 @@
         
         .thank-you-message {
             background: var(--bg-secondary);
-            padding: 3rem;
+            padding: 2.5rem;
             border-radius: var(--radius-lg);
             margin: 3rem 0;
             box-shadow: var(--shadow-card);
@@ -108,12 +108,13 @@
             margin-bottom: 1.5rem;
             position: relative;
             z-index: 2;
+            font-size: 1.8rem;
         }
         
         .thank-you-message p {
             position: relative;
             z-index: 2;
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 1.6;
             margin-bottom: 1rem;
             color: var(--text-secondary);
@@ -121,7 +122,7 @@
         
         .next-steps {
             background: var(--bg-secondary);
-            padding: 3rem;
+            padding: 2.5rem;
             border-radius: var(--radius-lg);
             margin: 3rem 0;
             box-shadow: var(--shadow-card);
@@ -142,7 +143,7 @@
         .next-steps h3 {
             color: var(--primary);
             margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
@@ -174,26 +175,28 @@
         .step-number {
             background: var(--gradient-primary);
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             flex-shrink: 0;
         }
         
         .step-content h4 {
             margin-bottom: 0.5rem;
             color: var(--text-primary);
+            font-size: 1.1rem;
         }
         
         .step-content p {
             color: var(--text-secondary);
             margin: 0;
             line-height: 1.5;
+            font-size: 0.95rem;
         }
         
         .countdown-container {
@@ -206,7 +209,7 @@
         }
         
         .countdown {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--primary);
             font-weight: 600;
             margin-top: 1rem;
@@ -219,7 +222,7 @@
         }
         
         .countdown-timer {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 800;
             color: var(--primary);
             min-width: 40px;
@@ -235,7 +238,7 @@
         }
         
         .resource-btn {
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             border-radius: var(--radius);
             text-decoration: none;
             font-weight: 600;
@@ -245,10 +248,11 @@
             transition: var(--transition);
             min-width: 200px;
             justify-content: center;
+            font-size: 0.95rem;
         }
         
         .resource-btn i {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         
         .contact-info-card {
@@ -267,6 +271,7 @@
             justify-content: center;
             gap: 0.75rem;
             color: var(--text-secondary);
+            font-size: 0.95rem;
         }
         
         .contact-info-card strong {
@@ -285,6 +290,7 @@
             font-weight: 600;
             margin-top: 1rem;
             transition: var(--transition);
+            font-size: 0.95rem;
         }
         
         .whatsapp-button:hover {
@@ -325,10 +331,31 @@
         .download-resources h4 {
             color: var(--primary);
             margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .thank-you-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--bg-primary));
+            z-index: 1;
         }
     </style>
 </head>
 <body>
+    <!-- Galaxy Background -->
+    <div class="galaxy-bg">
+        <div class="stars"></div>
+        <div class="nebula"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+    </div>
+
     <!-- Navigation -->
     <nav id="mainNav">
         <div class="logo" onclick="window.location.href='index.html'">
@@ -370,7 +397,7 @@
         <div class="container">
             <div class="thank-you-message">
                 <h2>🎉 Message Received Successfully!</h2>
-                <p style="font-size: 1.2rem; margin: 1rem 0; color: var(--success);">
+                <p style="font-size: 1.1rem; margin: 1rem 0; color: var(--success);">
                     <i class="fas fa-check-circle"></i> Your inquiry has been submitted successfully!
                 </p>
                 <p>
@@ -386,11 +413,11 @@
                     <div class="progress-fill"></div>
                 </div>
                 
-                <div style="display: inline-flex; align-items: center; gap: 1rem; background: rgba(168, 85, 247, 0.1); padding: 1rem 2rem; border-radius: var(--radius); margin-top: 1.5rem;">
-                    <i class="fas fa-bolt" style="font-size: 1.5rem; color: var(--primary);"></i>
+                <div style="display: inline-flex; align-items: center; gap: 1rem; background: rgba(168, 85, 247, 0.1); padding: 1rem 1.5rem; border-radius: var(--radius); margin-top: 1.5rem; flex-wrap: wrap;">
+                    <i class="fas fa-bolt" style="font-size: 1.3rem; color: var(--primary);"></i>
                     <div style="text-align: left;">
-                        <p style="margin: 0; font-weight: 600; color: var(--text-primary);">Next Steps Already Started</p>
-                        <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);">We're matching you with the perfect teacher</p>
+                        <p style="margin: 0; font-weight: 600; color: var(--text-primary); font-size: 0.95rem;">Next Steps Already Started</p>
+                        <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary);">We're matching you with the perfect teacher</p>
                     </div>
                 </div>
             </div>
@@ -437,14 +464,14 @@
                         <i class="fas fa-hourglass-half"></i>
                         Redirecting to homepage in <span class="countdown-timer" id="timer">15</span> seconds...
                     </div>
-                    <p style="margin-top: 1rem; color: var(--text-tertiary); font-size: 0.9rem;">
+                    <p style="margin-top: 1rem; color: var(--text-tertiary); font-size: 0.85rem;">
                         <i class="fas fa-hand-pointer"></i> Click here to <a href="index.html" style="color: var(--primary);">go to homepage now</a>
                     </p>
                 </div>
             </div>
             
             <div style="margin: 3rem 0; text-align: center;">
-                <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.5rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.4rem;">
                     <i class="fas fa-compass"></i> In the meantime, explore our resources:
                 </h3>
                 <div class="resource-buttons">
@@ -464,7 +491,7 @@
             </div>
             
             <div class="contact-info-card">
-                <h4 style="color: var(--primary); margin-bottom: 1rem;">
+                <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.2rem;">
                     <i class="fas fa-life-ring"></i> Need Immediate Assistance?
                 </h4>
                 
@@ -482,7 +509,7 @@
                     Chat on WhatsApp Now
                 </a>
                 
-                <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-tertiary);">
+                <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-tertiary);">
                     <i class="fas fa-clock"></i> Response time: Usually within 2 hours during business hours
                 </p>
             </div>
@@ -492,17 +519,17 @@
                 <h4 style="color: var(--primary); margin-bottom: 1rem;">
                     <i class="fas fa-download"></i> Free Learning Resources
                 </h4>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.95rem;">
                     Download our free starter guides while you wait:
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <button onclick="downloadResource('french_guide')" class="btn btn-outline" style="padding: 0.75rem 1.5rem;">
+                    <button onclick="downloadResource('french_guide')" class="btn btn-outline" style="padding: 0.75rem 1.5rem; font-size: 0.9rem;">
                         <i class="fas fa-file-pdf"></i> French Beginner's Guide
                     </button>
-                    <button onclick="downloadResource('spanish_guide')" class="btn btn-outline" style="padding: 0.75rem 1.5rem;">
+                    <button onclick="downloadResource('spanish_guide')" class="btn btn-outline" style="padding: 0.75rem 1.5rem; font-size: 0.9rem;">
                         <i class="fas fa-file-pdf"></i> Spanish Beginner's Guide
                     </button>
-                    <button onclick="downloadResource('learning_tips')" class="btn btn-outline" style="padding: 0.75rem 1.5rem;">
+                    <button onclick="downloadResource('learning_tips')" class="btn btn-outline" style="padding: 0.75rem 1.5rem; font-size: 0.9rem;">
                         <i class="fas fa-lightbulb"></i> Language Learning Tips
                     </button>
                 </div>
