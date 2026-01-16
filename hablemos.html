@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0f0f23">
+    <meta name="theme-color" content="#0a0a1a">
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Learn Spanish with native teachers at YoLingo. Authentic Spanish immersion, cultural workshops, and interactive lessons for young adults.">
@@ -82,7 +82,7 @@
         
         .course-info h2,
         .course-levels h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 2rem;
             color: var(--text-primary);
             position: relative;
@@ -102,8 +102,8 @@
         }
         
         .course-info p {
-            font-size: 1.2rem;
-            line-height: 1.7;
+            font-size: 1.1rem;
+            line-height: 1.6;
             color: var(--text-secondary);
             margin-bottom: 2rem;
         }
@@ -114,9 +114,9 @@
         
         .benefit {
             background: var(--bg-secondary);
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: var(--radius-lg);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             border-left: 4px solid var(--accent);
             transition: var(--transition);
             box-shadow: var(--shadow-card);
@@ -128,7 +128,7 @@
         }
         
         .benefit h3 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
             color: var(--accent);
             display: flex;
@@ -138,15 +138,16 @@
         
         .benefit p {
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.6;
             margin: 0;
+            font-size: 0.95rem;
         }
         
         .level {
             background: var(--bg-secondary);
-            padding: 3rem;
+            padding: 2rem;
             border-radius: var(--radius-lg);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             border: 2px solid rgba(255, 255, 255, 0.05);
             transition: var(--transition);
             box-shadow: var(--shadow-card);
@@ -159,15 +160,16 @@
         }
         
         .level h3 {
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
             color: var(--accent);
         }
         
         .level p {
             color: var(--text-secondary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             line-height: 1.6;
+            font-size: 0.95rem;
         }
         
         .level strong {
@@ -184,9 +186,29 @@
             font-size: 1.1rem;
             padding: 1.2rem 3.5rem;
         }
+        
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--bg-primary));
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
+    <!-- Galaxy Background -->
+    <div class="galaxy-bg">
+        <div class="stars"></div>
+        <div class="nebula"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+    </div>
+
     <!-- Navigation -->
     <nav id="mainNav">
         <div class="logo" onclick="window.location.href='index.html'">
@@ -290,7 +312,7 @@
                     <i class="fas fa-flag"></i>
                     Start Your Spanish Journey Today
                 </a>
-                <p style="margin-top: 1.5rem; color: var(--text-tertiary); font-size: 1rem;">
+                <p style="margin-top: 1.5rem; color: var(--text-tertiary); font-size: 0.9rem;">
                     <i class="fas fa-clock"></i> Free 30-minute trial lesson available | 
                     <i class="fas fa-calendar"></i> Flexible scheduling
                 </p>
