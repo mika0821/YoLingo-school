@@ -12,19 +12,19 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#0a0a1a">
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Affordable pricing plans for YoLingo language courses. Group classes, private lessons, and intensive courses with flexible scheduling for young adults.">
     <meta name="keywords" content="language course pricing, french lessons cost, spanish lessons price, affordable language learning, group classes, private lessons">
     <meta name="author" content="YoLingo Language School">
-    
+
     <!-- ===== STYLES & FONTS ===== -->
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         .page-header {
             padding: 10rem 0 5rem; /* Reduced padding */
@@ -34,7 +34,7 @@
             overflow: hidden;
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.9) 0%, rgba(139, 92, 246, 0.9) 100%);
         }
-        
+
         .page-header::before {
             content: '';
             position: absolute;
@@ -45,7 +45,7 @@
             background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
             z-index: 1;
         }
-        
+
         .page-header h1 {
             color: white;
             font-size: clamp(2.2rem, 5vw, 3.5rem); /* Reduced size */
@@ -54,7 +54,7 @@
             z-index: 2;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
-        
+
         .page-header .subtitle {
             color: rgba(255, 255, 255, 0.9);
             font-size: clamp(0.95rem, 1.8vw, 1.3rem); /* Reduced size */
@@ -64,14 +64,61 @@
             z-index: 2;
             text-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
-        
+
+        /* =========================================================
+           ✅ FIX: PRICING PLANS SIDE-BY-SIDE ON DESKTOP
+           This targets only the pricing cards section.
+        ========================================================= */
+        .pricing-plans .container {
+            /* Keep your global .container max-width from style.css,
+               but make it a grid only in this section */
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        /* Ensure cards fill column height nicely */
+        .pricing-plans .plan {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Push CTA button to bottom so cards feel aligned */
+        .pricing-plans .plan > a.btn {
+            margin-top: auto;
+        }
+
+        /* If your "popular" badge or borders cause weird overlap */
+        .pricing-plans .plan.popular {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Responsive breakpoints */
+        @media (max-width: 1100px) {
+            .pricing-plans .container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
+            .pricing-plans .container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* --------------------------------------------------------- */
+
         .additional-services {
             padding: 5rem 0; /* Reduced padding */
             background: var(--gradient-galaxy);
             position: relative;
             overflow: hidden;
         }
-        
+
         .additional-services h2 {
             text-align: center;
             font-size: 2.2rem; /* Reduced size */
@@ -80,7 +127,7 @@
             position: relative;
             z-index: 2;
         }
-        
+
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Smaller min-width */
@@ -88,7 +135,7 @@
             position: relative;
             z-index: 2;
         }
-        
+
         .service {
             background: var(--bg-secondary);
             padding: 2rem 1.5rem; /* Reduced padding */
@@ -98,19 +145,19 @@
             border: 2px solid rgba(255, 255, 255, 0.05);
             box-shadow: var(--shadow-card);
         }
-        
+
         .service:hover {
             transform: translateY(-8px); /* Reduced hover lift */
             box-shadow: var(--shadow-hover);
             border-color: rgba(168, 85, 247, 0.3);
         }
-        
+
         .service h3 {
             font-size: 1.3rem; /* Reduced size */
             margin-bottom: 0.8rem; /* Reduced margin */
             color: var(--primary);
         }
-        
+
         .service-price {
             font-size: 1.8rem; /* Reduced size */
             font-weight: 800;
@@ -122,14 +169,14 @@
             -webkit-text-fill-color: transparent;
             text-fill-color: transparent;
         }
-        
+
         .service p {
             color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 1.5rem; /* Reduced margin */
             font-size: 0.9rem; /* Smaller font */
         }
-        
+
         .money-back {
             padding: 5rem 0; /* Reduced padding */
             text-align: center;
@@ -138,12 +185,12 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .money-back h2 {
             font-size: 2.2rem; /* Reduced size */
             margin-bottom: 1.2rem; /* Reduced margin */
         }
-        
+
         .money-back p {
             font-size: 1.1rem; /* Reduced size */
             max-width: 700px;
@@ -151,19 +198,19 @@
             opacity: 0.95;
             line-height: 1.6;
         }
-        
+
         .faq {
             padding: 5rem 0; /* Reduced padding */
             background: var(--bg-primary);
         }
-        
+
         .faq h2 {
             text-align: center;
             font-size: 2.2rem; /* Reduced size */
             margin-bottom: 3rem; /* Reduced margin */
             color: var(--text-primary);
         }
-        
+
         .faq-item {
             background: var(--bg-secondary);
             margin-bottom: 1.2rem; /* Reduced margin */
@@ -174,13 +221,13 @@
             border: 2px solid rgba(255, 255, 255, 0.05);
             box-shadow: var(--shadow-card);
         }
-        
+
         .faq-item:hover {
             transform: translateY(-5px); /* Reduced hover lift */
             box-shadow: var(--shadow-hover);
             border-color: rgba(168, 85, 247, 0.3);
         }
-        
+
         .faq-item h3 {
             color: var(--text-primary);
             margin-bottom: 0;
@@ -190,7 +237,7 @@
             align-items: center;
             gap: 0.8rem; /* Reduced gap */
         }
-        
+
         .faq-item p {
             color: var(--text-secondary);
             line-height: 1.6;
@@ -201,25 +248,25 @@
             margin-top: 0;
             font-size: 0.9rem; /* Smaller font */
         }
-        
+
         .faq-item.active p {
             max-height: 500px;
             opacity: 1;
             margin-top: 1.2rem; /* Reduced margin */
         }
-        
+
         .faq-item.active h3 {
             color: var(--primary);
         }
-        
+
         .faq-item .faq-icon {
             transition: transform 0.3s ease;
         }
-        
+
         .faq-item.active .faq-icon {
             transform: rotate(180deg);
         }
-        
+
         .page-header::after {
             content: '';
             position: absolute;
@@ -252,12 +299,12 @@
                 <span>Yo</span><span>Lingo</span>
             </div>
         </div>
-        
+
         <!-- Mobile Menu Button -->
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
             <i class="fas fa-bars"></i>
         </button>
-        
+
         <!-- Navigation Links -->
         <div class="nav-links" id="navLinks">
             <a href="index.html">Home</a>
@@ -267,7 +314,7 @@
             <a href="contact.html">Contact</a>
         </div>
     </nav>
-    
+
     <!-- Header -->
     <header class="page-header">
         <div class="container">
@@ -275,7 +322,7 @@
             <p class="subtitle">Choose the perfect plan for your language learning journey. All prices are per 4 weeks and include full access to YoLingo learning materials and resources.</p>
         </div>
     </header>
-    
+
     <!-- Pricing Plans -->
     <main>
         <section class="pricing-plans">
@@ -307,7 +354,7 @@
                         Choose Group Plan
                     </a>
                 </div>
-                
+
                 <div class="plan popular">
                     <div class="popular-badge">MOST POPULAR</div>
                     <div class="plan-header">
@@ -337,7 +384,7 @@
                         Choose Private Plan
                     </a>
                 </div>
-                
+
                 <div class="plan">
                     <div class="plan-header">
                         <h3>Intensive Course</h3>
@@ -369,7 +416,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Additional Services -->
         <section class="additional-services">
             <div class="container">
@@ -410,7 +457,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Guarantee Section -->
         <section class="money-back">
             <div class="container">
@@ -432,32 +479,32 @@
         <section class="faq">
             <div class="container">
                 <h2>Frequently Asked Questions</h2>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-exchange-alt"></i> Can I switch between plans?</h3>
                     <p>Yes! You can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle. We prorate any differences in pricing to ensure you only pay for what you use.</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-credit-card"></i> How do payments work?</h3>
                     <p>All plans are billed every 4 weeks. You can pay via credit card, PayPal, or bank transfer. We send payment reminders 3 days before renewal. All major credit cards and digital payment methods are accepted.</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-percentage"></i> Do you offer discounts?</h3>
                     <p>Yes! We offer 10% discount for students (with valid ID) and 15% discount for 3-month commitments. Contact us directly for family discounts (multiple family members) or group discounts (3+ people signing up together).</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-calendar-times"></i> What if I miss a class?</h3>
                     <p>For private lessons, we offer makeup sessions with 24-hour notice. Group classes have recorded sessions available within 24 hours, and you can attend a similar level class later in the week if space is available.</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-user-clock"></i> Can I pause my subscription?</h3>
                     <p>Yes, you can pause your subscription for up to 4 weeks per year for vacations or personal reasons. Just notify us at least 7 days before your next billing date.</p>
                 </div>
-                
+
                 <div class="faq-item">
                     <h3><i class="fas fa-graduation-cap"></i> Are materials included?</h3>
                     <p>Yes! All digital learning materials are included in your subscription. This includes textbooks, workbooks, audio materials, and access to our exclusive learning platform with interactive exercises.</p>
@@ -484,7 +531,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <a href="index.html">Home</a>
@@ -493,14 +540,14 @@
                     <a href="pricing.html">Pricing</a>
                     <a href="contact.html">Contact</a>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Contact Info</h4>
                     <p><i class="fas fa-envelope"></i> contact@yolingo.info</p>
                     <p><i class="fas fa-phone"></i> +1 818 262 1520</p>
                     <p><i class="fas fa-clock"></i> Mon-Fri: 9am-8pm EST</p>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4>Payment Methods</h4>
                     <p><i class="fab fa-cc-visa"></i> Visa</p>
@@ -509,10 +556,10 @@
                     <p><i class="fas fa-university"></i> Bank Transfer</p>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
-                <p>&copy; 2026 YoLingo Language School. Designed for the digital generation. | 
-                    <a href="#">Privacy</a> • 
+                <p>&copy; 2026 YoLingo Language School. Designed for the digital generation. |
+                    <a href="#">Privacy</a> •
                     <a href="#">Terms</a>
                 </p>
             </div>
@@ -525,12 +572,12 @@
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         const navItems = document.querySelectorAll('.nav-links a');
-        
+
         // Toggle mobile menu
         function toggleMobileMenu() {
             navLinks.classList.toggle('active');
             menuToggle.classList.toggle('active');
-            
+
             // Update icon
             const icon = menuToggle.querySelector('i');
             if (navLinks.classList.contains('active')) {
@@ -543,7 +590,7 @@
                 document.body.style.overflow = '';
             }
         }
-        
+
         // Close menu when clicking a link
         navItems.forEach(item => {
             item.addEventListener('click', () => {
@@ -554,7 +601,7 @@
                 document.body.style.overflow = '';
             });
         });
-        
+
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
@@ -565,10 +612,10 @@
                 document.body.style.overflow = '';
             }
         });
-        
+
         // ===== NAVBAR SCROLL EFFECT =====
         const navbar = document.getElementById('mainNav');
-        
+
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
@@ -576,7 +623,7 @@
                 navbar.classList.remove('scrolled');
             }
         });
-        
+
         // ===== FAQ TOGGLE =====
         document.querySelectorAll('.faq-item').forEach(item => {
             item.addEventListener('click', function() {
@@ -586,17 +633,17 @@
                         otherItem.classList.remove('active');
                     }
                 });
-                
+
                 // Toggle current item
                 this.classList.toggle('active');
             });
         });
-        
+
         // ===== INITIALIZATION =====
         window.addEventListener('DOMContentLoaded', () => {
             // Event listeners
             menuToggle.addEventListener('click', toggleMobileMenu);
-            
+
             // Close mobile menu on escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && navLinks.classList.contains('active')) {
