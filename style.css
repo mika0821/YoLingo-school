@@ -518,31 +518,53 @@ nav.scrolled {
     transform: translateX(5px);
 }
 
-/* ===== PRICING PLANS - FIXED FOR SIDE BY SIDE ===== */
+/* ===== PRICING PLANS - FIXED FOR SIDE BY SIDE (CORRECT WRAPPER) ===== */
+
+/* Section itself should NOT be the grid, because it only contains .container */
 .pricing-plans {
+    display: block;
+    margin: 3rem 0; /* keep spacing */
+}
+
+/* The grid must be on the container because it holds the 3 plan cards */
+.pricing-plans > .container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Fixed for side-by-side */
-    gap: 2rem; /* Reduced gap */
-    margin: 3rem 0; /* Reduced margin */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
     align-items: stretch;
 }
 
+/* 2 columns on medium screens */
+@media screen and (max-width: 1100px) {
+    .pricing-plans > .container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* 1 column on mobile */
+@media screen and (max-width: 767px) {
+    .pricing-plans > .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* === Plan card styling (your same styles, kept) === */
 .plan {
     background: var(--bg-secondary);
     border-radius: var(--radius-lg);
-    padding: 2.5rem 1.8rem; /* Reduced padding */
+    padding: 2.5rem 1.8rem;
     position: relative;
     transition: var(--transition);
     border: 2px solid rgba(255, 255, 255, 0.05);
     box-shadow: var(--shadow-card);
     display: flex;
     flex-direction: column;
-    height: auto;
-    min-height: 600px; /* Reduced height */
+    height: 100%;
+    min-height: 600px;
 }
 
 .plan:hover {
-    transform: translateY(-12px); /* Reduced hover lift */
+    transform: translateY(-12px);
     box-shadow: var(--shadow-hover), var(--shadow-galaxy);
     border-color: rgba(168, 85, 247, 0.3);
 }
@@ -553,20 +575,20 @@ nav.scrolled {
 }
 
 .plan.popular:hover {
-    transform: translateY(-12px); /* Consistent hover */
+    transform: translateY(-12px);
 }
 
 .popular-badge {
     position: absolute;
-    top: -12px; /* Adjusted position */
+    top: -12px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--gradient-primary);
     color: white;
-    padding: 0.6rem 1.5rem; /* Reduced padding */
+    padding: 0.6rem 1.5rem;
     border-radius: 30px;
     font-weight: 800;
-    font-size: 0.8rem; /* Smaller font */
+    font-size: 0.8rem;
     letter-spacing: 1px;
     text-transform: uppercase;
     box-shadow: 0 5px 15px rgba(168, 85, 247, 0.4);
@@ -575,30 +597,30 @@ nav.scrolled {
 }
 
 .plan-header {
-    margin-bottom: 1.5rem; /* Reduced margin */
+    margin-bottom: 1.5rem;
     text-align: center;
 }
 
 .plan-header h3 {
-    font-size: 1.6rem; /* Smaller font */
+    font-size: 1.6rem;
     color: var(--text-primary);
-    margin-bottom: 0.8rem; /* Reduced margin */
+    margin-bottom: 0.8rem;
     font-weight: 800;
 }
 
 .plan-description {
     color: var(--text-secondary);
-    font-size: 0.95rem; /* Slightly smaller */
+    font-size: 0.95rem;
     line-height: 1.6;
 }
 
 .plan-price {
-    margin: 1.5rem 0; /* Reduced margin */
+    margin: 1.5rem 0;
     text-align: center;
 }
 
 .price {
-    font-size: 3rem; /* Smaller price font */
+    font-size: 3rem;
     font-weight: 900;
     color: var(--primary);
     line-height: 1;
@@ -612,23 +634,23 @@ nav.scrolled {
 
 .period {
     color: var(--text-tertiary);
-    font-size: 0.95rem; /* Slightly smaller */
+    font-size: 0.95rem;
     font-weight: 500;
 }
 
 .plan-features {
     list-style: none;
-    margin: 1.5rem 0; /* Reduced margin */
+    margin: 1.5rem 0;
     flex-grow: 1;
 }
 
 .plan-features li {
-    margin-bottom: 0.8rem; /* Reduced margin */
-    padding-left: 1.8rem; /* Reduced padding */
+    margin-bottom: 0.8rem;
+    padding-left: 1.8rem;
     position: relative;
     color: var(--text-secondary);
     line-height: 1.5;
-    font-size: 0.9rem; /* Smaller font */
+    font-size: 0.9rem;
 }
 
 .plan-features li::before {
@@ -637,14 +659,16 @@ nav.scrolled {
     left: 0;
     color: var(--primary);
     font-weight: bold;
-    font-size: 1rem; /* Smaller icon */
+    font-size: 1rem;
 }
 
+/* Keep button aligned at bottom */
 .plan .btn {
     margin-top: auto;
     width: 100%;
     justify-content: center;
 }
+
 
 /* ===== MODERN BUTTONS WITH GALAXY EFFECT ===== */
 .btn {
