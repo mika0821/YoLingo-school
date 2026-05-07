@@ -1129,6 +1129,35 @@ footer::before {
     color: var(--primary);
 }
 
+.made-by-nexio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.1rem;
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.made-by-nexio img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+}
+
+.made-by-name {
+    color: #061b44;
+    letter-spacing: 0.02em;
+}
+
 /* ===== RESPONSIVE BREAKPOINTS ===== */
 
 /* iPad (768px - 1024px) */
