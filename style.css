@@ -1864,3 +1864,63 @@ section.contact-container > .container {
         grid-template-columns: 1fr;
     }
 }
+
+/* ===== MOBILE CONTACT FORM FIXES ===== */
+/* Prevent checkboxes from inheriting the full-width input style on mobile. */
+.form-group input[type="checkbox"] {
+    width: auto;
+    min-width: 1.1rem;
+    height: 1.1rem;
+    padding: 0;
+    margin: 0.15rem 0 0;
+    flex: 0 0 1.1rem;
+    accent-color: var(--primary);
+}
+
+.privacy-consent {
+    margin-top: 2rem;
+}
+
+.privacy-consent label {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 100%;
+    margin: 0;
+}
+
+.privacy-consent span {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.privacy-consent a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+@media screen and (max-width: 480px) {
+    .contact-form {
+        padding: 1.6rem 1.1rem;
+    }
+
+    .privacy-consent label {
+        gap: 0.65rem;
+        font-size: 0.9rem;
+        line-height: 1.55;
+    }
+
+    .contact-form .btn {
+        font-size: 0.9rem;
+        letter-spacing: 0.04em;
+        padding-left: 0.9rem !important;
+        padding-right: 0.9rem !important;
+    }
+}
