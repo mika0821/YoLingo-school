@@ -67,16 +67,30 @@
         
         .course-details {
             padding: 6rem 0;
+        }
+
+        .course-details > .container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
             gap: 4rem;
             align-items: start;
         }
+
+        .course-info,
+        .course-levels {
+            min-width: 0;
+        }
+
+        .course-details .course-levels {
+            display: block;
+            margin-top: 0;
+        }
         
         @media (max-width: 968px) {
-            .course-details {
+            .course-details > .container {
                 grid-template-columns: 1fr;
                 gap: 3rem;
+                max-width: 820px;
             }
         }
         
@@ -185,6 +199,28 @@
         .center-button .btn {
             font-size: 1.1rem;
             padding: 1.2rem 3.5rem;
+        }
+        
+        @media (max-width: 640px) {
+            .course-details {
+                padding: 4rem 0;
+            }
+
+            .course-info h2,
+            .course-levels h2 {
+                text-align: center;
+            }
+
+            .course-info h2::after,
+            .course-levels h2::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .benefit:hover,
+            .level:hover {
+                transform: translateY(-4px);
+            }
         }
         
         .page-header::after {
