@@ -2,7 +2,7 @@
 # IMPORTANT: Change repo below if your GitHub username or repository name is different.
 backend:
   name: github
-  repo: aifeeder8/YoLingo-school
+  repo: mika0821/YoLingo-school
   branch: main
   # For GitHub Pages live login, you need a GitHub OAuth proxy.
   # After you set it up, add it here, for example:
