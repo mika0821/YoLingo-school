@@ -1,0 +1,21 @@
+{
+  "brand_name": "YoLingo",
+  "footer_description": "Modern online French and Spanish lessons with native teachers, flexible schedules, and a friendly learning experience.",
+  "email": "contact@yolingo.info",
+  "email_href": "mailto:contact@yolingo.info",
+  "support_email": "support@yolingo.info",
+  "careers_email": "careers@yolingo.info",
+  "phone_display": "+1 818 262 1520",
+  "phone_href": "tel:+18182621520",
+  "whatsapp_url": "https://wa.me/18182621520",
+  "business_hours": "Mon-Fri: 9am-8pm EST",
+  "weekend_hours": "Weekends: 10am-4pm EST",
+  "emergency_note": "Emergency: Available 24/7 for current students",
+  "email_response": "Email: Within 24 hours (usually faster)",
+  "whatsapp_response": "WhatsApp: Within 2 hours during business hours",
+  "phone_response": "Phone Calls: Immediate during business hours",
+  "weekend_response": "Weekend inquiries: Next business day",
+  "fastest_response": "Fastest Response: WhatsApp during business hours",
+  "whatsapp_note": "WhatsApp available",
+  "formspree_endpoint": "https://formspree.io/f/mlgrrrpd"
+}

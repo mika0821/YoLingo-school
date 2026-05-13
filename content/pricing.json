@@ -1,0 +1,33 @@
+{
+  "hero_title": "YoLingo Pricing Plans",
+  "hero_subtitle": "Choose the perfect plan for your language learning journey. All prices are per 4 weeks and include full access to YoLingo learning materials and resources.",
+  "plans": [
+    {
+      "name": "Group Classes",
+      "description": "Perfect for social learners who enjoy group dynamics",
+      "price": "$149",
+      "period": "per 4 weeks",
+      "saving": "Save 20% with 3-month commitment",
+      "button": "Choose Group Plan"
+    },
+    {
+      "name": "Private Lessons",
+      "description": "Fully personalized attention and flexible scheduling",
+      "price": "$249",
+      "period": "per 4 weeks",
+      "saving": "Save 25% with 3-month commitment",
+      "button": "Choose Private Plan"
+    },
+    {
+      "name": "Intensive Course",
+      "description": "Fast-track your learning with daily immersion",
+      "price": "$649",
+      "period": "per 4 weeks",
+      "saving": "Save 30% with 3-month commitment",
+      "button": "Choose Intensive Plan"
+    }
+  ],
+  "services_title": "Additional YoLingo Services",
+  "guarantee_title_html": "<i class=\"fas fa-shield-alt\"></i> 100% Satisfaction Guarantee",
+  "guarantee_text": "Try your first lesson completely risk-free. If you're not completely satisfied with our teaching method, we offer a full refund within 7 days of your first session. No questions asked."
+}

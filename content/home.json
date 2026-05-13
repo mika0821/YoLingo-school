@@ -1,0 +1,49 @@
+{
+  "hero_title_html": "Learn Languages<br>the <span class=\"highlight\">Modern Way</span>",
+  "hero_subtitle": "Master French or Spanish with native teachers through interactive, cultural immersion designed for young adults.",
+  "french_title": "🇫🇷 Parlons Français",
+  "french_description": "Experience the language of art, culture, and love with authentic French immersion",
+  "spanish_title": "🇪🇸 ¡Hablemos Español!",
+  "spanish_description": "Dive into vibrant Spanish culture with immersive lessons and real conversation practice",
+  "why_title_html": "Why Young Learners Choose <span class=\"text-gradient\">YoLingo</span>",
+  "features": [
+    {
+      "title": "Interactive Learning",
+      "text": "Games, role-plays, and modern teaching methods that make learning fun and engaging for young adults."
+    },
+    {
+      "title": "Young Community",
+      "text": "Join a community of young learners, participate in social events, and make friends while learning."
+    },
+    {
+      "title": "Modern Platform",
+      "text": "Access lessons on any device with our sleek, intuitive platform designed for the digital generation."
+    },
+    {
+      "title": "Cultural Immersion",
+      "text": "Learn through music, films, and cultural content that resonates with young adults worldwide."
+    }
+  ],
+  "stats": [
+    {
+      "number": "500+",
+      "label": "Young Learners"
+    },
+    {
+      "number": "98%",
+      "label": "Satisfaction Rate"
+    },
+    {
+      "number": "15+",
+      "label": "Native Teachers"
+    },
+    {
+      "number": "24/7",
+      "label": "Digital Access"
+    }
+  ],
+  "cta_title": "Ready to Speak Like a Local?",
+  "cta_text": "Join thousands of young adults who are transforming their language skills with YoLingo.",
+  "cta_primary": "Book Free Trial",
+  "cta_secondary": "View Plans"
+}
