@@ -49,9 +49,9 @@
     registerPreviewStyles();
 
     // Hide the loading card quickly so the CMS fields are always visible.
-    setTimeout(markLoaded, 650);
-    setTimeout(markLoaded, 1400);
-    setTimeout(addBrandTag, 1800);
+    setTimeout(markLoaded, 350);
+    setTimeout(markLoaded, 900);
+    setTimeout(addBrandTag, 1200);
   }
 
   if (document.readyState === "loading") {
