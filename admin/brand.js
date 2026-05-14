@@ -7,20 +7,22 @@
     document.body.classList.add("yl-cms-loaded");
   }
 
-  function addBrandBadge() {
-    if (document.querySelector(".yl-brand-badge")) return;
-    var badge = document.createElement("div");
-    badge.className = "yl-brand-badge";
-    badge.innerHTML = '<img src="/logo.png" alt="YoLingo" /><strong>YoLingo Admin</strong><span>Content manager</span>';
-    document.body.appendChild(badge);
+  function addBrandTag() {
+    if (document.getElementById("yl-admin-brand-tag")) return;
+
+    var tag = document.createElement("div");
+    tag.id = "yl-admin-brand-tag";
+    tag.innerHTML = '<img src="/logo.png" alt="" aria-hidden="true" /><span>YoLingo Admin</span>';
+    document.body.appendChild(tag);
   }
 
   function handleNetlifyIdentity() {
     if (!window.netlifyIdentity) return;
 
     window.netlifyIdentity.on("init", function (user) {
-      var hasInviteToken = window.location.hash.indexOf("invite_token") !== -1;
-      var hasRecoveryToken = window.location.hash.indexOf("recovery_token") !== -1;
+      var hash = window.location.hash || "";
+      var hasInviteToken = hash.indexOf("invite_token") !== -1;
+      var hasRecoveryToken = hash.indexOf("recovery_token") !== -1;
 
       if (!user && (hasInviteToken || hasRecoveryToken)) {
         window.netlifyIdentity.open();
@@ -45,11 +47,11 @@
   function init() {
     handleNetlifyIdentity();
     registerPreviewStyles();
-    addBrandBadge();
 
-    setTimeout(markLoaded, 1200);
-    setTimeout(addBrandBadge, 1800);
-    setTimeout(markLoaded, 2500);
+    // Hide the loading card quickly so the CMS fields are always visible.
+    setTimeout(markLoaded, 650);
+    setTimeout(markLoaded, 1400);
+    setTimeout(addBrandTag, 1800);
   }
 
   if (document.readyState === "loading") {
