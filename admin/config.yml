@@ -1,36 +1,39 @@
 # YoLingo Decap CMS configuration
-# IMPORTANT: Change repo below if your GitHub username or repository name is different.
+# Admin login works through Netlify Identity + Git Gateway.
 backend:
   name: git-gateway
   branch: main
-  # For GitHub Pages live login, you need a GitHub OAuth proxy.
-  # After you set it up, add it here, for example:
-  # base_url: https://your-decap-oauth-worker.yourname.workers.dev
-  # auth_endpoint: auth
 
 # Good for local testing only. Run: npx decap-server
 local_backend: true
+
+site_url: https://yolingo.info
+display_url: https://yolingo.info
+logo_url: /logo.png
+publish_mode: editorial_workflow
 
 media_folder: "uploads"
 public_folder: "/uploads"
 
 collections:
   - name: "settings"
-    label: "Site Settings"
+    label: "⚙️ Site Settings"
+    label_singular: "Site Setting"
+    description: "Edit global contact details, footer text, WhatsApp link, and response times."
     files:
       - label: "General Settings"
         name: "general"
         file: "content/site.json"
         fields:
-          - { label: "Brand Name", name: "brand_name", widget: "string" }
-          - { label: "Footer Description", name: "footer_description", widget: "text" }
+          - { label: "Brand Name", name: "brand_name", widget: "string", hint: "Usually YoLingo." }
+          - { label: "Footer Description", name: "footer_description", widget: "text", hint: "Short brand description shown in the website footer." }
           - { label: "Main Email", name: "email", widget: "string" }
           - { label: "Email Link", name: "email_href", widget: "string", hint: "Example: mailto:contact@yolingo.info" }
           - { label: "Support Email", name: "support_email", widget: "string" }
           - { label: "Careers Email", name: "careers_email", widget: "string" }
-          - { label: "Phone Display", name: "phone_display", widget: "string" }
+          - { label: "Phone Display", name: "phone_display", widget: "string", hint: "How the phone number looks on the website." }
           - { label: "Phone Link", name: "phone_href", widget: "string", hint: "Example: tel:+18182621520" }
-          - { label: "WhatsApp Link", name: "whatsapp_url", widget: "string" }
+          - { label: "WhatsApp Link", name: "whatsapp_url", widget: "string", hint: "Example: https://wa.me/18182621520" }
           - { label: "Business Hours", name: "business_hours", widget: "string" }
           - { label: "Weekend Hours", name: "weekend_hours", widget: "string" }
           - { label: "Emergency Note", name: "emergency_note", widget: "string" }
@@ -40,12 +43,14 @@ collections:
           - { label: "Weekend Response Time", name: "weekend_response", widget: "string" }
           - { label: "Fastest Response Text", name: "fastest_response", widget: "string" }
           - { label: "Footer WhatsApp Note", name: "whatsapp_note", widget: "string" }
-          - { label: "Formspree Endpoint", name: "formspree_endpoint", widget: "string" }
+          - { label: "Formspree Endpoint", name: "formspree_endpoint", widget: "string", hint: "Contact form endpoint. Do not change unless you create a new Formspree form." }
 
   - name: "pages"
-    label: "Pages"
+    label: "📄 Website Pages"
+    label_singular: "Website Page"
+    description: "Edit the main YoLingo website pages."
     files:
-      - label: "Home Page"
+      - label: "🏠 Home Page"
         name: "home"
         file: "content/home.json"
         fields:
@@ -55,16 +60,20 @@ collections:
           - { label: "French Card Description", name: "french_description", widget: "text" }
           - { label: "Spanish Card Title", name: "spanish_title", widget: "string" }
           - { label: "Spanish Card Description", name: "spanish_description", widget: "text" }
-          - { label: "Why Title HTML", name: "why_title_html", widget: "text" }
-          - label: "Features"
+          - { label: "Why Section Title HTML", name: "why_title_html", widget: "text" }
+          - label: "Feature Cards"
             name: "features"
             widget: "list"
+            summary: "{{fields.title}}"
+            collapsed: true
             fields:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Text", name: "text", widget: "text" }
           - label: "Stats"
             name: "stats"
             widget: "list"
+            summary: "{{fields.number}} — {{fields.label}}"
+            collapsed: true
             fields:
               - { label: "Number", name: "number", widget: "string" }
               - { label: "Label", name: "label", widget: "string" }
@@ -73,27 +82,29 @@ collections:
           - { label: "CTA Primary Button", name: "cta_primary", widget: "string" }
           - { label: "CTA Secondary Button", name: "cta_secondary", widget: "string" }
 
-      - label: "Pricing Page"
+      - label: "💳 Pricing Page"
         name: "pricing"
         file: "content/pricing.json"
         fields:
           - { label: "Hero Title", name: "hero_title", widget: "string" }
           - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
-          - label: "Main Plans"
+          - label: "Pricing Plans"
             name: "plans"
             widget: "list"
+            summary: "{{fields.name}} — {{fields.price}}"
+            collapsed: true
             fields:
-              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Plan Name", name: "name", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
               - { label: "Price", name: "price", widget: "string" }
               - { label: "Period", name: "period", widget: "string" }
-              - { label: "Saving Text", name: "saving", widget: "string" }
+              - { label: "Saving Text", name: "saving", widget: "string", required: false }
               - { label: "Button Text", name: "button", widget: "string" }
           - { label: "Services Title", name: "services_title", widget: "string" }
           - { label: "Guarantee Title HTML", name: "guarantee_title_html", widget: "text" }
           - { label: "Guarantee Text", name: "guarantee_text", widget: "text" }
 
-      - label: "Contact Page"
+      - label: "📞 Contact Page"
         name: "contact"
         file: "content/contact.json"
         fields:

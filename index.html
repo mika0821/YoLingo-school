@@ -277,15 +277,21 @@
 </footer>
 <script src="script.js"></script>
 <script src="cms-content.js"></script>
+<!-- Netlify Identity helper for admin invite and password reset links -->
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
   if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
+    window.netlifyIdentity.on("init", function(user) {
+      var hasInviteToken = window.location.hash.indexOf("invite_token") !== -1;
+      var hasRecoveryToken = window.location.hash.indexOf("recovery_token") !== -1;
+
+      if (!user && (hasInviteToken || hasRecoveryToken)) {
+        window.netlifyIdentity.open();
       }
+    });
+
+    window.netlifyIdentity.on("login", function() {
+      document.location.href = "/admin/";
     });
   }
 </script>

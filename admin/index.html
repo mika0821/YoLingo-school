@@ -3,10 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YoLingo Admin</title>
+  <meta name="robots" content="noindex" />
+  <title>YoLingo Admin Panel</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/admin/brand.css" />
 </head>
 <body>
+  <div class="yl-admin-loading" aria-hidden="true">
+    <div class="yl-admin-card">
+      <img src="/logo.png" alt="YoLingo" class="yl-admin-logo" />
+      <p class="yl-eyebrow">YoLingo Website Manager</p>
+      <h1>Admin Panel</h1>
+      <p>Edit homepage text, pricing, contact details, and site settings.</p>
+    </div>
+  </div>
+
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script src="/admin/brand.js"></script>
 </body>
 </html>
