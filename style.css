@@ -390,45 +390,64 @@ nav.scrolled {
 .language-chooser {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem; /* Reduced gap */
-    margin: 3rem 0; /* Reduced margin */
+    gap: 2rem;
+    margin: 3rem 0;
     justify-items: center;
+    align-items: stretch;
 }
 
 .language-card {
     width: 100%;
-    max-width: 480px; /* Slightly smaller max-width */
-    min-height: 480px; /* Reduced height */
-    border-radius: var(--radius-lg);
+    max-width: 460px;
+    min-height: 390px;
+    border-radius: 28px;
     overflow: hidden;
     text-decoration: none;
     color: white;
     position: relative;
-    transition: var(--transition);
-    box-shadow: var(--shadow-card);
-    background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+    background: linear-gradient(160deg, rgba(17, 20, 46, 0.92) 0%, rgba(20, 18, 54, 0.88) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
 }
 
 .language-card::before {
     content: '';
     position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at top right, rgba(127, 94, 255, 0.20), transparent 42%),
+        linear-gradient(180deg, rgba(127, 94, 255, 0.18) 0%, rgba(127, 94, 255, 0.02) 30%, transparent 100%);
+    z-index: 1;
+    transition: opacity .3s ease;
+}
+
+.language-card::after {
+    content: '';
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background: var(--gradient-french);
-    opacity: 0.9;
-    z-index: 1;
-    transition: var(--transition);
+    height: 4px;
+    background: linear-gradient(90deg, #7f5eff 0%, #a776ff 100%);
+    z-index: 2;
 }
 
 .language-card.spanish-card::before {
-    background: var(--gradient-spanish);
+    background:
+        radial-gradient(circle at top right, rgba(255, 105, 180, 0.22), transparent 42%),
+        linear-gradient(180deg, rgba(255, 105, 180, 0.18) 0%, rgba(255, 105, 180, 0.02) 30%, transparent 100%);
+}
+
+.language-card.spanish-card::after {
+    background: linear-gradient(90deg, #ff5aa5 0%, #ff7a8f 100%);
 }
 
 .language-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: var(--shadow-hover), var(--shadow-galaxy);
+    transform: translateY(-10px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+    border-color: rgba(255, 255, 255, 0.16);
 }
 
 .language-card:hover::before {
@@ -437,85 +456,109 @@ nav.scrolled {
 
 .card-content {
     position: relative;
-    z-index: 2;
-    padding: 2rem; /* Reduced padding */
+    z-index: 3;
+    padding: 2rem;
     height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
+    text-align: left;
 }
 
 .card-header {
-    margin-bottom: 1.5rem; /* Reduced margin */
+    margin-bottom: 1.25rem;
 }
 
 .card-header h2 {
-    font-size: 2rem; /* Smaller heading */
-    margin-bottom: 0.8rem; /* Reduced margin */
+    font-size: 1.9rem;
+    margin-bottom: 0.85rem;
     font-weight: 800;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    line-height: 1.15;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
 }
 
 .card-header p {
-    font-size: 1rem; /* Slightly smaller */
-    opacity: 0.95;
-    line-height: 1.5;
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    opacity: 0.92;
+    line-height: 1.6;
+    margin-bottom: 0;
+    max-width: 33ch;
 }
 
 .card-features {
     list-style: none;
-    margin: 1rem 0; /* Reduced margin */
+    margin: 1rem 0 1.6rem;
     flex-grow: 1;
+    display: grid;
+    gap: 0.8rem;
+    width: 100%;
 }
 
 .card-features li {
-    margin-bottom: 0.6rem; /* Reduced margin */
-    padding-left: 1.8rem; /* Reduced padding */
+    padding-left: 2rem;
     position: relative;
-    font-size: 0.9rem; /* Slightly smaller */
-    line-height: 1.4;
+    font-size: 0.98rem;
+    line-height: 1.45;
     font-weight: 500;
+    color: rgba(255, 255, 255, 0.94);
 }
 
 .card-features li::before {
-    content: "->";
+    content: "✓";
     position: absolute;
     left: 0;
-    font-size: 0.9rem; /* Smaller */
+    top: 0.05rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: #fff;
+    background: rgba(127, 94, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.language-card.spanish-card .card-features li::before {
+    background: rgba(255, 105, 180, 0.22);
 }
 
 .start-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.8rem; /* Reduced gap */
+    gap: 0.7rem;
     margin-top: auto;
     font-weight: 700;
-    font-size: 1rem; /* Smaller font */
+    font-size: 0.96rem;
     text-decoration: none;
     color: white;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 0.9rem 1.8rem; /* Reduced padding */
-    border-radius: 50px;
-    transition: var(--transition);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.10);
+    padding: 0.95rem 1.4rem;
+    border-radius: 999px;
+    transition: transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     justify-content: center;
+    align-self: flex-start;
+    min-width: 245px;
 }
 
 .start-link:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateX(8px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateX(4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
 .start-link i {
-    font-size: 1rem; /* Smaller icon */
-    transition: var(--transition);
+    font-size: 0.95rem;
+    transition: transform .25s ease;
 }
 
 .start-link:hover i {
-    transform: translateX(5px);
+    transform: translateX(3px);
 }
 
 /* ===== PRICING PLANS - FIXED FOR SIDE BY SIDE (CORRECT WRAPPER) ===== */
@@ -1193,12 +1236,12 @@ footer::before {
     /* Language Cards */
     .language-chooser {
         grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
+        gap: 1.75rem;
         margin: 2.5rem 0;
     }
     
     .language-card {
-        min-height: 460px;
+        min-height: 380px;
     }
     
     .card-content {
@@ -1206,7 +1249,7 @@ footer::before {
     }
     
     .card-header h2 {
-        font-size: 1.8rem;
+        font-size: 1.75rem;
     }
     
     .card-features li {
@@ -1347,21 +1390,21 @@ footer::before {
     /* Language Cards */
     .language-chooser {
         grid-template-columns: 1fr;
-        gap: 1.8rem;
+        gap: 1.4rem;
         margin: 2rem 0;
     }
     
     .language-card {
-        min-height: 440px;
+        min-height: 360px;
         max-width: 100%;
     }
     
     .card-content {
-        padding: 1.8rem 1.5rem;
+        padding: 1.6rem 1.4rem;
     }
     
     .card-header h2 {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
     }
     
     .card-header p {
@@ -1541,15 +1584,20 @@ footer::before {
     
     /* Language Cards */
     .language-card {
-        min-height: 420px;
+        min-height: 340px;
     }
     
     .card-header h2 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     
     .card-features li {
-        font-size: 0.8rem;
+        font-size: 0.88rem;
+    }
+
+    .start-link {
+        min-width: 100%;
+        justify-content: center;
     }
     
     /* Buttons */
