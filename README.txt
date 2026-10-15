@@ -1,0 +1,1 @@
+Bonmilo website files. Brand updated from YoLingo to Bonmilo. Mascot name: Milo. Tagline: Learn French Online. Admin/CMS removed. Contact email left as contact@yolingo.info until your new domain/email is ready.

@@ -1,4 +1,4 @@
-// YoLingo shared UI behavior
+// Bonmilo shared UI behavior
 (function () {
     'use strict';
 

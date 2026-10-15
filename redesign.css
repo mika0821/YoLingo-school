@@ -22,23 +22,8 @@
 @media(max-width:760px){.container{width:calc(100% - 32px)}.announcement{height:auto;flex-direction:column;gap:4px;padding:8px 12px;text-align:center}.site-header{height:74px}.nav-inner{width:calc(100% - 32px)}.menu-toggle{display:flex;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px}.menu-toggle span{height:2px;width:24px;background:var(--ink);transition:transform .2s ease,opacity .2s ease}.menu-toggle.active span:first-child{transform:translateY(7px) rotate(45deg)}.menu-toggle.active span:nth-child(2){opacity:0}.menu-toggle.active span:last-child{transform:translateY(-7px) rotate(-45deg)}.nav-links{position:absolute;top:74px;left:0;right:0;display:none;flex-direction:column;align-items:stretch;background:#fff;border-bottom:1px solid var(--line);padding:12px 16px 20px;gap:4px}.nav-links.active{display:flex}.nav-links>a{padding:12px 6px;border-bottom:1px solid #f2edf6}.nav-links>.nav-cta{margin-top:8px;text-align:center;border:none}.clean-hero{padding:48px 0}.hero-grid{min-height:0;gap:28px}.hero-copy h1{font-size:48px}.hero-lede{font-size:17px}.hero-panel{padding:22px!important;border-radius:26px!important}.hero-panel-copy strong{font-size:28px}.hero-mascot-frame{min-height:240px}.proof-grid,.steps-clean,.clean-pricing,.support-grid,.pricing-mini-grid,.form-two{grid-template-columns:1fr}.section-space{padding:70px 0}.section-copy h2,.section-heading-row.compact h2,.pricing-teaser-copy h2,.trial-strip h2,.contact-left h2,.form-top h2,.final-cta h2,.page-heading h1{font-size:38px}.pricing-teaser,.trial-strip,.final-cta-text,.price-card,.proof-card,.feature-row,.step-clean,.support-card,.form-card,.legal-card,.thanks-panel{padding:24px}.final-cta-panel{min-height:0}.footer-upper{flex-direction:column}.footer-links{grid-template-columns:1fr 1fr}.footer-bottom{align-items:flex-start}.nexio-credit{margin-left:0}}
 :focus-visible{outline:3px solid #b39df3;outline-offset:3px}::selection{background:#d9cdf8;color:#1f1d30}
 
-/* Large original Yo artwork, restored without floating notifications */
-.clean-hero{padding:38px 0 42px;background:linear-gradient(115deg,#fbfaf7 20%,#fbfaf7 55%,#f3ecff 100%);overflow:hidden}
-.clean-hero .hero-grid{grid-template-columns:1fr 1.04fr;gap:26px;min-height:625px}
-.clean-hero .hero-copy{position:relative;z-index:2}
-.clean-hero .hero-copy h1{font-size:clamp(53px,5.9vw,79px);letter-spacing:-.063em;line-height:1.04}
-.clean-hero .hero-visual{position:relative;min-width:0;width:100%;height:600px;isolation:isolate}
-.clean-hero .hero-orbit{position:absolute;inset:42px 5px 45px 22px;background:#e9defe;border-radius:51% 49% 44% 56% / 50% 45% 55% 50%;transform:rotate(-9deg)}
-.clean-hero .hero-orbit::before{content:'';position:absolute;inset:25px;border:1px solid rgba(117,78,233,.16);border-radius:inherit}
-.clean-hero .orbit-ring{position:absolute;border:1px solid rgba(135,104,209,.22);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%)}
-.clean-hero .orbit-ring-one{width:58%;aspect-ratio:1}
-.clean-hero .orbit-ring-two{width:85%;aspect-ratio:1}
-.clean-hero .hero-mascot-wrap{position:absolute;inset:0 0 0 0;display:flex;align-items:center;justify-content:center;z-index:2;filter:drop-shadow(0 26px 28px rgba(86,44,188,.15))}
-.clean-hero .hero-mascot{width:min(100%,565px);height:100%;max-height:590px;object-fit:contain;transform:rotate(-5deg);animation:yoGentleFloat 6s ease-in-out infinite}
-@keyframes yoGentleFloat{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(-3deg)}}
-@media(max-width:1100px){.clean-hero .hero-grid{grid-template-columns:1fr 1.04fr;min-height:560px;gap:8px}.clean-hero .hero-copy h1{font-size:clamp(42px,5.4vw,66px)}.clean-hero .hero-visual{height:530px}.clean-hero .hero-mascot{max-height:525px}}
-@media(max-width:760px){.clean-hero{padding:48px 0 25px}.clean-hero .hero-grid{grid-template-columns:1fr;gap:4px;min-height:0}.clean-hero .hero-copy h1{font-size:clamp(43px,11vw,58px)}.clean-hero .hero-visual{height:min(105vw,485px);margin-top:20px}.clean-hero .hero-orbit{inset:26px 14px 28px}.clean-hero .hero-mascot{width:96%;max-height:460px}.clean-hero .hero-points{margin-bottom:0}}
-@media(prefers-reduced-motion:reduce){.clean-hero .hero-mascot{animation:none}}
-/* Keep the navigation call-to-action readable on both desktop and mobile. */
-.nav-links>a.nav-cta{color:#fff;background:#262243}
-.nav-links>a.nav-cta:hover{color:#fff;background:#3b326b}
+
+/* Bonmilo hero mascot intro */
+.hero-mascot-frame{position:relative;overflow:hidden}
+.mascot-hello{position:absolute;left:18px;top:18px;z-index:2;background:rgba(255,255,255,.96);border:1px solid rgba(215,207,232,.95);box-shadow:0 16px 32px rgba(36,24,68,.10);border-radius:16px;padding:12px 16px;font-size:15px;font-weight:800;color:#302b48;letter-spacing:-.02em}
+@media(max-width:760px){.mascot-hello{left:14px;top:14px;padding:10px 13px;font-size:13px;border-radius:14px}}
