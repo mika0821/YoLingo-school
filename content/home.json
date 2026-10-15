@@ -1,27 +1,25 @@
 {
-  "hero_title_html": "Learn Languages<br>the <span class=\"highlight\">Modern Way</span>",
-  "hero_subtitle": "Master French or Spanish with native teachers through interactive, cultural immersion designed for young adults.",
-  "french_title": "🇫🇷 Parlons Français",
-  "french_description": "Experience the language of art, culture, and love with authentic French immersion",
-  "spanish_title": "🇪🇸 ¡Hablemos Español!",
-  "spanish_description": "Dive into vibrant Spanish culture with immersive lessons and real conversation practice",
-  "why_title_html": "Why Young Learners Choose <span class=\"text-gradient\">YoLingo</span>",
+  "hero_title_html": "Your French era<br>starts <em>here.</em>",
+  "hero_subtitle": "From your very first bonjour to real, effortless conversations. Learn French online with dedicated native-speaking teachers and lessons built around you.",
+  "french_title": "French, but make it yours.",
+  "french_description": "Real conversations, vibrant culture, and a learning journey that feels like you.",
+  "why_title_html": "A fresh way to fall in love with <em>French.</em>",
   "features": [
     {
-      "title": "Interactive Learning",
-      "text": "Games, role-plays, and modern teaching methods that make learning fun and engaging for young adults."
+      "title": "Talk from day one",
+      "text": "Practice the conversations you will actually have, not just the rules in a textbook."
     },
     {
-      "title": "Young Community",
-      "text": "Join a community of young learners, participate in social events, and make friends while learning."
+      "title": "Your pace, your place",
+      "text": "Learn from anywhere with flexible online classes that fit your schedule."
     },
     {
-      "title": "Modern Platform",
-      "text": "Access lessons on any device with our sleek, intuitive platform designed for the digital generation."
+      "title": "People, not just lessons",
+      "text": "Meet supportive teachers and learn in a relaxed, encouraging environment."
     },
     {
-      "title": "Cultural Immersion",
-      "text": "Learn through music, films, and cultural content that resonates with young adults worldwide."
+      "title": "Culture included",
+      "text": "Explore French through expressions, music, everyday life, and more."
     }
   ],
   "stats": [
@@ -42,8 +40,8 @@
       "label": "Digital Access"
     }
   ],
-  "cta_title": "Ready to Speak Like a Local?",
-  "cta_text": "Join thousands of young adults who are transforming their language skills with YoLingo.",
-  "cta_primary": "Book Free Trial",
-  "cta_secondary": "View Plans"
+  "cta_title": "Your first bonjour starts here.",
+  "cta_text": "Take the first step toward French that feels natural. Meet us in a free introductory lesson.",
+  "cta_primary": "Book a free trial",
+  "cta_secondary": "See class options"
 }
