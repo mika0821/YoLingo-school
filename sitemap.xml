@@ -1,48 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-  <loc>https://www.yolingo.info/</loc>
-  <lastmod>2026-05-07</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://www.yolingo.info/index.html</loc>
-  <lastmod>2026-05-07</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.yolingo.info/parlons.html</loc>
-  <lastmod>2026-05-07</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.yolingo.info/hablemos.html</loc>
-  <lastmod>2026-05-07</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.yolingo.info/pricing.html</loc>
-  <lastmod>2026-05-07</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.yolingo.info/contact.html</loc>
-  <lastmod>2026-05-07</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.yolingo.info/privacy.html</loc>
-  <lastmod>2026-05-07</lastmod>
-  <priority>0.40</priority>
-</url>
-<url>
-  <loc>https://www.yolingo.info/terms.html</loc>
-  <lastmod>2026-05-07</lastmod>
-  <priority>0.40</priority>
-</url>
-<url>
-  <loc>https://www.yolingo.info/refund-policy.html</loc>
-  <lastmod>2026-05-07</lastmod>
-  <priority>0.40</priority>
-</url>
+<url><loc>https://yolingo.info/</loc></url>
+<url><loc>https://yolingo.info/pricing.html</loc></url>
+<url><loc>https://yolingo.info/contact.html</loc></url>
+<url><loc>https://yolingo.info/privacy.html</loc></url>
+<url><loc>https://yolingo.info/terms.html</loc></url>
+<url><loc>https://yolingo.info/refund-policy.html</loc></url>
 </urlset>
